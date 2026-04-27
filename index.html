@@ -100,46 +100,21 @@ section{padding:120px 60px}
 .gear-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--c-border);color:var(--c-muted)}
 
 /* ── WORK ── */
-#work{background:#0d0d0d;padding-bottom:80px}
-.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
-
-/* Filter tabs */
-.work-filters{display:flex;gap:8px;flex-wrap:wrap;padding:0 60px 32px;border-bottom:1px solid var(--c-border);margin-bottom:8px}
-.filter-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:10px 22px;background:transparent;border:1px solid var(--c-border);color:var(--c-muted);cursor:none;transition:all .25s}
-.filter-btn:hover{color:var(--c-fg);border-color:rgba(240,237,230,.3)}
-.filter-btn.active{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-bg)}
-
-/* Category accordion rows */
-.work-category-block{margin-bottom:2px}
-.work-cat-header{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;border-bottom:1px solid var(--c-border);cursor:none;transition:background .25s;user-select:none}
-.work-cat-header:hover{background:rgba(240,237,230,.03)}
-.work-cat-title{font-family:var(--f-display);font-size:28px;letter-spacing:3px;color:var(--c-fg)}
-.work-cat-count{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted)}
-.work-cat-arrow{font-size:18px;color:var(--c-accent);transition:transform .35s ease;line-height:1}
-.work-cat-header.open .work-cat-arrow{transform:rotate(90deg)}
-
-/* Collapsible grid */
-.work-cat-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.23,1,.32,1)}
-.work-cat-body.open{max-height:10000px}
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.work-item{position:relative;overflow:hidden;cursor:none;height:300px;will-change:transform;transform:translateZ(0)}
-.work-item.featured{grid-column:1/-1;height:480px}
-.work-thumb{width:100%;height:100%;background:var(--c-mid);position:relative;overflow:hidden}
-.work-thumb img{width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .4s ease-out,transform .5s ease-out;will-change:transform,opacity;backface-visibility:hidden;transform:translateZ(0)}
-.work-item:hover .work-thumb img{opacity:.9;transform:translateZ(0) scale(1.03)}
-.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,transparent 60%);opacity:0;transition:opacity .3s ease-out;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;will-change:opacity;pointer-events:none}
+#work{background:#0d0d0d}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.work-item{position:relative;overflow:hidden;cursor:none}
+.work-item:first-child{grid-column:1/-1;height:520px}
+.work-item:not(:first-child){height:380px}
+.work-thumb{width:100%;height:100%;background:var(--c-mid);position:relative;overflow:hidden;display:flex}
+.work-thumb img{width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s,transform .8s cubic-bezier(.23,1,.32,1)}
+.work-item:hover .work-thumb img{opacity:.9;transform:scale(1.04)}
+.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,transparent 60%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:40px}
 .work-item:hover .work-overlay{opacity:1}
-.work-cat-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-accent);margin-bottom:10px}
-.work-name{font-family:var(--f-display);font-size:32px;letter-spacing:1px;color:var(--c-fg);line-height:1}
-.work-role{font-family:var(--f-mono);font-size:10px;color:var(--c-muted);margin-top:6px}
-.work-num{position:absolute;top:20px;left:20px;font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--c-muted);background:rgba(8,8,8,.6);padding:3px 8px;pointer-events:none}
-
-/* Load More */
-.work-load-more{display:flex;justify-content:center;padding:48px 0 0}
-.load-more-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:16px 48px;border:1px solid var(--c-border);color:var(--c-muted);background:transparent;cursor:none;transition:all .3s}
-.load-more-btn:hover{border-color:var(--c-accent);color:var(--c-accent)}
-.load-more-btn.hidden{display:none}
-.work-item.collapsed{display:none}
+.work-cat{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-accent);margin-bottom:12px}
+.work-name{font-family:var(--f-display);font-size:42px;letter-spacing:1px;color:var(--c-fg);line-height:1}
+.work-role{font-family:var(--f-mono);font-size:11px;color:var(--c-muted);margin-top:8px}
+.work-num{position:absolute;top:30px;left:30px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);background:rgba(8,8,8,.6);padding:4px 10px}
 
 /* ── SHOWREEL ── */
 #showreel{background:var(--c-bg);text-align:center;padding:100px 60px}
@@ -370,147 +345,56 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
 </section>
 
 <!-- ═══════════════════════════════════════════ WORK
-     HOW TO ADD MORE PROJECTS:
-     1. Find the right category block (AERIAL, COMMERCIAL, CORPORATE, EVENT, AUTOMOTIVE)
-     2. Copy any .work-item block and paste it inside that category's .work-grid
-     3. Update the img src, work-name, work-role, and work-num
-     4. The Load More button automatically handles showing/hiding extras
+     TO CUSTOMISE: Replace the img src URLs with your own project images.
+     Also update: work-cat (category), work-name (project title), work-role (your role).
 -->
-<section id="work" style="padding-left:0;padding-right:0;padding-top:120px">
-  <div style="padding:0 60px 40px" class="reveal">
+<section id="work" style="padding-left:0;padding-right:0;padding-top:120px;padding-bottom:0">
+  <div style="padding:0 60px 60px" class="reveal">
     <div class="section-label">Selected Work</div>
     <div class="work-header">
       <h2 class="section-title" style="margin-bottom:0">PORTFOLIO</h2>
-      <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted)" id="work-total-count"></span>
+      <button class="btn-ghost">View All Work</button>
     </div>
   </div>
-
-  <!-- FILTER TABS -->
-  <div class="work-filters reveal">
-    <button class="filter-btn active" onclick="filterCats('all',this)">All</button>
-    <button class="filter-btn" onclick="filterCats('aerial',this)">Aerial</button>
-    <button class="filter-btn" onclick="filterCats('commercial',this)">Commercial</button>
-    <button class="filter-btn" onclick="filterCats('corporate',this)">Corporate</button>
-    <button class="filter-btn" onclick="filterCats('event',this)">Event</button>
-    <button class="filter-btn" onclick="filterCats('automotive',this)">Automotive</button>
-  </div>
-
-  <!-- ── AERIAL ── -->
-  <div class="work-category-block" data-cat="aerial">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
-      <span class="work-cat-title">AERIAL</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <!-- FEATURED PROJECT -->
-        <div class="work-item featured" data-index="0">
-          <div class="work-thumb">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg" alt="Aerial Cinematic" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-            <div class="work-overlay">
-              <div class="work-cat-tag">Aerial Cinematography</div>
-              <div class="work-name">WINGS OVER<br>VIENTIANE</div>
-              <div class="work-role">Drone Operator · Video Editor · AI Content Specialist</div>
-            </div>
-            <div class="work-num">01 — Featured</div>
-          </div>
+  <div class="work-grid">
+    <!-- PROJECT 1 — Featured (full width) -->
+    <div class="work-item reveal">
+      <div class="work-thumb" style="height:100%;position:relative">
+        <img src="url('https://raw.github.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg')" alt="Aerial Cinematic" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+        <div class="work-overlay">
+          <div class="work-cat"></div>
+          <div class="work-name">WINGS OVER<br>VIENTIANE</div>
+          <div class="work-role">·Drone Operator · Video Editor · </div>
+          <div class="work-role">·AI Content Generation Specialist · </div>
         </div>
-        <!-- ADD MORE AERIAL PROJECTS HERE -->
+        <div class="work-num">01 — Featured</div>
       </div>
     </div>
-  </div>
-
-  <!-- ── COMMERCIAL ── -->
-  <div class="work-category-block" data-cat="commercial">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
-      <span class="work-cat-title">COMMERCIAL</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <div class="work-item" data-index="0">
-          <div class="work-thumb">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Brand Campaign" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-            <div class="work-overlay">
-              <div class="work-cat-tag">Brand Campaign — Allianz Insurance</div>
-              <div class="work-name">TRUST IN<br>MOTION</div>
-              <div class="work-role">Video Creator · Motion Graphics · Photography</div>
-            </div>
-            <div class="work-num">01</div>
-          </div>
+    <!-- PROJECT 2 -->
+    <div class="work-item reveal" style="transition-delay:.1s">
+      <div class="work-thumb" style="height:100%;position:relative">
+        <img src="url('https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about me.png')" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+        <div class="work-overlay">
+          <div class="work-cat"></div>
+          <div class="work-name">TRUST IN<br>MOTION</div>
+          <div class="work-role">Video Creator · Motion Graphics · Photography</div>
         </div>
-        <!-- ADD MORE COMMERCIAL PROJECTS HERE -->
+        <div class="work-num">02</div>
       </div>
     </div>
-  </div>
-
-  <!-- ── CORPORATE ── -->
-  <div class="work-category-block" data-cat="corporate">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
-      <span class="work-cat-title">CORPORATE</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <div class="work-item" data-index="0">
-          <div class="work-thumb">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Corporate" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-            <div class="work-overlay">
-              <div class="work-cat-tag">Corporate — LDB Bank</div>
-              <div class="work-name">FINANCIAL<br>VISION</div>
-              <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
-            </div>
-            <div class="work-num">01</div>
-          </div>
+    <!-- PROJECT 3 -->
+    <div class="work-item reveal" style="transition-delay:.2s">
+      <div class="work-thumb" style="height:100%;position:relative">
+        <img src="url('https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about me.png')" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+        <div class="work-overlay">
+          <div class="work-cat"></div>
+          <div class="work-name">FINANCIAL<br>VISION</div>
+          <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
         </div>
-        <!-- ADD MORE CORPORATE PROJECTS HERE -->
+        <div class="work-num">03</div>
       </div>
     </div>
   </div>
-
-  <!-- ── EVENT ── (collapsed by default — open when you add projects) -->
-  <div class="work-category-block" data-cat="event">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">EVENT</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">0 Projects</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body">
-      <div class="work-grid" style="padding:2px 0">
-        <!-- ADD EVENT PROJECTS HERE -->
-        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon — add your event projects here</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── AUTOMOTIVE ── (collapsed by default) -->
-  <div class="work-category-block" data-cat="automotive">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">AUTOMOTIVE</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">0 Projects</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body">
-      <div class="work-grid" style="padding:2px 0">
-        <!-- ADD AUTOMOTIVE PROJECTS HERE -->
-        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon — add your automotive projects here</div>
-      </div>
-    </div>
-  </div>
-
 </section>
 
 <!-- ═══════════════════════════════════════════ SHOWREEL
@@ -699,9 +583,7 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ CTA
-     TO CUSTOMISE: Update the phone number href and button link to your booking calendar.
--->
+<!-- ═══════════════════════════════════════════ CTA -->
 <section id="cta">
   <div class="reveal">
     <div class="section-label">Ready to Create?</div>
@@ -709,16 +591,102 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
     <p class="cta-sub">Available for projects, campaigns, and collaborations across Southeast Asia</p>
     <div class="cta-actions">
       <a href="tel:+8562055040203" class="btn-primary" style="text-decoration:none;font-family:var(--f-mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;background:var(--c-accent);color:var(--c-bg);display:inline-block">+856 20 5504 0203</a>
-      <button class="btn-ghost">Book a Discovery Call</button>
+      <button class="btn-ghost" onclick="openBooking()">Book Me</button>
     </div>
     <div class="cta-socials">
-      <!-- Update these href values with your real social profile URLs -->
       <a href="https://facebook.com/Jarnyodfpvlaos" target="_blank" rel="noopener">Facebook</a>
       <a href="https://tiktok.com/@yod_taiban" target="_blank" rel="noopener">TikTok</a>
       <a href="https://instagram.com/Jarnyod_taiban" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════ BOOKING MODAL -->
+<div id="booking-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px">
+  <!-- Backdrop -->
+  <div onclick="closeBooking()" style="position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)"></div>
+  <!-- Modal Box -->
+  <div style="position:relative;z-index:1;background:#111;border:1px solid rgba(240,237,230,.1);width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:60px 48px;animation:fadeUp .4s ease">
+    <!-- Close -->
+    <button onclick="closeBooking()" style="position:absolute;top:24px;right:24px;background:transparent;border:none;color:rgba(240,237,230,.4);font-size:24px;cursor:none;transition:color .2s;line-height:1" onmouseover="this.style.color='#e8c87a'" onmouseout="this.style.color='rgba(240,237,230,.4)'">✕</button>
+
+    <!-- Header -->
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#e8c87a;margin-bottom:16px">New Project</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:.95;margin-bottom:8px">BOOK ME</h2>
+    <p style="font-size:15px;color:rgba(240,237,230,.5);font-family:'Cormorant Garamond',serif;margin-bottom:48px;font-weight:300">Fill in the details below and I'll get back to you within 24 hours.</p>
+
+    <!-- Form -->
+    <div id="booking-form">
+      <!-- Name -->
+      <div style="margin-bottom:24px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Your Name *</label>
+        <input id="f-name" type="text" placeholder="e.g. Somchai Phongsavath" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
+      </div>
+
+      <!-- Email -->
+      <div style="margin-bottom:24px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Email Address *</label>
+        <input id="f-email" type="email" placeholder="your@email.com" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
+      </div>
+
+      <!-- Phone -->
+      <div style="margin-bottom:24px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Phone Number</label>
+        <input id="f-phone" type="tel" placeholder="+856 20 XXXX XXXX" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
+      </div>
+
+      <!-- Service Type -->
+      <div style="margin-bottom:24px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Service Needed *</label>
+        <select id="f-service" style="width:100%;background:#111;border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
+          <option value="" disabled selected style="color:rgba(240,237,230,.3)">Select a service...</option>
+          <option value="video">Video Creation</option>
+          <option value="drone">Drone Cinematography</option>
+          <option value="photo">Photography &amp; Editing</option>
+          <option value="commercial">Commercial Campaign</option>
+          <option value="corporate">Corporate Content</option>
+          <option value="event">Event Coverage</option>
+          <option value="other">Other / Not Sure Yet</option>
+        </select>
+      </div>
+
+      <!-- Budget -->
+      <div style="margin-bottom:24px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Estimated Budget</label>
+        <select id="f-budget" style="width:100%;background:#111;border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
+          <option value="" disabled selected style="color:rgba(240,237,230,.3)">Select budget range...</option>
+          <option value="small">Under $500</option>
+          <option value="medium">$500 – $1,500</option>
+          <option value="large">$1,500 – $5,000</option>
+          <option value="xlarge">$5,000+</option>
+          <option value="discuss">Let's discuss</option>
+        </select>
+      </div>
+
+      <!-- Project Details -->
+      <div style="margin-bottom:40px">
+        <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Project Details *</label>
+        <textarea id="f-message" rows="5" placeholder="Tell me about your project — what do you need, when, and where?" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;resize:vertical" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'"></textarea>
+      </div>
+
+      <!-- Error message -->
+      <div id="f-error" style="display:none;font-family:'DM Mono',monospace;font-size:11px;color:#e87a7a;letter-spacing:1px;margin-bottom:20px"></div>
+
+      <!-- Submit -->
+      <button onclick="submitBooking()" style="width:100%;background:var(--c-accent,#e8c87a);border:none;padding:18px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#080808;cursor:none;transition:background .3s;font-weight:500" onmouseover="this.style.background='#f0ede6'" onmouseout="this.style.background='#e8c87a'">Send Booking Request</button>
+
+      <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(240,237,230,.25);text-align:center;margin-top:20px">I'll reply to your email within 24 hours</p>
+    </div>
+
+    <!-- Success Message (hidden by default) -->
+    <div id="booking-success" style="display:none;text-align:center;padding:40px 0">
+      <div style="font-size:48px;margin-bottom:24px">✓</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:#e8c87a;margin-bottom:16px">REQUEST SENT!</h3>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(240,237,230,.6);line-height:1.7">Thank you! I'll review your project and<br>get back to you within 24 hours.</p>
+      <button onclick="closeBooking()" style="margin-top:40px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 40px;border:1px solid rgba(240,237,230,.2);color:rgba(240,237,230,.5);background:transparent;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='#e8c87a';this.style.color='#e8c87a'" onmouseout="this.style.borderColor='rgba(240,237,230,.2)';this.style.color='rgba(240,237,230,.5)'">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════ FOOTER -->
 <footer>
@@ -764,26 +732,49 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── PORTFOLIO ACCORDION TOGGLE ── */
-function toggleCat(header) {
-  const body = header.nextElementSibling;
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  header.classList.toggle('open', !isOpen);
+/* ── BOOKING MODAL ── */
+function openBooking() {
+  const modal = document.getElementById('booking-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
-
-/* ── PORTFOLIO CATEGORY FILTER ── */
-function filterCats(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.work-category-block').forEach(block => {
-    if (cat === 'all' || block.getAttribute('data-cat') === cat) {
-      block.style.display = 'block';
-    } else {
-      block.style.display = 'none';
-    }
-  });
+function closeBooking() {
+  const modal = document.getElementById('booking-modal');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('booking-form').style.display = 'block';
+    document.getElementById('booking-success').style.display = 'none';
+    ['f-name','f-email','f-phone','f-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-service').value = '';
+    document.getElementById('f-budget').value = '';
+    document.getElementById('f-error').style.display = 'none';
+  }, 300);
 }
+function submitBooking() {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const service = document.getElementById('f-service').value;
+  const message = document.getElementById('f-message').value.trim();
+  const errEl = document.getElementById('f-error');
+  if (!name || !email || !service || !message) {
+    errEl.textContent = '⚠ Please fill in all required fields marked with *';
+    errEl.style.display = 'block'; return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = '⚠ Please enter a valid email address';
+    errEl.style.display = 'block'; return;
+  }
+  errEl.style.display = 'none';
+  const budget = document.getElementById('f-budget').value || 'Not specified';
+  const phone = document.getElementById('f-phone').value || 'Not provided';
+  const subject = encodeURIComponent(`Booking Request — ${name} — ${service}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nBudget: ${budget}\n\nProject Details:\n${message}`);
+  window.location.href = `mailto:jarnyod@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('booking-form').style.display = 'none';
+  document.getElementById('booking-success').style.display = 'block';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
 
 /* ── NAV ── */
 const nav = document.getElementById('main-nav');
