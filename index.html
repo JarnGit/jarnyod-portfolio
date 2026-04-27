@@ -583,7 +583,9 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ CTA -->
+<!-- ═══════════════════════════════════════════ CTA
+     TO CUSTOMISE: Update the phone number href and button link to your booking calendar.
+-->
 <section id="cta">
   <div class="reveal">
     <div class="section-label">Ready to Create?</div>
@@ -594,6 +596,7 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
       <button class="btn-ghost" onclick="openBooking()">Book Me</button>
     </div>
     <div class="cta-socials">
+      <!-- Update these href values with your real social profile URLs -->
       <a href="https://facebook.com/Jarnyodfpvlaos" target="_blank" rel="noopener">Facebook</a>
       <a href="https://tiktok.com/@yod_taiban" target="_blank" rel="noopener">TikTok</a>
       <a href="https://instagram.com/Jarnyod_taiban" target="_blank" rel="noopener">Instagram</a>
@@ -601,86 +604,65 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ BOOKING MODAL -->
+<!-- ═══════════════════════════════════════════ BOOKING MODAL (Formspree) -->
 <div id="booking-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px">
-  <!-- Backdrop -->
   <div onclick="closeBooking()" style="position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)"></div>
-  <!-- Modal Box -->
   <div style="position:relative;z-index:1;background:#111;border:1px solid rgba(240,237,230,.1);width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:60px 48px;animation:fadeUp .4s ease">
-    <!-- Close -->
     <button onclick="closeBooking()" style="position:absolute;top:24px;right:24px;background:transparent;border:none;color:rgba(240,237,230,.4);font-size:24px;cursor:none;transition:color .2s;line-height:1" onmouseover="this.style.color='#e8c87a'" onmouseout="this.style.color='rgba(240,237,230,.4)'">✕</button>
-
-    <!-- Header -->
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#e8c87a;margin-bottom:16px">New Project</div>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:.95;margin-bottom:8px">BOOK ME</h2>
     <p style="font-size:15px;color:rgba(240,237,230,.5);font-family:'Cormorant Garamond',serif;margin-bottom:48px;font-weight:300">Fill in the details below and I'll get back to you within 24 hours.</p>
 
-    <!-- Form -->
+    <!-- FORM — posts to Formspree -->
     <div id="booking-form">
-      <!-- Name -->
       <div style="margin-bottom:24px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Your Name *</label>
         <input id="f-name" type="text" placeholder="e.g. Somchai Phongsavath" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
       </div>
-
-      <!-- Email -->
       <div style="margin-bottom:24px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Email Address *</label>
         <input id="f-email" type="email" placeholder="your@email.com" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
       </div>
-
-      <!-- Phone -->
       <div style="margin-bottom:24px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Phone Number</label>
         <input id="f-phone" type="tel" placeholder="+856 20 XXXX XXXX" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
       </div>
-
-      <!-- Service Type -->
       <div style="margin-bottom:24px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Service Needed *</label>
         <select id="f-service" style="width:100%;background:#111;border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
-          <option value="" disabled selected style="color:rgba(240,237,230,.3)">Select a service...</option>
-          <option value="video">Video Creation</option>
-          <option value="drone">Drone Cinematography</option>
-          <option value="photo">Photography &amp; Editing</option>
-          <option value="commercial">Commercial Campaign</option>
-          <option value="corporate">Corporate Content</option>
-          <option value="event">Event Coverage</option>
-          <option value="other">Other / Not Sure Yet</option>
+          <option value="" disabled selected>Select a service...</option>
+          <option value="Video Creation">Video Creation</option>
+          <option value="Drone Cinematography">Drone Cinematography</option>
+          <option value="Photography & Editing">Photography &amp; Editing</option>
+          <option value="Commercial Campaign">Commercial Campaign</option>
+          <option value="Corporate Content">Corporate Content</option>
+          <option value="Event Coverage">Event Coverage</option>
+          <option value="Other">Other / Not Sure Yet</option>
         </select>
       </div>
-
-      <!-- Budget -->
       <div style="margin-bottom:24px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Estimated Budget</label>
         <select id="f-budget" style="width:100%;background:#111;border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'">
-          <option value="" disabled selected style="color:rgba(240,237,230,.3)">Select budget range...</option>
-          <option value="small">Under $500</option>
-          <option value="medium">$500 – $1,500</option>
-          <option value="large">$1,500 – $5,000</option>
-          <option value="xlarge">$5,000+</option>
-          <option value="discuss">Let's discuss</option>
+          <option value="" disabled selected>Select budget range...</option>
+          <option value="Under $500">Under $500</option>
+          <option value="$500 – $1,500">$500 – $1,500</option>
+          <option value="$1,500 – $5,000">$1,500 – $5,000</option>
+          <option value="$5,000+">$5,000+</option>
+          <option value="Let's discuss">Let's discuss</option>
         </select>
       </div>
-
-      <!-- Project Details -->
       <div style="margin-bottom:40px">
         <label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.5);display:block;margin-bottom:10px">Project Details *</label>
         <textarea id="f-message" rows="5" placeholder="Tell me about your project — what do you need, when, and where?" style="width:100%;background:rgba(240,237,230,.04);border:1px solid rgba(240,237,230,.1);padding:14px 18px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;resize:vertical" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(240,237,230,.1)'"></textarea>
       </div>
-
-      <!-- Error message -->
       <div id="f-error" style="display:none;font-family:'DM Mono',monospace;font-size:11px;color:#e87a7a;letter-spacing:1px;margin-bottom:20px"></div>
-
-      <!-- Submit -->
-      <button onclick="submitBooking()" style="width:100%;background:var(--c-accent,#e8c87a);border:none;padding:18px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#080808;cursor:none;transition:background .3s;font-weight:500" onmouseover="this.style.background='#f0ede6'" onmouseout="this.style.background='#e8c87a'">Send Booking Request</button>
-
+      <button id="f-submit" onclick="submitBooking()" style="width:100%;background:#e8c87a;border:none;padding:18px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#080808;cursor:none;transition:background .3s;font-weight:500" onmouseover="this.style.background='#f0ede6'" onmouseout="this.style.background='#e8c87a'">Send Booking Request</button>
       <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(240,237,230,.25);text-align:center;margin-top:20px">I'll reply to your email within 24 hours</p>
     </div>
 
-    <!-- Success Message (hidden by default) -->
+    <!-- Success screen -->
     <div id="booking-success" style="display:none;text-align:center;padding:40px 0">
-      <div style="font-size:48px;margin-bottom:24px">✓</div>
+      <div style="font-size:48px;margin-bottom:24px;color:#e8c87a">✓</div>
       <h3 style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:#e8c87a;margin-bottom:16px">REQUEST SENT!</h3>
       <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(240,237,230,.6);line-height:1.7">Thank you! I'll review your project and<br>get back to you within 24 hours.</p>
       <button onclick="closeBooking()" style="margin-top:40px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:14px 40px;border:1px solid rgba(240,237,230,.2);color:rgba(240,237,230,.5);background:transparent;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='#e8c87a';this.style.color='#e8c87a'" onmouseout="this.style.borderColor='rgba(240,237,230,.2)';this.style.color='rgba(240,237,230,.5)'">Close</button>
@@ -732,50 +714,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── BOOKING MODAL ── */
-function openBooking() {
-  const modal = document.getElementById('booking-modal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeBooking() {
-  const modal = document.getElementById('booking-modal');
-  modal.style.display = 'none';
-  document.body.style.overflow = '';
-  setTimeout(() => {
-    document.getElementById('booking-form').style.display = 'block';
-    document.getElementById('booking-success').style.display = 'none';
-    ['f-name','f-email','f-phone','f-message'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('f-service').value = '';
-    document.getElementById('f-budget').value = '';
-    document.getElementById('f-error').style.display = 'none';
-  }, 300);
-}
-function submitBooking() {
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const service = document.getElementById('f-service').value;
-  const message = document.getElementById('f-message').value.trim();
-  const errEl = document.getElementById('f-error');
-  if (!name || !email || !service || !message) {
-    errEl.textContent = '⚠ Please fill in all required fields marked with *';
-    errEl.style.display = 'block'; return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errEl.textContent = '⚠ Please enter a valid email address';
-    errEl.style.display = 'block'; return;
-  }
-  errEl.style.display = 'none';
-  const budget = document.getElementById('f-budget').value || 'Not specified';
-  const phone = document.getElementById('f-phone').value || 'Not provided';
-  const subject = encodeURIComponent(`Booking Request — ${name} — ${service}`);
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nBudget: ${budget}\n\nProject Details:\n${message}`);
-  window.location.href = `mailto:jarnyod@gmail.com?subject=${subject}&body=${body}`;
-  document.getElementById('booking-form').style.display = 'none';
-  document.getElementById('booking-success').style.display = 'block';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
-
 /* ── NAV ── */
 const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
@@ -820,6 +758,75 @@ function switchTesti(i) {
 }
 document.getElementById('tq').style.transition = 'opacity .3s';
 setInterval(() => switchTesti((ct + 1) % 3), 5000);
+
+/* ── BOOKING MODAL — FORMSPREE ── */
+function openBooking() {
+  document.getElementById('booking-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeBooking() {
+  document.getElementById('booking-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('booking-form').style.display = 'block';
+    document.getElementById('booking-success').style.display = 'none';
+    ['f-name','f-email','f-phone','f-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-service').selectedIndex = 0;
+    document.getElementById('f-budget').selectedIndex = 0;
+    document.getElementById('f-error').style.display = 'none';
+    document.getElementById('f-submit').textContent = 'Send Booking Request';
+    document.getElementById('f-submit').disabled = false;
+  }, 300);
+}
+async function submitBooking() {
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const service = document.getElementById('f-service').value;
+  const budget  = document.getElementById('f-budget').value;
+  const message = document.getElementById('f-message').value.trim();
+  const errEl   = document.getElementById('f-error');
+  const btn     = document.getElementById('f-submit');
+
+  // Validation
+  if (!name || !email || !service || !message) {
+    errEl.textContent = '⚠ Please fill in all required fields marked with *';
+    errEl.style.display = 'block'; return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = '⚠ Please enter a valid email address';
+    errEl.style.display = 'block'; return;
+  }
+  errEl.style.display = 'none';
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  // Send to Formspree
+  try {
+    const res = await fetch('https://formspree.io/f/mzdyqawy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name, email,
+        phone: phone || 'Not provided',
+        service, budget: budget || 'Not specified',
+        message
+      })
+    });
+    if (res.ok) {
+      document.getElementById('booking-form').style.display = 'none';
+      document.getElementById('booking-success').style.display = 'block';
+    } else {
+      throw new Error('Failed');
+    }
+  } catch(e) {
+    errEl.textContent = '⚠ Something went wrong. Please try again or contact me directly.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Send Booking Request';
+    btn.disabled = false;
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
 </script>
 
 </body>
