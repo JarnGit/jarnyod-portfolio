@@ -24,8 +24,8 @@ html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--c-bg);color:var(--c-fg);font-family:var(--f-serif);overflow-x:hidden;cursor:none}
 
 /* ── CURSOR ── */
-#cursor{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--c-accent);border-radius:50%;pointer-events:none;z-index:9999;transition:width .2s ease,height .2s ease;mix-blend-mode:difference;will-change:transform}
-#cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid var(--c-accent);border-radius:50%;pointer-events:none;z-index:9998;transition:width .3s ease,height .3s ease,opacity .3s ease;opacity:0.5;will-change:transform}
+#cursor{position:fixed;width:10px;height:10px;background:var(--c-accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s ease,width .2s ease,height .2s ease;mix-blend-mode:difference}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--c-accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .35s cubic-bezier(.23,1,.32,1),width .3s ease,height .3s ease,opacity .3s ease;opacity:0.5}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
@@ -100,30 +100,46 @@ section{padding:120px 60px}
 .gear-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--c-border);color:var(--c-muted)}
 
 /* ── WORK ── */
-#work{background:#0d0d0d}
-.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px}
-.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.work-item{position:relative;overflow:hidden;cursor:none;will-change:transform;transform:translateZ(0)}
-.work-item:first-child{grid-column:1/-1;height:520px}
-.work-item:not(:first-child){height:380px}
-.work-thumb{width:100%;height:100%;background:var(--c-mid);position:relative;overflow:hidden;display:flex}
+#work{background:#0d0d0d;padding-bottom:80px}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+
+/* Filter tabs */
+.work-filters{display:flex;gap:8px;flex-wrap:wrap;padding:0 60px 32px;border-bottom:1px solid var(--c-border);margin-bottom:8px}
+.filter-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:10px 22px;background:transparent;border:1px solid var(--c-border);color:var(--c-muted);cursor:none;transition:all .25s}
+.filter-btn:hover{color:var(--c-fg);border-color:rgba(240,237,230,.3)}
+.filter-btn.active{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-bg)}
+
+/* Category accordion rows */
+.work-category-block{margin-bottom:2px}
+.work-cat-header{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;border-bottom:1px solid var(--c-border);cursor:none;transition:background .25s;user-select:none}
+.work-cat-header:hover{background:rgba(240,237,230,.03)}
+.work-cat-title{font-family:var(--f-display);font-size:28px;letter-spacing:3px;color:var(--c-fg)}
+.work-cat-count{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted)}
+.work-cat-arrow{font-size:18px;color:var(--c-accent);transition:transform .35s ease;line-height:1}
+.work-cat-header.open .work-cat-arrow{transform:rotate(90deg)}
+
+/* Collapsible grid */
+.work-cat-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.23,1,.32,1)}
+.work-cat-body.open{max-height:10000px}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.work-item{position:relative;overflow:hidden;cursor:none;height:300px;will-change:transform;transform:translateZ(0)}
+.work-item.featured{grid-column:1/-1;height:480px}
+.work-thumb{width:100%;height:100%;background:var(--c-mid);position:relative;overflow:hidden}
 .work-thumb img{width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .4s ease-out,transform .5s ease-out;will-change:transform,opacity;backface-visibility:hidden;transform:translateZ(0)}
 .work-item:hover .work-thumb img{opacity:.9;transform:translateZ(0) scale(1.03)}
-.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,transparent 60%);opacity:0;transition:opacity .3s ease-out;display:flex;flex-direction:column;justify-content:flex-end;padding:40px;will-change:opacity;pointer-events:none}
+.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,transparent 60%);opacity:0;transition:opacity .3s ease-out;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;will-change:opacity;pointer-events:none}
 .work-item:hover .work-overlay{opacity:1}
-.work-cat{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-accent);margin-bottom:12px}
-.work-name{font-family:var(--f-display);font-size:42px;letter-spacing:1px;color:var(--c-fg);line-height:1}
-.work-role{font-family:var(--f-mono);font-size:11px;color:var(--c-muted);margin-top:8px}
-.work-num{position:absolute;top:30px;left:30px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);background:rgba(8,8,8,.6);padding:4px 10px;pointer-events:none}
+.work-cat-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-accent);margin-bottom:10px}
+.work-name{font-family:var(--f-display);font-size:32px;letter-spacing:1px;color:var(--c-fg);line-height:1}
+.work-role{font-family:var(--f-mono);font-size:10px;color:var(--c-muted);margin-top:6px}
+.work-num{position:absolute;top:20px;left:20px;font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--c-muted);background:rgba(8,8,8,.6);padding:3px 8px;pointer-events:none}
 
-/* ── WORK FILTERS (Post64 inspired) ── */
-.work-filters{display:flex;gap:8px;flex-wrap:wrap;padding:0 60px 40px;border-bottom:1px solid var(--c-border);margin-bottom:60px}
-.filter-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:10px 22px;background:transparent;border:1px solid var(--c-border);color:var(--c-muted);cursor:none;transition:all .3s}
-.filter-btn:hover{color:var(--c-fg);border-color:rgba(240,237,230,0.3)}
-.filter-btn.active{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-bg)}
-.work-item.hidden{display:none}
-.work-item.filtered-show{animation:filterFade .5s ease forwards}
-@keyframes filterFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* Load More */
+.work-load-more{display:flex;justify-content:center;padding:48px 0 0}
+.load-more-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:16px 48px;border:1px solid var(--c-border);color:var(--c-muted);background:transparent;cursor:none;transition:all .3s}
+.load-more-btn:hover{border-color:var(--c-accent);color:var(--c-accent)}
+.load-more-btn.hidden{display:none}
+.work-item.collapsed{display:none}
 
 /* ── SHOWREEL ── */
 #showreel{background:var(--c-bg);text-align:center;padding:100px 60px}
@@ -354,68 +370,147 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
 </section>
 
 <!-- ═══════════════════════════════════════════ WORK
-     POST64-INSPIRED FILTERABLE GRID
-     TO ADD MORE PROJECTS: copy a .work-item block, set data-cat to one of:
-     "commercial", "aerial", "corporate", "event", "automotive"
+     HOW TO ADD MORE PROJECTS:
+     1. Find the right category block (AERIAL, COMMERCIAL, CORPORATE, EVENT, AUTOMOTIVE)
+     2. Copy any .work-item block and paste it inside that category's .work-grid
+     3. Update the img src, work-name, work-role, and work-num
+     4. The Load More button automatically handles showing/hiding extras
 -->
-<section id="work" style="padding-left:0;padding-right:0;padding-top:120px;padding-bottom:120px">
-  <div style="padding:0 60px 60px" class="reveal">
+<section id="work" style="padding-left:0;padding-right:0;padding-top:120px">
+  <div style="padding:0 60px 40px" class="reveal">
     <div class="section-label">Selected Work</div>
     <div class="work-header">
       <h2 class="section-title" style="margin-bottom:0">PORTFOLIO</h2>
+      <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted)" id="work-total-count"></span>
     </div>
   </div>
 
-  <!-- FILTER BUTTONS -->
+  <!-- FILTER TABS -->
   <div class="work-filters reveal">
-    <button class="filter-btn active" data-filter="all" onclick="filterWork('all',this)">All</button>
-    <button class="filter-btn" data-filter="aerial" onclick="filterWork('aerial',this)">Aerial</button>
-    <button class="filter-btn" data-filter="commercial" onclick="filterWork('commercial',this)">Commercial</button>
-    <button class="filter-btn" data-filter="corporate" onclick="filterWork('corporate',this)">Corporate</button>
-    <button class="filter-btn" data-filter="event" onclick="filterWork('event',this)">Event</button>
-    <button class="filter-btn" data-filter="automotive" onclick="filterWork('automotive',this)">Automotive</button>
+    <button class="filter-btn active" onclick="filterCats('all',this)">All</button>
+    <button class="filter-btn" onclick="filterCats('aerial',this)">Aerial</button>
+    <button class="filter-btn" onclick="filterCats('commercial',this)">Commercial</button>
+    <button class="filter-btn" onclick="filterCats('corporate',this)">Corporate</button>
+    <button class="filter-btn" onclick="filterCats('event',this)">Event</button>
+    <button class="filter-btn" onclick="filterCats('automotive',this)">Automotive</button>
   </div>
 
-  <div class="work-grid">
-    <!-- PROJECT 1 — Featured Aerial -->
-    <div class="work-item reveal" data-cat="aerial">
-      <div class="work-thumb" style="height:100%;position:relative">
-        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg" alt="Aerial Cinematic" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-        <div class="work-overlay">
-          <div class="work-cat">Aerial Cinematography</div>
-          <div class="work-name">WINGS OVER<br>VIENTIANE</div>
-          <div class="work-role">Drone Operator · Video Editor · AI Content Specialist</div>
-        </div>
-        <div class="work-num">01 — Featured</div>
+  <!-- ── AERIAL ── -->
+  <div class="work-category-block" data-cat="aerial">
+    <div class="work-cat-header open" onclick="toggleCat(this)">
+      <span class="work-cat-title">AERIAL</span>
+      <div style="display:flex;align-items:center;gap:24px">
+        <span class="work-cat-count">1 Project</span>
+        <span class="work-cat-arrow">›</span>
       </div>
     </div>
-
-    <!-- PROJECT 2 — Commercial -->
-    <div class="work-item reveal" data-cat="commercial" style="transition-delay:.1s">
-      <div class="work-thumb" style="height:100%;position:relative">
-        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Brand Campaign" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-        <div class="work-overlay">
-          <div class="work-cat">Brand Campaign — Allianz Insurance</div>
-          <div class="work-name">TRUST IN<br>MOTION</div>
-          <div class="work-role">Video Creator · Motion Graphics · Photography</div>
+    <div class="work-cat-body open">
+      <div class="work-grid" style="padding:2px 0">
+        <!-- FEATURED PROJECT -->
+        <div class="work-item featured" data-index="0">
+          <div class="work-thumb">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg" alt="Aerial Cinematic" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+            <div class="work-overlay">
+              <div class="work-cat-tag">Aerial Cinematography</div>
+              <div class="work-name">WINGS OVER<br>VIENTIANE</div>
+              <div class="work-role">Drone Operator · Video Editor · AI Content Specialist</div>
+            </div>
+            <div class="work-num">01 — Featured</div>
+          </div>
         </div>
-        <div class="work-num">02</div>
-      </div>
-    </div>
-
-    <!-- PROJECT 3 — Corporate -->
-    <div class="work-item reveal" data-cat="corporate" style="transition-delay:.2s">
-      <div class="work-thumb" style="height:100%;position:relative">
-        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Corporate Content" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-        <div class="work-overlay">
-          <div class="work-cat">Corporate — LDB Bank</div>
-          <div class="work-name">FINANCIAL<br>VISION</div>
-          <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
-        </div>
-        <div class="work-num">03</div>
+        <!-- ADD MORE AERIAL PROJECTS HERE -->
       </div>
     </div>
   </div>
+
+  <!-- ── COMMERCIAL ── -->
+  <div class="work-category-block" data-cat="commercial">
+    <div class="work-cat-header open" onclick="toggleCat(this)">
+      <span class="work-cat-title">COMMERCIAL</span>
+      <div style="display:flex;align-items:center;gap:24px">
+        <span class="work-cat-count">1 Project</span>
+        <span class="work-cat-arrow">›</span>
+      </div>
+    </div>
+    <div class="work-cat-body open">
+      <div class="work-grid" style="padding:2px 0">
+        <div class="work-item" data-index="0">
+          <div class="work-thumb">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Brand Campaign" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+            <div class="work-overlay">
+              <div class="work-cat-tag">Brand Campaign — Allianz Insurance</div>
+              <div class="work-name">TRUST IN<br>MOTION</div>
+              <div class="work-role">Video Creator · Motion Graphics · Photography</div>
+            </div>
+            <div class="work-num">01</div>
+          </div>
+        </div>
+        <!-- ADD MORE COMMERCIAL PROJECTS HERE -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CORPORATE ── -->
+  <div class="work-category-block" data-cat="corporate">
+    <div class="work-cat-header open" onclick="toggleCat(this)">
+      <span class="work-cat-title">CORPORATE</span>
+      <div style="display:flex;align-items:center;gap:24px">
+        <span class="work-cat-count">1 Project</span>
+        <span class="work-cat-arrow">›</span>
+      </div>
+    </div>
+    <div class="work-cat-body open">
+      <div class="work-grid" style="padding:2px 0">
+        <div class="work-item" data-index="0">
+          <div class="work-thumb">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Corporate" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+            <div class="work-overlay">
+              <div class="work-cat-tag">Corporate — LDB Bank</div>
+              <div class="work-name">FINANCIAL<br>VISION</div>
+              <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
+            </div>
+            <div class="work-num">01</div>
+          </div>
+        </div>
+        <!-- ADD MORE CORPORATE PROJECTS HERE -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EVENT ── (collapsed by default — open when you add projects) -->
+  <div class="work-category-block" data-cat="event">
+    <div class="work-cat-header" onclick="toggleCat(this)">
+      <span class="work-cat-title">EVENT</span>
+      <div style="display:flex;align-items:center;gap:24px">
+        <span class="work-cat-count">0 Projects</span>
+        <span class="work-cat-arrow">›</span>
+      </div>
+    </div>
+    <div class="work-cat-body">
+      <div class="work-grid" style="padding:2px 0">
+        <!-- ADD EVENT PROJECTS HERE -->
+        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon — add your event projects here</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUTOMOTIVE ── (collapsed by default) -->
+  <div class="work-category-block" data-cat="automotive">
+    <div class="work-cat-header" onclick="toggleCat(this)">
+      <span class="work-cat-title">AUTOMOTIVE</span>
+      <div style="display:flex;align-items:center;gap:24px">
+        <span class="work-cat-count">0 Projects</span>
+        <span class="work-cat-arrow">›</span>
+      </div>
+    </div>
+    <div class="work-cat-body">
+      <div class="work-grid" style="padding:2px 0">
+        <!-- ADD AUTOMOTIVE PROJECTS HERE -->
+        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon — add your automotive projects here</div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ═══════════════════════════════════════════ SHOWREEL
@@ -643,37 +738,25 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
-let cursorRaf = null;
-
 document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
-  if (!cursorRaf) {
-    cursorRaf = requestAnimationFrame(() => {
-      cur.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
-      cursorRaf = null;
-    });
-  }
-}, { passive: true });
-
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+});
 (function animate() {
   rx += (mx - rx) * .15; ry += (my - ry) * .15;
-  ring.style.transform = `translate3d(${Math.round(rx)}px, ${Math.round(ry)}px, 0) translate(-50%, -50%)`;
+  ring.style.left = Math.round(rx) + 'px'; ring.style.top = Math.round(ry) + 'px';
   requestAnimationFrame(animate);
 })();
-
-/* Event delegation — single listener instead of one per element */
-document.body.addEventListener('mouseover', e => {
-  if (e.target.closest('a,button,[onclick],.work-item')) {
+document.querySelectorAll('a,button,[onclick]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
     cur.style.width = '20px'; cur.style.height = '20px';
     ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.8';
-  }
-}, { passive: true });
-document.body.addEventListener('mouseout', e => {
-  if (e.target.closest('a,button,[onclick],.work-item')) {
+  });
+  el.addEventListener('mouseleave', () => {
     cur.style.width = '10px'; cur.style.height = '10px';
     ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.5';
-  }
-}, { passive: true });
+  });
+});
 
 /* ── SCROLL REVEAL ── */
 const obs = new IntersectionObserver(entries => {
@@ -681,19 +764,23 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── WORK FILTERS ── */
-function filterWork(category, btn) {
+/* ── PORTFOLIO ACCORDION TOGGLE ── */
+function toggleCat(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+}
+
+/* ── PORTFOLIO CATEGORY FILTER ── */
+function filterCats(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.work-item').forEach(item => {
-    const cat = item.getAttribute('data-cat');
-    if (category === 'all' || cat === category) {
-      item.classList.remove('hidden');
-      item.classList.remove('filtered-show');
-      void item.offsetWidth;
-      item.classList.add('filtered-show');
+  document.querySelectorAll('.work-category-block').forEach(block => {
+    if (cat === 'all' || block.getAttribute('data-cat') === cat) {
+      block.style.display = 'block';
     } else {
-      item.classList.add('hidden');
+      block.style.display = 'none';
     }
   });
 }
