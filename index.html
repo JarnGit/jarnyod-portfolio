@@ -116,6 +116,15 @@ section{padding:120px 60px}
 .work-role{font-family:var(--f-mono);font-size:11px;color:var(--c-muted);margin-top:8px}
 .work-num{position:absolute;top:30px;left:30px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);background:rgba(8,8,8,.6);padding:4px 10px}
 
+/* ── WORK FILTERS (Post64 inspired) ── */
+.work-filters{display:flex;gap:8px;flex-wrap:wrap;padding:0 60px 40px;border-bottom:1px solid var(--c-border);margin-bottom:60px}
+.filter-btn{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:10px 22px;background:transparent;border:1px solid var(--c-border);color:var(--c-muted);cursor:none;transition:all .3s}
+.filter-btn:hover{color:var(--c-fg);border-color:rgba(240,237,230,0.3)}
+.filter-btn.active{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-bg)}
+.work-item.hidden{display:none}
+.work-item.filtered-show{animation:filterFade .5s ease forwards}
+@keyframes filterFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
 /* ── SHOWREEL ── */
 #showreel{background:var(--c-bg);text-align:center;padding:100px 60px}
 .reel-wrap{position:relative;margin-top:60px;cursor:none}
@@ -345,48 +354,61 @@ footer{padding:60px 60px 40px;border-top:1px solid var(--c-border);display:grid;
 </section>
 
 <!-- ═══════════════════════════════════════════ WORK
-     TO CUSTOMISE: Replace the img src URLs with your own project images.
-     Also update: work-cat (category), work-name (project title), work-role (your role).
+     POST64-INSPIRED FILTERABLE GRID
+     TO ADD MORE PROJECTS: copy a .work-item block, set data-cat to one of:
+     "commercial", "aerial", "corporate", "event", "automotive"
 -->
-<section id="work" style="padding-left:0;padding-right:0;padding-top:120px;padding-bottom:0">
+<section id="work" style="padding-left:0;padding-right:0;padding-top:120px;padding-bottom:120px">
   <div style="padding:0 60px 60px" class="reveal">
     <div class="section-label">Selected Work</div>
     <div class="work-header">
       <h2 class="section-title" style="margin-bottom:0">PORTFOLIO</h2>
-      <button class="btn-ghost">View All Work</button>
     </div>
   </div>
+
+  <!-- FILTER BUTTONS -->
+  <div class="work-filters reveal">
+    <button class="filter-btn active" data-filter="all" onclick="filterWork('all',this)">All</button>
+    <button class="filter-btn" data-filter="aerial" onclick="filterWork('aerial',this)">Aerial</button>
+    <button class="filter-btn" data-filter="commercial" onclick="filterWork('commercial',this)">Commercial</button>
+    <button class="filter-btn" data-filter="corporate" onclick="filterWork('corporate',this)">Corporate</button>
+    <button class="filter-btn" data-filter="event" onclick="filterWork('event',this)">Event</button>
+    <button class="filter-btn" data-filter="automotive" onclick="filterWork('automotive',this)">Automotive</button>
+  </div>
+
   <div class="work-grid">
-    <!-- PROJECT 1 — Featured (full width) -->
-    <div class="work-item reveal">
+    <!-- PROJECT 1 — Featured Aerial -->
+    <div class="work-item reveal" data-cat="aerial">
       <div class="work-thumb" style="height:100%;position:relative">
         <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg" alt="Aerial Cinematic" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
         <div class="work-overlay">
-          <div class="work-cat"></div>
+          <div class="work-cat">Aerial Cinematography</div>
           <div class="work-name">WINGS OVER<br>VIENTIANE</div>
-          <div class="work-role">·Drone Operator · Video Editor · </div>
+          <div class="work-role">Drone Operator · Video Editor · AI Content Specialist</div>
         </div>
         <div class="work-num">01 — Featured</div>
       </div>
     </div>
-    <!-- PROJECT 2 -->
-    <div class="work-item reveal" style="transition-delay:.1s">
+
+    <!-- PROJECT 2 — Commercial -->
+    <div class="work-item reveal" data-cat="commercial" style="transition-delay:.1s">
       <div class="work-thumb" style="height:100%;position:relative">
-        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/replace image here.png" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Brand Campaign" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
         <div class="work-overlay">
-          <div class="work-cat"></div>
+          <div class="work-cat">Brand Campaign — Allianz Insurance</div>
           <div class="work-name">TRUST IN<br>MOTION</div>
           <div class="work-role">Video Creator · Motion Graphics · Photography</div>
         </div>
         <div class="work-num">02</div>
       </div>
     </div>
-    <!-- PROJECT 3 -->
-    <div class="work-item reveal" style="transition-delay:.2s">
+
+    <!-- PROJECT 3 — Corporate -->
+    <div class="work-item reveal" data-cat="corporate" style="transition-delay:.2s">
       <div class="work-thumb" style="height:100%;position:relative">
-        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/replace image here.png" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
+        <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Corporate Content" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
         <div class="work-overlay">
-          <div class="work-cat"></div>
+          <div class="work-cat">Corporate — LDB Bank</div>
           <div class="work-name">FINANCIAL<br>VISION</div>
           <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
         </div>
@@ -646,6 +668,23 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
 }, { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── WORK FILTERS ── */
+function filterWork(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.work-item').forEach(item => {
+    const cat = item.getAttribute('data-cat');
+    if (category === 'all' || cat === category) {
+      item.classList.remove('hidden');
+      item.classList.remove('filtered-show');
+      void item.offsetWidth;
+      item.classList.add('filtered-show');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+}
 
 /* ── NAV ── */
 const nav = document.getElementById('main-nav');
