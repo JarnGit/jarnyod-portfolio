@@ -30,10 +30,10 @@ html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--c-bg);color:var(--c-fg);font-family:var(--f-serif);overflow-x:hidden;cursor:none}
 
 /* ── AMBIENT ORBS (liquid glass bg elements) ── */
-.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;will-change:transform}
-#orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(232,200,122,.12) 0%,transparent 70%);top:-10%;left:-10%}
-#orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(168,212,245,.08) 0%,transparent 70%);top:30%;right:-5%}
-#orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(232,200,122,.06) 0%,transparent 70%);bottom:10%;left:20%}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+#orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(232,200,122,.09) 0%,transparent 65%);top:-15%;left:-15%;filter:blur(80px)}
+#orb2{width:550px;height:550px;background:radial-gradient(circle,rgba(168,212,245,.06) 0%,transparent 65%);top:25%;right:-10%;filter:blur(80px)}
+#orb3{width:450px;height:450px;background:radial-gradient(circle,rgba(232,200,122,.05) 0%,transparent 65%);bottom:5%;left:15%;filter:blur(80px)}
 
 /* ── CURSOR ── */
 #cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:var(--c-accent);border-radius:50%;pointer-events:none;z-index:9999;transition:width .2s ease,height .2s ease,background .2s;mix-blend-mode:normal;will-change:transform}
@@ -41,9 +41,9 @@ body{background:var(--c-bg);color:var(--c-fg);font-family:var(--f-serif);overflo
 #cursor-glass{position:fixed;top:0;left:0;width:80px;height:80px;background:radial-gradient(circle,rgba(232,200,122,.06) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:9997;opacity:0;transition:opacity .4s;will-change:transform}
 
 /* ── GLASS MIXIN ── */
-.glass{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur)) saturate(1.4);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.4);border:1px solid var(--glass-border);box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 var(--glass-shine)}
-.glass-gold{background:rgba(232,200,122,.06);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border:1px solid rgba(232,200,122,.18);box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(232,200,122,.12)}
-.glass-dark{background:rgba(4,6,10,.7);backdrop-filter:blur(30px) saturate(1.2);-webkit-backdrop-filter:blur(30px) saturate(1.2);border:1px solid var(--glass-border);box-shadow:0 20px 80px rgba(0,0,0,.6),inset 0 1px 0 var(--glass-shine)}
+.glass{background:var(--glass-bg);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--glass-border);box-shadow:0 8px 32px rgba(0,0,0,.35),inset 0 1px 0 var(--glass-shine);transform:translateZ(0)}
+.glass-gold{background:rgba(232,200,122,.05);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(232,200,122,.15);box-shadow:0 8px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(232,200,122,.1);transform:translateZ(0)}
+.glass-dark{background:rgba(4,6,10,.75);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border:1px solid var(--glass-border);box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 var(--glass-shine);transform:translateZ(0)}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:24px 60px;display:flex;justify-content:space-between;align-items:center;transition:all .5s cubic-bezier(.23,1,.32,1)}
@@ -461,52 +461,32 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
 
   <!-- COMMERCIAL -->
   <div class="work-category-block" data-cat="commercial">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
+    <div class="work-cat-header" onclick="toggleCat(this)">
       <span class="work-cat-title">COMMERCIAL</span>
       <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
+        <span class="work-cat-count">Coming Soon</span>
         <span class="work-cat-arrow">›</span>
       </div>
     </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <div class="work-item">
-          <div class="work-thumb">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Brand Campaign" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-            <div class="work-overlay">
-              <div class="work-cat">Brand Campaign — Allianz Insurance</div>
-              <div class="work-name">TRUST IN<br>MOTION</div>
-              <div class="work-role">Video Creator · Motion Graphics · Photography</div>
-            </div>
-            <div class="work-num">01</div>
-          </div>
-        </div>
+    <div class="work-cat-body">
+      <div style="padding:48px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);display:flex;align-items:center;gap:16px">
+        <span style="color:var(--c-accent);opacity:.5">✦</span> Coming Soon — Commercial projects will appear here
       </div>
     </div>
   </div>
 
   <!-- CORPORATE -->
   <div class="work-category-block" data-cat="corporate">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
+    <div class="work-cat-header" onclick="toggleCat(this)">
       <span class="work-cat-title">CORPORATE</span>
       <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
+        <span class="work-cat-count">Coming Soon</span>
         <span class="work-cat-arrow">›</span>
       </div>
     </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <div class="work-item">
-          <div class="work-thumb">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/about%20me.png" alt="Corporate" style="width:100%;height:100%;object-fit:cover;opacity:.65;display:block">
-            <div class="work-overlay">
-              <div class="work-cat">Corporate — LDB Bank</div>
-              <div class="work-name">FINANCIAL<br>VISION</div>
-              <div class="work-role">In-Studio &amp; On-Location · Video · Photo</div>
-            </div>
-            <div class="work-num">01</div>
-          </div>
-        </div>
+    <div class="work-cat-body">
+      <div style="padding:48px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);display:flex;align-items:center;gap:16px">
+        <span style="color:var(--c-accent);opacity:.5">✦</span> Coming Soon — Corporate projects will appear here
       </div>
     </div>
   </div>
@@ -809,42 +789,42 @@ document.body.addEventListener('mouseout',e=>{
   }
 },{passive:true});
 
-/* ── SCROLL PROGRESS ── */
-window.addEventListener('scroll',()=>{
-  const s=document.documentElement.scrollTop;
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('progress-bar').style.width=(s/h*100)+'%';
-},{ passive:true });
-
-/* ── HERO PARALLAX ── */
+/* ── ALL SCROLL LOGIC — single RAF-throttled handler ── */
 const heroBg=document.getElementById('hero-bg');
 const heroCard=document.getElementById('hero-card');
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  if(y<window.innerHeight){
-    heroBg.style.transform=`translateY(${y*0.35}px) scale(1.05)`;
-    if(heroCard) heroCard.style.transform=`translateY(calc(-50% + ${y*0.15}px))`;
-  }
-},{passive:true});
-
-/* ── AMBIENT ORB PARALLAX ── */
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  document.getElementById('orb1').style.transform=`translateY(${y*0.12}px)`;
-  document.getElementById('orb2').style.transform=`translateY(${-y*0.08}px)`;
-  document.getElementById('orb3').style.transform=`translateY(${y*0.06}px)`;
-},{passive:true});
-
-/* ── NAV ── */
 const nav=document.getElementById('main-nav');
+const progressBar=document.getElementById('progress-bar');
+const docEl=document.documentElement;
+let scrollRAF=null;
+let lastScrollY=0;
+
+function onScroll(){
+  const y=window.scrollY;
+  lastScrollY=y;
+  scrollRAF=null;
+
+  // Progress bar
+  const h=docEl.scrollHeight-window.innerHeight;
+  progressBar.style.width=(y/h*100)+'%';
+
+  // Hero parallax — only when hero is visible
+  if(y<window.innerHeight){
+    heroBg.style.transform=`translate3d(0,${y*0.28}px,0) scale(1.05)`;
+    if(heroCard) heroCard.style.transform=`translate3d(0,calc(-50% + ${y*0.12}px),0)`;
+  }
+
+  // Nav glass
+  nav.classList.toggle('scrolled',y>60);
+}
+
 window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>60);
+  if(!scrollRAF) scrollRAF=requestAnimationFrame(onScroll);
 },{passive:true});
 
 /* ── SCROLL REVEAL ── */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el=>obs.observe(el));
 
 /* ── PORTFOLIO ACCORDION ── */
@@ -931,18 +911,6 @@ async function submitBooking(){
   }catch(e){errEl.textContent='⚠ Something went wrong. Please try again or contact me directly.';errEl.style.display='block';btn.textContent='Send Booking Request';btn.disabled=false;}
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
-
-/* ── SECTION SCALE ON SCROLL (cinematic zoom) ── */
-const sections=document.querySelectorAll('section');
-const scaleObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.style.transform='scale(1)';e.target.style.opacity='1';}
-  });
-},{threshold:.05});
-sections.forEach(s=>{
-  s.style.transition='transform 1.2s cubic-bezier(.23,1,.32,1), opacity 1.2s ease';
-  scaleObs.observe(s);
-});
 </script>
 </body>
 </html>
