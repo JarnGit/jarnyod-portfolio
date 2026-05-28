@@ -263,29 +263,190 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
 .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════════
+   RESPONSIVE — TABLET (≤900px)
+══════════════════════════════════════════════ */
 @media(max-width:900px){
-  nav{padding:18px 24px}nav.scrolled{padding:14px 24px}
+  /* Nav */
+  nav{padding:18px 24px}
+  nav.scrolled{padding:14px 24px}
+
+  /* Sections */
   section{padding:80px 24px}
   #hero{padding:0 24px 80px}
-  #about{grid-template-columns:1fr;gap:48px}
-  .work-grid{grid-template-columns:1fr}
-  .work-item.featured{height:360px}
-  .services-grid{grid-template-columns:1fr;gap:12px}
-  .exp-grid{grid-template-columns:1fr;gap:32px}
+
+  /* Hero */
   .hero-glass-card{display:none}
-  footer{grid-template-columns:1fr;text-align:center}
-  .footer-copy{text-align:center}
-  .footer-links{justify-content:center}
-  .clients-strip{gap:20px 40px}
-  .cta-actions{flex-direction:column;align-items:center}
-  .reel-sub-grid{grid-template-columns:1fr}
+  .hero-title{font-size:clamp(64px,13vw,110px)}
+  .hero-title-sub{margin-left:40px}
+  .hero-desc{max-width:100%}
+  .hero-actions{flex-wrap:wrap}
+
+  /* About */
+  #about{grid-template-columns:1fr;gap:48px}
+
+  /* Work */
   #work{padding-left:0;padding-right:0}
   .work-header,.work-filters,.work-cat-header{padding-left:24px;padding-right:24px}
+  .work-grid{grid-template-columns:1fr 1fr}
+  .work-item.featured{height:320px}
+  .work-item{height:260px}
+
+  /* Showreel */
+  .reel-sub-grid{grid-template-columns:1fr 1fr}
+
+  /* Services */
+  .services-grid{grid-template-columns:1fr 1fr;gap:12px}
+
+  /* Experience */
+  .exp-grid{grid-template-columns:1fr;gap:32px}
+
+  /* Workshop */
+  #workshop{padding:80px 24px}
+  .workshop-grid{grid-template-columns:1fr!important;gap:40px!important}
+
+  /* Clients */
+  .clients-strip{gap:20px 40px}
+
+  /* CTA */
+  .cta-actions{flex-direction:column;align-items:center}
+
+  /* Footer */
+  footer{grid-template-columns:1fr;text-align:center;gap:24px;padding:40px 24px 28px}
+  .footer-copy{text-align:center}
+  .footer-links{justify-content:center}
 }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤600px)
+══════════════════════════════════════════════ */
 @media(max-width:600px){
+  /* Nav */
   .nav-links{display:none}
-  .hero-title{font-size:clamp(60px,15vw,90px)}
+  nav{padding:16px 20px}
+  .nav-logo{font-size:18px;letter-spacing:3px}
+  .nav-cta{padding:8px 16px;font-size:10px}
+
+  /* Hero */
+  #hero{padding:0 20px 64px;min-height:100svh}
+  .hero-title{font-size:clamp(56px,15vw,88px);line-height:.9}
+  .hero-title-sub{font-size:clamp(36px,10vw,60px);margin-left:24px}
+  .hero-tag{font-size:9px;letter-spacing:2px}
+  .hero-desc{font-size:15px;margin-top:24px}
+  .hero-actions{margin-top:32px;gap:12px}
+  .btn-primary,.btn-ghost{padding:13px 28px;font-size:10px;letter-spacing:2px}
+  .hero-scroll{right:20px;bottom:32px}
+
+  /* Marquee */
+  .marquee-item{font-size:10px;letter-spacing:2px}
+
+  /* Sections */
+  section{padding:64px 20px}
+  .section-title{font-size:clamp(40px,10vw,64px);margin-bottom:40px}
+  .section-label{font-size:9px;letter-spacing:3px}
+
+  /* About */
+  #about{padding:64px 20px;gap:40px}
+  .about-img{aspect-ratio:4/5}
+  .about-glass-frame{width:80px;height:80px;bottom:-12px;right:-12px}
+  .about-tag{font-size:8px;padding:6px 14px;top:20px;left:-12px}
+  .about-text{font-size:16px}
+  .about-highlights{grid-template-columns:1fr 1fr;gap:10px}
+  .highlight-item{padding:16px 14px}
+  .highlight-num{font-size:30px}
+  .gear-list{gap:8px;margin-top:28px}
+  .gear-tag{font-size:9px;padding:6px 12px}
+
+  /* Work */
+  #work{padding-top:64px}
+  .work-header{padding:0 20px 32px!important}
+  .work-filters{padding:0 20px 24px!important;gap:6px}
+  .filter-btn{padding:7px 14px;font-size:9px;letter-spacing:2px}
+  .work-cat-header{padding:16px 20px!important}
+  .work-cat-title{font-size:22px;letter-spacing:2px}
+  .work-cat-count{font-size:9px}
+  .work-grid{grid-template-columns:1fr}
+  .work-item.featured{height:280px}
+  .work-item{height:220px}
+  .work-name{font-size:24px}
+  .work-overlay{padding:20px}
+
+  /* Showreel */
+  #showreel{padding:64px 20px}
+  .reel-sub-grid{grid-template-columns:1fr;gap:12px}
+  .reel-caption{font-size:9px;letter-spacing:2px}
+
+  /* Services */
+  #services{padding:64px 20px}
+  .services-grid{grid-template-columns:1fr;gap:10px}
+  .service-item{padding:36px 28px}
+  .service-name{font-size:28px}
+  .service-desc{font-size:14px}
+
+  /* Experience */
+  #experience{padding:64px 20px}
+  .exp-grid{grid-template-columns:1fr;gap:28px}
+  .exp-tab{font-size:10px;letter-spacing:1px;padding:14px 0}
+  .exp-role{font-size:40px}
+  .exp-company{font-size:16px}
+  .exp-duties li{font-size:14px}
+
+  /* Testimonials */
+  #testimonials{padding:64px 20px}
+  .testi-glass{padding:32px 24px}
+  .testi-quote{font-size:clamp(17px,4.5vw,22px)}
+
+  /* Clients */
+  #clients{padding:64px 20px}
+  .clients-strip{gap:16px 28px}
+  .client-logo{font-size:14px;letter-spacing:2px;padding:8px 12px}
+
+  /* Workshop section */
+  #workshop{padding:64px 20px!important}
+  .workshop-grid{grid-template-columns:1fr!important;gap:32px!important}
+
+  /* CTA */
+  #cta{padding:80px 20px}
+  .cta-title{font-size:clamp(56px,14vw,100px)}
+  .cta-sub{font-size:16px;margin:20px 0 40px}
+  .cta-actions{gap:12px}
+  .cta-socials{gap:20px;flex-wrap:wrap;justify-content:center}
+
+  /* Footer */
+  footer{padding:36px 20px 24px;gap:20px}
+  .footer-brand{font-size:17px;letter-spacing:3px}
+  .footer-links{flex-wrap:wrap;gap:16px 24px;justify-content:center}
+  .footer-copy{font-size:9px}
+
+  /* Workshop modal */
+  #workshop-modal{padding:12px}
+  #workshop-modal > div:last-child{max-width:100%;border-radius:12px}
+  .w-form-grid{grid-template-columns:1fr!important}
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (≤390px)
+══════════════════════════════════════════════ */
+@media(max-width:390px){
+  .hero-title{font-size:52px}
+  .hero-title-sub{font-size:34px;margin-left:16px}
+  .btn-primary,.btn-ghost{width:100%;text-align:center;padding:14px 20px}
+  .hero-actions{flex-direction:column}
+  .about-highlights{grid-template-columns:1fr}
+  .section-title{font-size:38px}
+  .work-cat-header{padding:14px 16px!important}
+  .work-filters{padding:0 16px 20px!important}
+  .filter-btn{padding:6px 10px;font-size:8px}
+}
+/* ── TOUCH / HOVER:NONE DEVICES ── */
+@media(hover:none){
+  #cursor,#cursor-ring,#cursor-glass{display:none!important}
+  body{cursor:auto}
+  a,button,[onclick]{cursor:pointer}
+  .work-overlay{opacity:1;background:linear-gradient(to top,rgba(4,6,10,.88) 0%,transparent 65%)}
+  .work-thumb img{opacity:.72!important;transform:none!important}
+  .work-glass-chip{opacity:1;transform:translateY(0)}
+  .service-line{width:56px;opacity:.8}
 }
 </style>
 </head>
@@ -700,24 +861,24 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
 <!-- ═══ TAIBAN AI WORKSHOP ═══ -->
 <section id="workshop" style="padding:130px 60px;position:relative;z-index:2;background:transparent">
   <div class="section-divider" style="margin-bottom:80px"></div>
-  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div class="reveal workshop-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
 
     <!-- Left: Info -->
     <div>
       <div class="section-label">Taiban × AI</div>
-      <h2 class="section-title" style="font-size:clamp(44px,5.5vw,80px);margin-bottom:24px;font-family:'Noto Sans Lao',sans-serif;font-weight:700;letter-spacing:0">ໃຊ້ເອໄອ<br>ໃຫ້ເປັນເງິນ</h2>
-      <p style="font-size:17px;line-height:1.8;color:rgba(240,237,230,.6);font-family:'Noto Sans Lao',sans-serif;font-weight:300;margin-bottom:16px">A free AI workshop by Taiban Studio — learn how to use AI tools to grow your business, create content, and generate real income.</p>
-      <p style="font-size:14px;line-height:1.8;color:rgba(240,237,230,.4);font-family:'Noto Sans Lao',sans-serif;margin-bottom:40px">ຮຽນຟຣີ · ທີ່ນັ່ງຈຳກັດ · Vientiane, Laos</p>
+      <h2 class="section-title" style="font-size:clamp(44px,5.5vw,80px);margin-bottom:24px">ໃຊ້ເອໄອ<br>ໃຫ້ເປັນເງິນ</h2>
+      <p style="font-size:17px;line-height:1.8;color:rgba(240,237,230,.6);font-family:'Cormorant Garamond',serif;font-weight:300;margin-bottom:16px">A free AI workshop by Taiban Studio — learn how to use AI tools to grow your business, create content, and generate real income.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(240,237,230,.4);font-family:'DM Mono',monospace;margin-bottom:40px">ຮຽນຟຣີ · ທີ່ນັ່ງຈຳກັດ · Vientiane, Laos</p>
 
       <!-- Feature pills -->
       <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px">
-        <span style="font-family:'Noto Sans Lao',sans-serif;font-size:10px;letter-spacing:1px;padding:8px 16px;background:rgba(176,28,28,.1);border:1px solid rgba(176,28,28,.3);color:rgba(240,100,100,.8)">FREE · ຮຽນຟຣີ</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(176,28,28,.1);border:1px solid rgba(176,28,28,.3);color:rgba(240,100,100,.8)">FREE · ຮຽນຟຣີ</span>
         <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(232,200,122,.06);border:1px solid rgba(232,200,122,.2);color:var(--c-accent)">AI Tools</span>
         <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--c-muted)">Content Creation</span>
         <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--c-muted)">Online Business</span>
       </div>
 
-      <button onclick="openWorkshop()" style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;font-weight:600;padding:16px 40px;background:rgba(176,28,28,.9);border:1px solid rgba(176,28,28,.6);color:#fff;cursor:none;transition:all .3s;position:relative;overflow:hidden" onmouseover="this.style.background='#b01c1c';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(176,28,28,.4)'" onmouseout="this.style.background='rgba(176,28,28,.9)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+      <button onclick="openWorkshop()" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;background:rgba(176,28,28,.9);border:1px solid rgba(176,28,28,.6);color:#fff;cursor:none;transition:all .3s;position:relative;overflow:hidden" onmouseover="this.style.background='#b01c1c';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(176,28,28,.4)'" onmouseout="this.style.background='rgba(176,28,28,.9)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         ລົງທະບຽນ · Register Now
       </button>
     </div>
@@ -732,7 +893,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
           <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#8b1010,#b01c1c);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 16px rgba(176,28,28,.4)">🤖</div>
           <div>
             <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(176,28,28,.8);margin-bottom:4px">Taiban × AI Workshop</div>
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:24px;font-weight:700;line-height:1.2">ໃຊ້ເອໄອໃຫ້ເປັນເງິນ</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1">ໃຊ້ເອໄອໃຫ້ເປັນເງິນ</div>
           </div>
         </div>
 
@@ -740,25 +901,25 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
         <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px">
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
-            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Noto Sans Lao',sans-serif;line-height:1.6">ການຂາຍອອນລາຍ ແລະ ການຕະຫຼາດດ້ວຍ AI</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການຂາຍອອນລາຍ ແລະ ການຕະຫຼາດດ້ວຍ AI</span>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
-            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Noto Sans Lao',sans-serif;line-height:1.6">ການສ້າງຄອນເທນ ແລະ ວິດີໂອ</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການສ້າງຄອນເທນ ແລະ ວິດີໂອ</span>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
-            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Noto Sans Lao',sans-serif;line-height:1.6">ການອອກແບບ ແລະ Automation</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການອອກແບບ ແລະ Automation</span>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
-            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Noto Sans Lao',sans-serif;line-height:1.6">ເຄື່ອງມື AI ສຳລັບທຸລະກິດ</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ເຄື່ອງມື AI ສຳລັບທຸລະກິດ</span>
           </div>
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.07)">
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(240,237,230,.35);letter-spacing:1px">Taiban Studio · Vientiane</div>
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;color:rgba(176,28,28,.8);font-weight:600">ຟຣີ · Free</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(176,28,28,.8);letter-spacing:2px;text-transform:uppercase">ຟຣີ · Free</div>
         </div>
       </div>
     </div>
@@ -845,7 +1006,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
         </div>
 
         <!-- WhatsApp + Facebook -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div class="w-form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
           <div>
             <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">WhatsApp <span style="color:#b01c1c">*</span></label>
             <div style="position:relative">
