@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="JY.png">
 <link rel="apple-touch-icon" href="JY.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Noto+Sans+Lao:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -21,6 +21,7 @@
   --f-display:'Bebas Neue',sans-serif;
   --f-serif:'Cormorant Garamond',serif;
   --f-mono:'DM Mono',monospace;
+  --f-lao:'Noto Sans Lao',sans-serif;
   --glass-bg:rgba(255,255,255,0.04);
   --glass-border:rgba(255,255,255,0.10);
   --glass-blur:20px;
@@ -28,6 +29,10 @@
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--c-bg);color:var(--c-fg);font-family:var(--f-serif);overflow-x:hidden;cursor:none}
+
+/* ── LAO FONT UTILITY ── */
+.lao, [lang="lo"], #workshop, #workshop-modal{font-family:var(--f-lao)}
+#workshop h2.section-title{font-family:var(--f-display)} /* keep display font for big heading */
 
 /* ── AMBIENT ORBS (liquid glass bg elements) ── */
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
@@ -305,6 +310,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
     <li><a href="#work">Work</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#experience">About</a></li>
+    <li><a href="#workshop" style="color:rgba(224,176,96,.7)">Workshop</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Hire Me</button>
 </nav>
@@ -691,6 +697,213 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
   </div>
 </section>
 
+<!-- ═══ TAIBAN AI WORKSHOP ═══ -->
+<section id="workshop" style="padding:130px 60px;position:relative;z-index:2;background:transparent">
+  <div class="section-divider" style="margin-bottom:80px"></div>
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+
+    <!-- Left: Info -->
+    <div>
+      <div class="section-label">Taiban × AI</div>
+      <h2 class="section-title" style="font-size:clamp(44px,5.5vw,80px);margin-bottom:24px">ໃຊ້ເອໄອ<br>ໃຫ້ເປັນເງິນ</h2>
+      <p style="font-size:17px;line-height:1.8;color:rgba(240,237,230,.6);font-family:'Cormorant Garamond',serif;font-weight:300;margin-bottom:16px">A free AI workshop by Taiban Studio — learn how to use AI tools to grow your business, create content, and generate real income.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(240,237,230,.4);font-family:'DM Mono',monospace;margin-bottom:40px">ຮຽນຟຣີ · ທີ່ນັ່ງຈຳກັດ · Vientiane, Laos</p>
+
+      <!-- Feature pills -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px">
+        <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(176,28,28,.1);border:1px solid rgba(176,28,28,.3);color:rgba(240,100,100,.8)">FREE · ຮຽນຟຣີ</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(232,200,122,.06);border:1px solid rgba(232,200,122,.2);color:var(--c-accent)">AI Tools</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--c-muted)">Content Creation</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--c-muted)">Online Business</span>
+      </div>
+
+      <button onclick="openWorkshop()" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;background:rgba(176,28,28,.9);border:1px solid rgba(176,28,28,.6);color:#fff;cursor:none;transition:all .3s;position:relative;overflow:hidden" onmouseover="this.style.background='#b01c1c';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(176,28,28,.4)'" onmouseout="this.style.background='rgba(176,28,28,.9)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        ລົງທະບຽນ · Register Now
+      </button>
+    </div>
+
+    <!-- Right: Glass card preview -->
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="glass" style="padding:40px;position:relative;overflow:hidden;cursor:none" onclick="openWorkshop()">
+        <!-- Crimson accent top bar -->
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#b01c1c,#e0b060,transparent)"></div>
+
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
+          <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#8b1010,#b01c1c);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 16px rgba(176,28,28,.4)">🤖</div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(176,28,28,.8);margin-bottom:4px">Taiban × AI Workshop</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1">ໃຊ້ເອໄອໃຫ້ເປັນເງິນ</div>
+          </div>
+        </div>
+
+        <!-- What you'll learn -->
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການຂາຍອອນລາຍ ແລະ ການຕະຫຼາດດ້ວຍ AI</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການສ້າງຄອນເທນ ແລະ ວິດີໂອ</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ການອອກແບບ ແລະ Automation</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:#e0b060;font-size:14px;flex-shrink:0;margin-top:2px">✦</span>
+            <span style="font-size:14px;color:rgba(240,237,230,.65);font-family:'Cormorant Garamond',serif;line-height:1.6">ເຄື່ອງມື AI ສຳລັບທຸລະກິດ</span>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.07)">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(240,237,230,.35);letter-spacing:1px">Taiban Studio · Vientiane</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(176,28,28,.8);letter-spacing:2px;text-transform:uppercase">ຟຣີ · Free</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ WORKSHOP REGISTRATION MODAL — THEME 2 ═══ -->
+<div id="workshop-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:16px">
+  <!-- Backdrop -->
+  <div onclick="closeWorkshop()" style="position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(20px)"></div>
+
+  <!-- Modal card -->
+  <div style="position:relative;z-index:1;width:100%;max-width:500px;max-height:92vh;overflow-y:auto;background:#f7f4f0;border-radius:16px;box-shadow:0 40px 120px rgba(100,20,20,.3),0 20px 60px rgba(0,0,0,.5);animation:fadeUp .4s ease;font-family:'Noto Sans Lao',sans-serif">
+
+    <!-- ── HERO BANNER — cover image with overlay header ── -->
+    <div style="position:relative;border-radius:16px 16px 0 0;overflow:hidden;background:#0a0a0a;min-height:200px">
+
+      <!-- Cover image — upload taiban_ai_banner.jpg to GitHub repo -->
+      <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/taiban_ai_banner.jpg"
+           style="width:100%;display:block;max-height:260px;object-fit:cover;object-position:center top"
+           alt="Taiban x AI Workshop">
+
+      <!-- Dark gradient overlay at bottom for text readability -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.75));pointer-events:none"></div>
+
+      <!-- Overlay text at bottom of image -->
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;display:flex;align-items:center;gap:12px">
+        <!-- AI Bot icon -->
+        <div style="flex-shrink:0;width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#8b1010,#cc2020);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 12px rgba(0,0,0,.5)">🤖</div>
+        <div>
+          <div style="font-size:9px;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:2px">Taiban × AI Workshop</div>
+          <div style="font-size:18px;font-weight:700;color:#fff;line-height:1.2;font-family:'Noto Sans Lao',sans-serif;text-shadow:0 1px 8px rgba(0,0,0,.5)">ໃຊ້ເອໄອໃຫ້ເປັນເງິນ</div>
+        </div>
+      </div>
+
+      <!-- Close button -->
+      <button onclick="closeWorkshop()" style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,.55);border:none;color:rgba(255,255,255,.9);font-size:15px;width:28px;height:28px;border-radius:50%;cursor:none;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(4px)" onmouseover="this.style.background='rgba(0,0,0,.85)'" onmouseout="this.style.background='rgba(0,0,0,.55)'">✕</button>
+    </div>
+
+    <!-- ── REGISTRATION BADGE STRIP ── -->
+    <div style="background:linear-gradient(90deg,#8b1010,#b01c1c);padding:10px 20px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);font-family:'DM Mono',monospace">
+        <span style="width:5px;height:5px;border-radius:50%;background:#e0b060;display:inline-block"></span>
+        ລົງທະບຽນ · Registration
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,.55);font-family:'Noto Sans Lao',sans-serif">
+        ຮຽນຟຣີ — ທີ່ນັ່ງຈຳກັດ
+      </div>
+    </div>
+
+    <!-- ── FORM BODY (light background) ── -->
+    <div style="background:#fff;padding:28px 28px 32px;border-radius:0 0 16px 16px">
+      <div id="workshop-form">
+
+        <!-- Section label -->
+        <div style="font-size:10px;font-weight:700;color:#b01c1c;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace">
+          ຂໍ້ມູນສ່ວນຕົວ
+          <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(176,28,28,.2),transparent);display:block"></span>
+        </div>
+
+        <!-- Full Name -->
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">ຊື່-ນາມສະກຸນ <span style="color:#b01c1c">*</span></label>
+          <div style="position:relative">
+            <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">👤</span>
+            <input id="w-name" type="text" placeholder="ຊື່ ແລະ ນາມສະກຸນ" autocomplete="name"
+              style="width:100%;padding:12px 14px 12px 40px;border:1.5px solid #e2d9d0;border-radius:8px;background:#faf8f6;font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:#1a1212;outline:none;transition:border .2s"
+              onfocus="this.style.borderColor='#b01c1c';this.style.boxShadow='0 0 0 3px rgba(176,28,28,.12)'"
+              onblur="this.style.borderColor='#e2d9d0';this.style.boxShadow='none'">
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">ທີ່ຢູ່ປະຈຸບັນ <span style="color:#b01c1c">*</span></label>
+          <div style="position:relative">
+            <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">📍</span>
+            <input id="w-address" type="text" placeholder="ເມືອງ / ແຂວງ" autocomplete="address-level2"
+              style="width:100%;padding:12px 14px 12px 40px;border:1.5px solid #e2d9d0;border-radius:8px;background:#faf8f6;font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:#1a1212;outline:none;transition:border .2s"
+              onfocus="this.style.borderColor='#b01c1c';this.style.boxShadow='0 0 0 3px rgba(176,28,28,.12)'"
+              onblur="this.style.borderColor='#e2d9d0';this.style.boxShadow='none'">
+          </div>
+        </div>
+
+        <!-- WhatsApp + Facebook -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">WhatsApp <span style="color:#b01c1c">*</span></label>
+            <div style="position:relative">
+              <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none">💬</span>
+              <input id="w-whatsapp" type="tel" placeholder="+856 XX XXX XXXX"
+                style="width:100%;padding:12px 10px 12px 38px;border:1.5px solid #e2d9d0;border-radius:8px;background:#faf8f6;font-family:'DM Mono',monospace;font-size:12px;color:#1a1212;outline:none;transition:border .2s"
+                onfocus="this.style.borderColor='#b01c1c';this.style.boxShadow='0 0 0 3px rgba(176,28,28,.12)'"
+                onblur="this.style.borderColor='#e2d9d0';this.style.boxShadow='none'">
+            </div>
+          </div>
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">Facebook</label>
+            <div style="position:relative">
+              <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none">🔗</span>
+              <input id="w-facebook" type="text" placeholder="Facebook URL ຫຼືຊື່"
+                style="width:100%;padding:12px 10px 12px 38px;border:1.5px solid #e2d9d0;border-radius:8px;background:#faf8f6;font-family:'DM Mono',monospace;font-size:12px;color:#1a1212;outline:none;transition:border .2s"
+                onfocus="this.style.borderColor='#b01c1c';this.style.boxShadow='0 0 0 3px rgba(176,28,28,.12)'"
+                onblur="this.style.borderColor='#e2d9d0';this.style.boxShadow='none'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Topic -->
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#6b5b55;margin-bottom:6px;letter-spacing:.04em">ຢາກຮຽນ AI ເລື່ອງໃດ? <span style="color:#b01c1c">*</span></label>
+          <textarea id="w-topic" rows="3" placeholder="ເຊັ່ນ: ການຂາຍອອນລາຍ, ການສ້າງຄອນເທນ, ການຕະຫຼາດ, ການອອກແບບ..."
+            style="width:100%;padding:12px 14px;border:1.5px solid #e2d9d0;border-radius:8px;background:#faf8f6;font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:#1a1212;outline:none;transition:border .2s;resize:vertical"
+            onfocus="this.style.borderColor='#b01c1c';this.style.boxShadow='0 0 0 3px rgba(176,28,28,.12)'"
+            onblur="this.style.borderColor='#e2d9d0';this.style.boxShadow='none'"></textarea>
+        </div>
+
+        <div id="w-error" style="display:none;font-family:'DM Mono',monospace;font-size:11px;color:#b01c1c;letter-spacing:1px;margin-bottom:14px;padding:10px 14px;background:rgba(176,28,28,.06);border-radius:6px;border-left:3px solid #b01c1c"></div>
+
+        <!-- Submit button -->
+        <button id="w-submit" onclick="submitWorkshop()"
+          style="width:100%;background:linear-gradient(135deg,#b01c1c,#cc2020);border:none;padding:16px;border-radius:8px;font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:600;color:#fff;cursor:none;transition:all .3s;box-shadow:0 4px 20px rgba(176,28,28,.3)"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(176,28,28,.45)'"
+          onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(176,28,28,.3)'">
+          <span style="margin-right:8px">✉️</span>ສົ່ງໃບສະໝັກ / Submit Registration
+        </button>
+
+        <p style="font-size:11px;color:#a09090;text-align:center;margin-top:14px;font-family:'DM Mono',monospace;letter-spacing:.5px">© Taiban Studio · Vientiane, Laos</p>
+      </div>
+
+      <!-- Success screen -->
+      <div id="workshop-success" style="display:none;text-align:center;padding:32px 0">
+        <div style="font-size:56px;margin-bottom:16px">✅</div>
+        <h3 style="font-family:'Noto Sans Lao',sans-serif;font-size:24px;font-weight:700;color:#b01c1c;margin-bottom:12px">ລົງທະບຽນສຳເລັດ!</h3>
+        <p style="font-family:'Noto Sans Lao',sans-serif;font-size:15px;color:#6b5b55;line-height:1.7">ພວກເຮົາຈະຕິດຕໍ່ຫາທ່ານໂດຍໄວ.<br><span style="font-size:13px;color:#a09090">Registration received — we'll be in touch soon.</span></p>
+        <button onclick="closeWorkshop()"
+          style="margin-top:28px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:12px 32px;border:1.5px solid #e2d9d0;color:#6b5b55;background:transparent;border-radius:6px;cursor:none;transition:all .3s"
+          onmouseover="this.style.borderColor='#b01c1c';this.style.color='#b01c1c'"
+          onmouseout="this.style.borderColor='#e2d9d0';this.style.color='#6b5b55'">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ CTA ═══ -->
 <section id="cta">
   <div class="cta-orb"></div>
@@ -745,6 +958,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
     <a href="#work">Work</a>
     <a href="#services">Services</a>
     <a href="#experience">Experience</a>
+    <a href="#workshop">Workshop</a>
     <a href="#cta">Contact</a>
   </div>
   <div class="footer-copy">Vientiane, Laos — Visual Creator &amp; Drone Operator<br>&copy; 2025 Yod Thammavong</div>
@@ -910,7 +1124,57 @@ async function submitBooking(){
     else throw new Error();
   }catch(e){errEl.textContent='⚠ Something went wrong. Please try again or contact me directly.';errEl.style.display='block';btn.textContent='Send Booking Request';btn.disabled=false;}
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeBooking();closeWorkshop();}});
+
+/* ── WORKSHOP MODAL ── */
+function openWorkshop(){
+  document.getElementById('workshop-modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeWorkshop(){
+  document.getElementById('workshop-modal').style.display='none';
+  document.body.style.overflow='';
+  setTimeout(()=>{
+    document.getElementById('workshop-form').style.display='block';
+    document.getElementById('workshop-success').style.display='none';
+    ['w-name','w-address','w-whatsapp','w-facebook','w-topic'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('w-error').style.display='none';
+    document.getElementById('w-submit').textContent='ສົ່ງໃບສະໝັກ · Submit Registration';
+    document.getElementById('w-submit').disabled=false;
+  },300);
+}
+async function submitWorkshop(){
+  const name    = document.getElementById('w-name').value.trim();
+  const address = document.getElementById('w-address').value.trim();
+  const whatsapp= document.getElementById('w-whatsapp').value.trim();
+  const facebook= document.getElementById('w-facebook').value.trim();
+  const topic   = document.getElementById('w-topic').value.trim();
+  const errEl   = document.getElementById('w-error');
+  const btn     = document.getElementById('w-submit');
+  if(!name||!address||!whatsapp||!topic){
+    errEl.textContent='⚠ ກະລຸນາຕື່ມຂໍ້ມູນທີ່ຈຳເປັນ · Please fill in all required fields';
+    errEl.style.display='block';return;
+  }
+  errEl.style.display='none';
+  btn.textContent='ກຳລັງສົ່ງ... Sending...';
+  btn.disabled=true;
+  try{
+    const res=await fetch('https://formspree.io/f/xwvzwdlr',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,address,whatsapp,facebook:facebook||'Not provided',topic})
+    });
+    if(res.ok){
+      document.getElementById('workshop-form').style.display='none';
+      document.getElementById('workshop-success').style.display='block';
+    }else throw new Error();
+  }catch(e){
+    errEl.textContent='⚠ ເກີດຂໍ້ຜິດພາດ · Submission failed, please try again.';
+    errEl.style.display='block';
+    btn.textContent='ສົ່ງໃບສະໝັກ · Submit Registration';
+    btn.disabled=false;
+  }
+}
 </script>
 </body>
 </html>
