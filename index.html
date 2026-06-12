@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="JY.png">
 <link rel="apple-touch-icon" href="JY.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Noto+Sans+Lao:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&family=Caveat:wght@700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -294,6 +294,17 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
 .ws-role span{display:flex;align-items:center;justify-content:center;padding:11px 12px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;text-align:center;transition:all .2s}
 .ws-role:hover span{border-color:rgba(167,139,250,.5);color:#fff}
 .ws-role input:checked + span{background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(240,171,252,.25));border-color:#a78bfa;color:#fff;box-shadow:0 0 30px rgba(167,139,250,.35)}
+
+/* ── FREE COFFEE PROMO ── */
+.coffee-promo{position:relative;display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(120deg,rgba(240,171,252,.12),rgba(167,139,250,.12),rgba(96,231,255,.1));border:1px solid rgba(240,171,252,.4);border-radius:16px;overflow:hidden;backdrop-filter:blur(20px)}
+.coffee-promo-glow{position:absolute;top:-50%;left:-100%;width:60%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:skewX(-20deg);animation:coffeeShine 4s ease-in-out infinite}
+@keyframes coffeeShine{0%{left:-100%}60%,100%{left:200%}}
+.coffee-icon{font-size:30px;flex-shrink:0;animation:coffeeSteam 3s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(240,171,252,.5))}
+@keyframes coffeeSteam{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-3px) rotate(-4deg)}}
+.coffee-title{font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:800;background:linear-gradient(135deg,#fff 0%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px}
+.coffee-sub{font-family:'Noto Sans Lao',sans-serif;font-size:11px;color:rgba(184,174,219,.9);line-height:1.4}
+.coffee-badge{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#f0abfc,#a78bfa);color:#fff;font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;line-height:1;box-shadow:0 0 30px rgba(240,171,252,.5)}
+.coffee-badge span{font-size:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;opacity:.9;margin-top:2px}
 @media(max-width:600px){
   #workshop{padding:64px 20px!important}
   .workshop-grid{grid-template-columns:1fr!important;gap:40px!important}
@@ -400,7 +411,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
     <div>
       <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.4);border-radius:100px;font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:24px">
         <span style="width:6px;height:6px;background:#f0abfc;border-radius:50%;box-shadow:0 0 10px #f0abfc;display:inline-block"></span>
-        Workshop · ຈຳກັດ 20 ບ່ອນນັ່ງ
+        Workshop · AI Workflow Lab
       </div>
       <h2 style="font-family:'Noto Sans Lao',sans-serif;font-size:clamp(40px,5vw,68px);font-weight:800;line-height:1.1;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#c4b5fd 40%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">AI Workshop</h2>
       <p style="font-family:'Noto Sans Lao',sans-serif;font-size:25px;font-weight:600;color:#c4b5fd;margin-bottom:25px">ສຳລັບ Content Creator &amp; Editor</p>
@@ -423,6 +434,17 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
           <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c-muted);margin-bottom:4px">ສະຖານທີ່</div>
           <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;font-weight:600;color:var(--c-fg);line-height:1.3;text-decoration:none;display:block">Kaopoon<br>Studio</a>
         </div>
+      </div>
+
+      <!-- Free Coffee Promo -->
+      <div class="coffee-promo" style="margin-bottom:32px">
+        <div class="coffee-promo-glow"></div>
+        <div class="coffee-icon">☕</div>
+        <div style="flex:1;min-width:0">
+          <div class="coffee-title">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
+          <div class="coffee-sub">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free Coffee for the first 50 guests</div>
+        </div>
+        <div class="coffee-badge">50<span>cups</span></div>
       </div>
 
       <button onclick="openWorkshop()" style="font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:700;letter-spacing:.5px;padding:16px 44px;background:linear-gradient(135deg,#6366f1 0%,#a78bfa 50%,#f0abfc 100%);background-size:200% 200%;border:none;border-radius:14px;color:#fff;cursor:none;transition:all .3s;box-shadow:0 10px 30px -5px rgba(99,102,241,.5)" onmouseover="this.style.transform='translateY(-2px)';this.style.backgroundPosition='100% 100%';this.style.boxShadow='0 15px 40px -5px rgba(167,139,250,.6)'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundPosition='0% 0%';this.style.boxShadow='0 10px 30px -5px rgba(99,102,241,.5)'">
@@ -799,7 +821,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
         <div style="text-align:center;margin-bottom:30px">
           <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.4);border-radius:100px;font-family:'Noto Sans Lao',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:18px">
             <span style="width:6px;height:6px;background:#f0abfc;border-radius:50%;box-shadow:0 0 10px #f0abfc;display:inline-block;animation:pulse 2s ease-in-out infinite"></span>
-            AI Workshop · ຈຳກັດ 20 ບ່ອນນັ່ງ(ກາຍນັ້ນຢືນ)
+            AI Workshop · Workflow Lab
           </div>
           <div style="font-family:'Outfit',sans-serif;font-size:clamp(28px,5vw,40px);font-weight:800;line-height:1.15;background:linear-gradient(135deg,#fff 0%,#c4b5fd 40%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(167,139,250,.5)">AI <span style="font-family:'Caveat',cursive;font-style:italic;font-weight:700;background:linear-gradient(135deg,#60e7ff 0%,#a78bfa 50%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;transform:rotate(-2deg)">Workflow Lab</span></div>
           <div style="font-family:'Noto Sans Lao',sans-serif;font-size:clamp(15px,3vw,19px);font-weight:700;margin-top:8px;background:linear-gradient(135deg,#fff 0%,#c4b5fd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">ສຳລັບ Content Creator &amp; Editor</div>
@@ -823,6 +845,17 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
             <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8479b0;margin-bottom:3px">ສະຖານທີ່</div>
             <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;color:#f1ecff;line-height:1.3;text-decoration:none;display:block">Kaopoon<br>Studio</a>
           </div>
+        </div>
+
+        <!-- Free Coffee Promo -->
+        <div class="coffee-promo" style="margin-bottom:28px">
+          <div class="coffee-promo-glow"></div>
+          <div class="coffee-icon">☕</div>
+          <div style="flex:1;min-width:0">
+            <div class="coffee-title">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
+            <div class="coffee-sub">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free Coffee for the first 50 guests</div>
+          </div>
+          <div class="coffee-badge">50<span>cups</span></div>
         </div>
 
         <h2 style="font-family:'Noto Sans Lao',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">ລົງທະບຽນເຂົ້າຮ່ວມ</h2>
