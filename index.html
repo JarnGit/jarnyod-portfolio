@@ -279,7 +279,12 @@ h1.hero-title{font-size:13.5vw;white-space:nowrap;width:100%;text-align:center;l
 @media(min-width:640px){.projects{border-radius:50px 50px 0 0;margin-top:-48px}}
 @media(min-width:768px){.projects{border-radius:60px 60px 0 0;margin-top:-56px;padding:96px 40px 40px}}
 .proj-slot{height:auto;position:relative;margin-bottom:24px}
-@media(min-width:1024px){.proj-slot{height:85vh;margin-bottom:0}}
+@media(min-width:1024px){.proj-slot{height:auto;min-height:85vh;margin-bottom:0}}
+/* cards carrying a description paragraph get shorter image slots so they still fit one screen */
+.proj-card.has-note .img-a{height:clamp(80px,11vw,168px)}
+.proj-card.has-note .img-b{height:clamp(100px,16vw,248px)}
+.proj-note{font-size:14px;line-height:1.8;color:var(--muted);max-width:66ch;margin:-4px 0 20px}
+@media(min-width:1024px){.proj-note{font-size:14.5px;margin-bottom:22px}}
 .proj-card{border-radius:32px;border:2px solid var(--fg);background:var(--bg);padding:16px;transform-origin:top center}
 @media(min-width:640px){.proj-card{border-radius:44px;padding:24px}}
 @media(min-width:768px){.proj-card{border-radius:56px;padding:32px}}
@@ -289,19 +294,22 @@ h1.hero-title{font-size:13.5vw;white-space:nowrap;width:100%;text-align:center;l
 .proj-meta{flex:1;min-width:180px}
 .proj-cat{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:4px}
 .proj-name{font-weight:600;text-transform:uppercase;font-size:clamp(1.05rem,2.2vw,2rem);line-height:1.15}
-.proj-imgs{display:grid;grid-template-columns:40% 1fr;gap:12px}
-.proj-imgs .col{display:flex;flex-direction:column;gap:12px}
+.proj-imgs{display:grid;grid-template-columns:40% 1fr;gap:12px;align-items:stretch}
+.proj-imgs .col{display:flex;flex-direction:column;gap:12px;min-height:0}
 .proj-imgs img{width:100%;object-fit:cover;border-radius:24px;background:#141414}
 @media(min-width:640px){.proj-imgs img{border-radius:36px}}
 @media(min-width:768px){.proj-imgs img{border-radius:48px}}
 .img-a{height:clamp(90px,16vw,230px)}
 .img-b{height:clamp(110px,22vw,340px)}
-.img-c{height:100%;min-height:100%}
+/* right column is a fixed frame: the image fills it instead of dictating the card's height,
+   so a portrait source can never blow the card out */
+.proj-imgs .col:last-child{position:relative}
+.img-c{position:absolute;inset:0;width:100%;height:100%;object-position:center 42%}
 
 /* ═══════════════ REEL ═══════════════ */
 .reel-frame{max-width:1000px;margin:0 auto;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#000}
 .reel-frame .ratio{position:relative;width:100%;aspect-ratio:16/9}
-.reel-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 .reel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:1000px;margin:14px auto 0}
 .reel-grid .ratio{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#000}
 .reel-cap{text-align:center;color:var(--muted);font-size:13px;margin-top:16px;letter-spacing:.04em}
@@ -568,7 +576,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <h2 class="sec-title display hero-heading fade" style="margin-bottom:56px">Project</h2>
 
   <div class="proj-slot">
-    <article class="proj-card" data-card="0" style="top:96px">
+    <article class="proj-card has-note" data-card="0" style="top:96px">
       <div class="proj-head">
         <div class="proj-num">01</div>
         <div class="proj-meta">
@@ -577,7 +585,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
         </div>
         <span class="btn-ghost" style="cursor:default">Field Production</span>
       </div>
-      <p style="font-size:14px;line-height:1.8;color:var(--muted);max-width:66ch;margin:-6px 0 22px">
+      <p class="proj-note">
         Full visual documentation for the Climate Adaptive River Basins of Sayaboury programme — aerial mapping of the
         river basin, village livelihood photography, on-location interview portraits and coverage of the MoU signing
         and inception workshop. Shot across Sayaboury province, August 2026.
@@ -595,7 +603,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   </div>
 
   <div class="proj-slot">
-    <article class="proj-card" data-card="1" style="top:110px">
+    <article class="proj-card has-note" data-card="1" style="top:110px">
       <div class="proj-head">
         <div class="proj-num">02</div>
         <div class="proj-meta">
@@ -604,7 +612,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
         </div>
         <span class="btn-ghost" style="cursor:default">Field Production</span>
       </div>
-      <p style="font-size:14px;line-height:1.8;color:var(--muted);max-width:66ch;margin:-6px 0 22px">
+      <p class="proj-note">
         Three days on the Mekong documenting the Phou Xieng Thong National Protected Area — dawn aerials over the
         river cliffs, fishermen casting nets from longtail boats, ranger and patrol-team portraits, village
         livelihoods and community consultation meetings. June 2026.
