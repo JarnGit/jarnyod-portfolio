@@ -3,714 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOD THAMMAVONG — Visual Creator</title>
+<title>YOD THAMMAVONG — Visual Creator &amp; Drone Operator</title>
+<meta name="description" content="Yod Thammavong — visual creator and drone operator based in Vientiane, Laos. Video creation, aerial cinematography, photography and AI-assisted content.">
 <link rel="icon" type="image/png" href="JY.png">
 <link rel="apple-touch-icon" href="JY.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&family=Caveat:wght@700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ═══════════════ TOKENS ═══════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --c-bg:#04060a;
-  --c-fg:#f0ede6;
-  --c-accent:#e8c87a;
-  --c-accent2:#a8d4f5;
-  --c-mid:#0e1118;
-  --c-border:rgba(240,237,230,0.07);
-  --c-muted:rgba(240,237,230,0.38);
-  --f-display:'Bebas Neue',sans-serif;
-  --f-serif:'Cormorant Garamond',serif;
-  --f-mono:'DM Mono',monospace;
-  --f-lao:'Noto Sans Lao',sans-serif;
-  --glass-bg:rgba(255,255,255,0.04);
-  --glass-border:rgba(255,255,255,0.10);
-  --glass-blur:20px;
-  --glass-shine:rgba(255,255,255,0.06);
+  --bg:#0C0C0C;
+  --fg:#D7E2EA;
+  --muted:rgba(215,226,234,.55);
+  --line:rgba(215,226,234,.18);
+  --violet:#a78bfa;
+  --pink:#f0abfc;
+  --cyan:#60e7ff;
+  --indigo:#6366f1;
+  --ease:cubic-bezier(.25,.1,.25,1);
 }
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--c-bg);color:var(--c-fg);font-family:var(--f-serif);overflow-x:hidden;cursor:none}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:'Kanit',sans-serif;font-weight:300;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.lao,[lang="lo"]{font-family:'Noto Sans Lao','Kanit',sans-serif}
 
-/* ── LAO FONT UTILITY ── */
-.lao, [lang="lo"]{font-family:'Noto Sans Lao',sans-serif}
-
-/* ── AMBIENT ORBS (liquid glass bg elements) ── */
-.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
-#orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(232,200,122,.09) 0%,transparent 65%);top:-15%;left:-15%;filter:blur(80px)}
-#orb2{width:550px;height:550px;background:radial-gradient(circle,rgba(168,212,245,.06) 0%,transparent 65%);top:25%;right:-10%;filter:blur(80px)}
-#orb3{width:450px;height:450px;background:radial-gradient(circle,rgba(232,200,122,.05) 0%,transparent 65%);bottom:5%;left:15%;filter:blur(80px)}
-
-/* ── CURSOR ── */
-#cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:var(--c-accent);border-radius:50%;pointer-events:none;z-index:9999;transition:width .2s ease,height .2s ease,background .2s;mix-blend-mode:normal;will-change:transform}
-#cursor-ring{position:fixed;top:0;left:0;width:40px;height:40px;border:1px solid rgba(232,200,122,.5);border-radius:50%;pointer-events:none;z-index:9998;transition:width .3s ease,height .3s ease,opacity .3s ease,border-color .3s;opacity:0.5;will-change:transform}
-#cursor-glass{position:fixed;top:0;left:0;width:80px;height:80px;background:radial-gradient(circle,rgba(232,200,122,.06) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:9997;opacity:0;transition:opacity .4s;will-change:transform}
-
-/* ── GLASS MIXIN ── */
-.glass{background:var(--glass-bg);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--glass-border);box-shadow:0 8px 32px rgba(0,0,0,.35),inset 0 1px 0 var(--glass-shine);transform:translateZ(0)}
-.glass-gold{background:rgba(232,200,122,.05);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(232,200,122,.15);box-shadow:0 8px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(232,200,122,.1);transform:translateZ(0)}
-.glass-dark{background:rgba(4,6,10,.75);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border:1px solid var(--glass-border);box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 var(--glass-shine);transform:translateZ(0)}
-
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:24px 60px;display:flex;justify-content:space-between;align-items:center;transition:all .5s cubic-bezier(.23,1,.32,1)}
-nav.scrolled{background:rgba(4,6,10,.8);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--glass-border);padding:16px 60px}
-.nav-logo{font-family:var(--f-display);font-size:22px;letter-spacing:4px;color:var(--c-fg);position:relative;z-index:1}
-.nav-logo span{color:var(--c-accent)}
-.nav-links{display:flex;gap:40px;list-style:none}
-.nav-links a{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);text-decoration:none;transition:color .3s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--c-accent);transition:width .3s}
-.nav-links a:hover{color:var(--c-fg)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;background:rgba(232,200,122,.1);border:1px solid rgba(232,200,122,.3);color:var(--c-accent);cursor:none;transition:all .3s;backdrop-filter:blur(10px)}
-.nav-cta:hover{background:var(--c-accent);color:var(--c-bg);border-color:var(--c-accent)}
-
-/* ── HERO ── */
-#hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 60px 100px}
-.hero-bg{position:absolute;inset:0;background:url(https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg) center/cover no-repeat;z-index:0;transform-origin:center;will-change:transform}
-.hero-bg-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(4,6,10,.85) 0%,rgba(4,6,10,.3) 50%,rgba(4,6,10,.7) 100%)}
-.hero-bg-overlay2{position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;background:linear-gradient(to top,rgba(4,6,10,1) 0%,transparent 100%)}
-
-/* Liquid glass hero card */
-.hero-glass-card{position:absolute;top:50%;right:60px;transform:translateY(-50%);z-index:3;padding:40px 36px;min-width:200px;text-align:right}
-.hero-stat-num{font-family:var(--f-display);font-size:52px;line-height:1;color:var(--c-fg)}
-.hero-stat-label{font-family:var(--f-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);margin-top:4px}
-.hero-stat-divider{width:100%;height:1px;background:var(--glass-border);margin:20px 0}
-
-.hero-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--c-accent);margin-bottom:28px;position:relative;z-index:2;opacity:0;animation:fadeUp .8s .3s forwards;display:flex;align-items:center;gap:12px}
-.hero-tag::before{content:'';width:32px;height:1px;background:var(--c-accent)}
-.hero-title{font-family:var(--f-display);font-size:clamp(76px,11vw,150px);line-height:.88;letter-spacing:2px;position:relative;z-index:2;opacity:0;animation:fadeUp .9s .5s forwards}
-.hero-title-sub{font-family:var(--f-serif);font-style:italic;font-size:clamp(48px,7vw,100px);font-weight:300;color:rgba(240,237,230,.55);display:block;margin-left:80px;line-height:.9}
-.hero-desc{margin-top:36px;max-width:520px;font-size:17px;line-height:1.75;color:var(--c-muted);font-weight:300;position:relative;z-index:2;opacity:0;animation:fadeUp .8s .8s forwards}
-.hero-actions{display:flex;gap:16px;margin-top:44px;align-items:center;position:relative;z-index:2;opacity:0;animation:fadeUp .8s 1s forwards}
-.btn-primary{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:15px 36px;background:var(--c-accent);color:var(--c-bg);cursor:none;font-weight:500;transition:all .3s;border:none;position:relative;overflow:hidden}
-.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 60%)}
-.btn-primary:hover{background:var(--c-fg);transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,200,122,.3)}
-.btn-ghost{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:15px 36px;background:rgba(240,237,230,.05);border:1px solid rgba(240,237,230,.2);color:var(--c-muted);cursor:none;backdrop-filter:blur(10px);transition:all .3s}
-.btn-ghost:hover{border-color:var(--c-fg);color:var(--c-fg);background:rgba(240,237,230,.1);transform:translateY(-2px)}
-
-.hero-scroll{position:absolute;bottom:48px;right:64px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fadeIn 1s 1.6s forwards}
-.hero-scroll span{font-family:var(--f-mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,237,230,.3);writing-mode:vertical-rl}
-.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--c-accent),transparent);animation:scrollPulse 2.5s infinite}
-
-/* ── MARQUEE ── */
-.marquee-section{overflow:hidden;padding:18px 0;background:rgba(232,200,122,.04);border-top:1px solid rgba(232,200,122,.1);border-bottom:1px solid rgba(232,200,122,.1);position:relative;z-index:2}
-.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marqueeScroll 25s linear infinite}
-.marquee-item{font-family:var(--f-mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(232,200,122,.4);flex-shrink:0}
-.marquee-dot{color:var(--c-accent);margin:0 10px;opacity:.6}
-
-/* ── SECTIONS ── */
-section{padding:130px 60px;position:relative;z-index:2;scroll-margin-top:84px}
-#workshop,#work{scroll-margin-top:72px}
-.section-label{font-family:var(--f-mono);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--c-accent);margin-bottom:20px;display:flex;align-items:center;gap:12px}
-.section-label::before{content:'';width:24px;height:1px;background:var(--c-accent)}
-.section-title{font-family:var(--f-display);font-size:clamp(48px,6vw,88px);line-height:.93;letter-spacing:2px;margin-bottom:60px}
-
-/* ── ABOUT ── */
-#about{background:transparent;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-visual{position:relative}
-.about-img-wrap{position:relative;overflow:hidden}
-.about-img{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden}
-.about-img::before{content:'';position:absolute;inset:0;background:url(https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/About%20me.png) center top/cover;opacity:1;transition:transform .8s ease}
-.about-img-wrap:hover .about-img::before{transform:scale(1.03)}
-/* Glass frame overlay */
-.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%,rgba(232,200,122,.04) 100%);pointer-events:none}
-.about-glass-frame{position:absolute;bottom:-16px;right:-16px;width:120px;height:120px;border:1px solid rgba(232,200,122,.3);background:rgba(232,200,122,.04);backdrop-filter:blur(10px)}
-.about-tag{position:absolute;top:32px;left:-16px;background:var(--c-accent);color:var(--c-bg);font-family:var(--f-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:8px 18px;writing-mode:vertical-rl;transform:rotate(180deg);box-shadow:0 8px 24px rgba(232,200,122,.3)}
-.about-text{font-size:18px;line-height:1.85;color:rgba(240,237,230,.65);margin-bottom:32px;font-weight:300}
-.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}
-.highlight-item{padding:22px 20px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
-.highlight-item:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
-.highlight-num{font-family:var(--f-display);font-size:38px;color:var(--c-accent);line-height:1}
-.highlight-txt{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--c-muted);margin-top:6px}
-.gear-list{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px}
-.gear-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--c-muted);backdrop-filter:blur(8px);transition:all .3s}
-.gear-tag:hover{border-color:rgba(232,200,122,.4);color:var(--c-accent);background:rgba(232,200,122,.06)}
-
-/* ── WORK ── */
-#work{padding-left:0;padding-right:0;padding-top:130px;padding-bottom:80px}
-.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;padding:0 60px}
-
-/* Filter tabs */
-.work-filters{display:flex;gap:8px;flex-wrap:wrap;padding:0 60px 28px;border-bottom:1px solid var(--c-border);margin-bottom:4px}
-.filter-btn{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:9px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:var(--c-muted);cursor:none;transition:all .25s;backdrop-filter:blur(8px)}
-.filter-btn:hover{color:var(--c-fg);border-color:rgba(240,237,230,.2);background:rgba(255,255,255,.06)}
-.filter-btn.active{background:rgba(232,200,122,.12);border-color:rgba(232,200,122,.4);color:var(--c-accent)}
-
-/* Accordion */
-.work-category-block{margin-bottom:1px}
-.work-cat-header{display:flex;justify-content:space-between;align-items:center;padding:22px 60px;border-bottom:1px solid var(--c-border);cursor:none;transition:background .25s;user-select:none;position:relative}
-.work-cat-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--c-accent);transition:width .3s}
-.work-cat-header:hover{background:rgba(255,255,255,.02)}
-.work-cat-header:hover::before,.work-cat-header.open::before{width:3px}
-.work-cat-title{font-family:var(--f-display);font-size:28px;letter-spacing:3px;color:var(--c-fg)}
-.work-cat-count{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--c-muted)}
-.work-cat-arrow{font-size:20px;color:var(--c-accent);transition:transform .4s cubic-bezier(.23,1,.32,1);line-height:1}
-.work-cat-header.open .work-cat-arrow{transform:rotate(90deg)}
-.work-cat-body{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.23,1,.32,1)}
-.work-cat-body.open{max-height:10000px}
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.work-item{position:relative;overflow:hidden;cursor:none;height:300px;will-change:transform;transform:translateZ(0)}
-.work-item.featured{grid-column:1/-1;height:500px}
-.work-thumb{width:100%;height:100%;background:var(--c-mid);position:relative;overflow:hidden}
-.work-thumb img{width:100%;height:100%;object-fit:cover;opacity:.65;transition:opacity .5s ease-out,transform .7s cubic-bezier(.23,1,.32,1);will-change:transform,opacity;backface-visibility:hidden;transform:translateZ(0) scale(1.02)}
-.work-item:hover .work-thumb img{opacity:.88;transform:translateZ(0) scale(1.06)}
-.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,6,10,.96) 0%,rgba(4,6,10,.4) 50%,transparent 100%);opacity:0;transition:opacity .4s ease-out;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;pointer-events:none}
-.work-item:hover .work-overlay{opacity:1}
-/* Glass chip on work cards */
-.work-glass-chip{position:absolute;top:20px;right:20px;padding:6px 14px;font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--c-accent);background:rgba(4,6,10,.6);border:1px solid rgba(232,200,122,.2);backdrop-filter:blur(12px);opacity:0;transform:translateY(-8px);transition:all .35s}
-.work-item:hover .work-glass-chip{opacity:1;transform:translateY(0)}
-.work-cat{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-accent);margin-bottom:10px}
-.work-name{font-family:var(--f-display);font-size:32px;letter-spacing:1px;color:var(--c-fg);line-height:1}
-.work-role{font-family:var(--f-mono);font-size:10px;color:var(--c-muted);margin-top:6px}
-.work-num{position:absolute;top:20px;left:20px;font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--c-muted);background:rgba(4,6,10,.7);backdrop-filter:blur(8px);padding:4px 10px;border:1px solid rgba(255,255,255,.06);pointer-events:none}
-
-/* ── SHOWREEL ── */
-#showreel{text-align:center;background:transparent}
-.reel-wrap{position:relative;margin-top:60px}
-.reel-screen{width:100%;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 40px 120px rgba(0,0,0,.7),inset 0 1px 0 var(--glass-shine)}
-.reel-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,transparent 60%);pointer-events:none;z-index:1}
-.reel-caption{margin-top:20px;font-family:var(--f-mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--c-muted)}
-.reel-sub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-.reel-sub-item{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--glass-border);background:#000;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-.reel-sub-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 60%);pointer-events:none;z-index:1}
-
-/* ── SERVICES ── */
-#services{background:transparent}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
-.service-item{padding:48px 36px;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s}
-.service-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none}
-.service-item:hover{transform:translateY(-6px);box-shadow:0 24px 80px rgba(0,0,0,.5)}
-.service-num{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--c-accent);margin-bottom:36px;opacity:.7}
-.service-name{font-family:var(--f-display);font-size:34px;letter-spacing:2px;line-height:1.05;margin-bottom:20px}
-.service-desc{font-size:14px;line-height:1.85;color:var(--c-muted);font-weight:300;margin-bottom:36px}
-.service-line{width:36px;height:1px;background:var(--c-accent);transition:width .5s cubic-bezier(.23,1,.32,1);opacity:.6}
-.service-item:hover .service-line{width:72px;opacity:1}
-
-/* ── EXPERIENCE ── */
-#experience{background:transparent}
-.exp-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px;margin-top:80px}
-.exp-nav{display:flex;flex-direction:column;gap:0}
-.exp-tab{padding:18px 0;border-bottom:1px solid var(--c-border);font-family:var(--f-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--c-muted);cursor:none;transition:all .3s;position:relative;padding-left:0}
-.exp-tab::before{content:'';position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:0;height:1px;background:var(--c-accent);transition:width .35s}
-.exp-tab.active,.exp-tab:hover{color:var(--c-fg);padding-left:18px}
-.exp-tab.active::before{width:10px}
-.exp-panel{display:none;animation:fadeUp .4s forwards}
-.exp-panel.active{display:block}
-.exp-years{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;color:var(--c-accent);margin-bottom:16px;opacity:.8}
-.exp-role{font-family:var(--f-display);font-size:52px;letter-spacing:2px;line-height:.93;margin-bottom:8px}
-.exp-company{font-size:18px;color:var(--c-muted);font-style:italic;margin-bottom:36px}
-.exp-duties{list-style:none;display:flex;flex-direction:column;gap:14px}
-.exp-duties li{padding-left:22px;position:relative;font-size:15px;line-height:1.75;color:rgba(240,237,230,.6);font-weight:300}
-.exp-duties li::before{content:'—';position:absolute;left:0;color:var(--c-accent);opacity:.7}
-
-/* ── TESTIMONIALS ── */
-#testimonials{text-align:center;background:transparent}
-.testi-wrap{max-width:820px;margin:80px auto 0;position:relative}
-.testi-glass{padding:60px;position:relative;overflow:hidden}
-.testi-glass::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--c-accent),transparent)}
-.testi-quote{font-size:clamp(19px,2.5vw,26px);line-height:1.65;font-style:italic;color:var(--c-fg);margin-bottom:44px;min-height:90px;transition:opacity .3s}
-.testi-author{display:flex;align-items:center;justify-content:center;gap:20px}
-.testi-avatar{width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,200,122,.3);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:20px;color:var(--c-accent);background:rgba(232,200,122,.06);backdrop-filter:blur(10px)}
-.testi-name{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--c-fg);text-align:left}
-.testi-role{font-family:var(--f-mono);font-size:10px;color:var(--c-muted);margin-top:4px;text-align:left}
-.testi-dots{display:flex;gap:10px;justify-content:center;margin-top:40px}
-.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15);cursor:none;transition:all .35s}
-.dot.active{background:var(--c-accent);transform:scale(1.4);box-shadow:0 0 8px rgba(232,200,122,.5)}
-
-/* ── CLIENTS ── */
-#clients{text-align:center;background:transparent}
-.clients-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:32px 56px;margin-top:56px;align-items:center}
-.client-logo{font-family:var(--f-display);font-size:18px;letter-spacing:4px;color:rgba(240,237,230,.15);transition:all .4s;padding:12px 20px;border:1px solid transparent;cursor:default}
-.client-logo:hover{color:rgba(240,237,230,.6);border-color:var(--glass-border);background:var(--glass-bg);backdrop-filter:blur(10px)}
-
-/* ── CTA ── */
-#cta{text-align:center;padding:160px 60px;position:relative;overflow:hidden;background:transparent}
-.cta-orb{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(232,200,122,.05) 0%,transparent 70%);pointer-events:none}
-.cta-title{font-family:var(--f-display);font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:2px;position:relative;z-index:1}
-.cta-sub{font-size:18px;color:var(--c-muted);margin:28px 0 52px;font-weight:300;position:relative;z-index:1}
-.cta-actions{display:flex;gap:16px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
-.cta-socials{margin-top:44px;display:flex;gap:28px;justify-content:center;position:relative;z-index:1}
-.cta-socials a{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);text-decoration:none;transition:color .3s;padding:8px 0;position:relative}
-.cta-socials a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--c-accent);transition:width .3s}
-.cta-socials a:hover{color:var(--c-accent)}
-.cta-socials a:hover::after{width:100%}
-
-/* ── FOOTER ── */
-footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:40px;position:relative;z-index:2;background:rgba(4,6,10,.6);backdrop-filter:blur(20px)}
-.footer-brand{font-family:var(--f-display);font-size:20px;letter-spacing:4px}
-.footer-brand span{color:var(--c-accent)}
-.footer-links{display:flex;gap:28px}
-.footer-links a{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);text-decoration:none;transition:color .3s}
-.footer-links a:hover{color:var(--c-accent)}
-.footer-copy{font-family:var(--f-mono);font-size:10px;letter-spacing:1px;color:rgba(240,237,230,.2);text-align:right}
-
-/* ── SCROLL PROGRESS BAR ── */
-#progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--c-accent),var(--c-accent2));z-index:200;width:0%;transition:width .1s linear;box-shadow:0 0 8px rgba(232,200,122,.5)}
-
-/* ── SECTION TRANSITION LINES ── */
-.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(232,200,122,.2),transparent);position:relative;z-index:2}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.05)}}
-@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes float{0%,100%{transform:translateY(0) translateX(0)}33%{transform:translateY(-20px) translateX(10px)}66%{transform:translateY(10px) translateX(-8px)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(.94);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-.reveal-scale.visible{opacity:1;transform:scale(1)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  nav{padding:18px 24px}nav.scrolled{padding:14px 24px}
-  section{padding:80px 24px}
-  #hero{padding:0 24px 80px}
-  #about{grid-template-columns:1fr;gap:48px}
-  .work-grid{grid-template-columns:1fr}
-  .work-item.featured{height:360px}
-  .services-grid{grid-template-columns:1fr;gap:12px}
-  .exp-grid{grid-template-columns:1fr;gap:32px}
-  .hero-glass-card{display:none}
-  footer{grid-template-columns:1fr;text-align:center}
-  .footer-copy{text-align:center}
-  .footer-links{justify-content:center}
-  .clients-strip{gap:20px 40px}
-  .cta-actions{flex-direction:column;align-items:center}
-  .reel-sub-grid{grid-template-columns:1fr}
-  #work{padding-left:0;padding-right:0}
-  .work-header,.work-filters,.work-cat-header{padding-left:24px;padding-right:24px}
+/* gradient display type — the signature of the reference design */
+.hero-heading{
+  background:linear-gradient(180deg,#646973 0%,#BBCCD7 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
 }
-@media(max-width:600px){
-  .nav-links{display:none}
-  .hero-title{font-size:clamp(60px,15vw,90px)}
+.display{font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.02em}
+
+/* ═══════════════ REVEAL ═══════════════ */
+.fade{opacity:0;transform:translate(var(--fx,0px),var(--fy,30px));transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.fade.in{opacity:1;transform:translate(0,0)}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .fade{opacity:1;transform:none}
 }
-/* ── WORKSHOP ROLE PILLS ── */
+
+/* ═══════════════ PROGRESS ═══════════════ */
+.progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:200;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#646973,#BBCCD7)}
+
+/* ═══════════════ NAV ═══════════════ */
+nav{position:fixed;top:0;left:0;width:100%;z-index:150;display:flex;align-items:center;justify-content:space-between;
+    padding:24px 24px;gap:16px;transition:background .4s var(--ease),padding .4s var(--ease),backdrop-filter .4s}
+nav.scrolled{background:rgba(12,12,12,.72);backdrop-filter:blur(18px);padding:14px 24px;border-bottom:1px solid rgba(215,226,234,.08)}
+.nav-logo{font-weight:800;letter-spacing:.06em;font-size:15px;color:var(--fg);text-transform:uppercase}
+.nav-logo span{color:var(--violet)}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,3vw,44px);list-style:none}
+.nav-links a{font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--fg);transition:opacity .2s}
+.nav-links a:hover{opacity:.7}
+.nav-links a.accent{color:var(--violet)}
+@media(min-width:768px){nav{padding:28px 40px}.nav-links a{font-size:15px}.nav-logo{font-size:17px}}
+@media(min-width:1024px){.nav-links a{font-size:1.05rem}}
+@media(max-width:520px){.nav-links{gap:12px}.nav-links a{font-size:11px;letter-spacing:.05em}.nav-links .hide-xs{display:none}}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow-x:clip;padding:0 20px}
+.hero-glow{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:min(1100px,120vw);aspect-ratio:1;
+  background:radial-gradient(circle,rgba(187,204,215,.10) 0%,rgba(12,12,12,0) 62%);pointer-events:none;z-index:0}
+.hero-heading-wrap{overflow:hidden;position:relative;z-index:2}
+h1.hero-title{font-size:13.5vw;white-space:nowrap;width:100%;text-align:center;letter-spacing:-.035em}
+@media(min-width:640px){h1.hero-title{font-size:15vw}}
+@media(min-width:768px){h1.hero-title{font-size:16vw}}
+@media(min-width:1024px){h1.hero-title{font-size:16.8vw}}
+.hero-portrait{position:absolute;left:50%;transform:translateX(-50%);z-index:5;width:280px;top:46%;translate:0 -50%;
+  opacity:0;transition:opacity .9s var(--ease) .6s;filter:drop-shadow(0 40px 90px rgba(0,0,0,.75))}
+.hero-portrait.in{opacity:1}
+.hero-portrait img{width:100%;border-radius:28px;object-fit:cover}
+@media(min-width:640px){.hero-portrait{width:360px;top:auto;bottom:0;translate:0 0}}
+@media(min-width:768px){.hero-portrait{width:440px}}
+@media(min-width:1024px){.hero-portrait{width:520px}}
+.hero-bottom{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:28px}
+@media(min-width:768px){.hero-bottom{padding-bottom:40px;padding-inline:20px}}
+.hero-tagline{font-size:clamp(.75rem,1.4vw,1.5rem);font-weight:300;text-transform:uppercase;letter-spacing:.04em;line-height:1.35;
+  color:var(--fg);max-width:160px}
+@media(min-width:640px){.hero-tagline{max-width:220px}}
+@media(min-width:768px){.hero-tagline{max-width:280px}}
+.hero-scroll{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;z-index:4;font-size:9px;letter-spacing:.4em;
+  text-transform:uppercase;color:rgba(215,226,234,.35)}
+@media(max-width:639px){.hero-scroll{display:none}}
+
+/* ═══════════════ BUTTONS ═══════════════ */
+.btn-contact{
+  border:none;border-radius:999px;cursor:pointer;color:#fff;font-weight:500;text-transform:uppercase;letter-spacing:.16em;
+  background:linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
+  box-shadow:0px 4px 4px rgba(181,1,167,.25),4px 4px 12px #7721B1 inset;
+  outline:2px solid #fff;outline-offset:-3px;
+  padding:12px 32px;font-size:12px;transition:transform .25s var(--ease),box-shadow .25s var(--ease);white-space:nowrap}
+.btn-contact:hover{transform:translateY(-2px);box-shadow:0px 10px 24px rgba(181,1,167,.35),4px 4px 12px #7721B1 inset}
+@media(min-width:640px){.btn-contact{padding:14px 40px;font-size:13px}}
+@media(min-width:768px){.btn-contact{padding:16px 48px;font-size:15px}}
+.btn-ghost{
+  border:2px solid var(--fg);border-radius:999px;background:transparent;color:var(--fg);cursor:pointer;
+  font-weight:500;text-transform:uppercase;letter-spacing:.16em;padding:12px 32px;font-size:13px;transition:background .25s}
+.btn-ghost:hover{background:rgba(215,226,234,.10)}
+@media(min-width:640px){.btn-ghost{padding:14px 40px;font-size:15px}}
+
+/* ═══════════════ MARQUEE ═══════════════ */
+.marquee{background:var(--bg);padding:96px 0 40px;overflow:hidden}
+@media(min-width:640px){.marquee{padding-top:128px}}
+@media(min-width:768px){.marquee{padding-top:160px}}
+.marquee-rows{display:flex;flex-direction:column;gap:12px}
+.marquee-row{display:flex;gap:12px;will-change:transform}
+.tile{width:260px;height:167px;flex:0 0 auto;border-radius:16px;overflow:hidden;background:#141414;position:relative}
+.tile img{width:100%;height:100%;object-fit:cover}
+.tile::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(215,226,234,.08);border-radius:16px}
+@media(min-width:768px){.tile{width:340px;height:219px}}
+@media(min-width:1024px){.tile{width:420px;height:270px}}
+
+/* ═══════════════ SECTION SHELL ═══════════════ */
+.sec{padding:80px 20px}
+@media(min-width:768px){.sec{padding:96px 40px}}
+.sec-title{font-size:clamp(3rem,12vw,160px);text-align:center}
+.eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* ═══════════════ ABOUT ═══════════════ */
+.about{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;
+  padding:80px 20px;overflow:hidden}
+.about-inner{display:flex;flex-direction:column;align-items:center;gap:40px;position:relative;z-index:2;text-align:center}
+@media(min-width:768px){.about-inner{gap:64px}}
+.about-copy{color:var(--fg);font-weight:500;line-height:1.7;max-width:560px;font-size:clamp(1rem,2vw,1.35rem)}
+.about-copy span{transition:opacity .1s linear}
+.deco{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
+.deco-1{width:120px;aspect-ratio:1;top:6%;left:2%;
+  background:radial-gradient(circle at 32% 28%,#e8eef3,#8f9aa5 42%,#2c3138 78%,#14171b);
+  box-shadow:0 30px 70px rgba(0,0,0,.6),inset -12px -14px 30px rgba(0,0,0,.55)}
+.deco-2{width:100px;aspect-ratio:1;bottom:10%;left:5%;border-radius:26px;
+  background:linear-gradient(145deg,rgba(96,231,255,.22),rgba(118,33,176,.35));
+  border:1px solid rgba(215,226,234,.18);backdrop-filter:blur(6px);transform:rotate(-12deg)}
+.deco-3{width:120px;aspect-ratio:1;top:6%;right:2%;border-radius:50%;
+  background:conic-gradient(from 220deg,rgba(182,0,168,.35),rgba(118,33,176,.25),rgba(96,231,255,.28),rgba(182,0,168,.35));
+  filter:blur(.5px);box-shadow:0 20px 60px rgba(118,33,176,.35)}
+.deco-4{width:130px;aspect-ratio:1;bottom:10%;right:5%;border-radius:50%;border:1px solid rgba(215,226,234,.28);
+  background:radial-gradient(circle at 70% 30%,rgba(215,226,234,.14),transparent 62%)}
+@media(min-width:640px){.deco-1,.deco-3{width:160px}.deco-2{width:140px}.deco-4{width:170px}}
+@media(min-width:768px){.deco-1,.deco-3{width:210px}.deco-2{width:180px}.deco-4{width:220px}
+  .deco-1{left:4%}.deco-3{right:4%}.deco-2{left:10%}.deco-4{right:10%}}
+@media(max-width:520px){.deco{opacity:.5}}
+
+/* ═══════════════ WORKSHOP ═══════════════ */
+.workshop{padding:0 20px 96px;position:relative}
+.workshop-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;max-width:1200px;margin:0 auto}
+@media(min-width:1024px){.workshop-grid{grid-template-columns:1.05fr 1fr;gap:56px}}
+.ws-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(167,139,250,.12);
+  border:1px solid rgba(167,139,250,.4);border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--violet);margin-bottom:20px}
+.ws-badge i{width:6px;height:6px;background:var(--pink);border-radius:50%;box-shadow:0 0 10px var(--pink)}
+.ws-title{font-size:clamp(38px,5vw,66px);font-weight:800;line-height:1.1;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 40%,var(--pink) 100%);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+.ws-sub{font-size:clamp(18px,2.4vw,25px);font-weight:600;color:#c4b5fd;margin:6px 0 20px}
+.ws-desc{font-size:15px;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:28px;max-width:52ch}
+.ws-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px;max-width:520px}
+.ws-fact{padding:16px 12px;text-align:center;border-radius:14px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(215,226,234,.10);backdrop-filter:blur(14px)}
+.ws-fact img{width:28px;height:28px;object-fit:contain;margin:0 auto 6px}
+.ws-fact-k{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ws-fact-v{font-size:12px;font-weight:600;color:var(--fg);line-height:1.35}
+.coffee{position:relative;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;overflow:hidden;
+  background:linear-gradient(120deg,rgba(190,76,0,.16),rgba(118,33,176,.16));border:1px solid rgba(215,226,234,.12);
+  margin-bottom:28px;max-width:520px}
+.coffee-icon{font-size:26px}
+.coffee-title{font-weight:700;font-size:15px;color:#fff}
+.coffee-sub{font-size:11.5px;color:var(--muted)}
+.coffee-badge{font-weight:800;font-size:22px;color:var(--cyan);line-height:1;text-align:center}
+.coffee-badge span{display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.btn-ws{border:none;border-radius:14px;cursor:pointer;color:#fff;font-weight:700;font-size:15px;padding:16px 42px;
+  background:linear-gradient(135deg,var(--indigo) 0%,var(--violet) 50%,var(--pink) 100%);background-size:200% 200%;
+  box-shadow:0 10px 30px -5px rgba(99,102,241,.5);transition:transform .3s,box-shadow .3s,background-position .3s}
+.btn-ws:hover{transform:translateY(-2px);background-position:100% 100%;box-shadow:0 16px 40px -5px rgba(167,139,250,.6)}
+.ws-card{position:relative;padding:34px;border-radius:24px;background:rgba(20,14,56,.5);border:1px solid rgba(139,92,246,.25);
+  backdrop-filter:blur(30px);box-shadow:0 30px 80px -20px rgba(0,0,0,.6),0 0 40px rgba(167,139,250,.18);cursor:pointer;overflow:hidden}
+.ws-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--violet),var(--pink),transparent)}
+.ws-card-k{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:8px}
+.ws-card-h{font-size:clamp(21px,3vw,27px);font-weight:700;color:#fff;line-height:1.3;margin-bottom:22px}
+.ws-list{display:flex;flex-direction:column;gap:14px}
+.ws-list div{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(241,236,255,.75);line-height:1.6}
+.ws-card-f{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:22px;margin-top:22px;
+  border-top:1px solid rgba(167,139,250,.15);font-size:11px;color:rgba(241,236,255,.4)}
+
+/* ═══════════════ SERVICES (light block) ═══════════════ */
+.services{background:#fff;color:#0C0C0C;border-radius:40px 40px 0 0;padding:80px 20px}
+@media(min-width:640px){.services{border-radius:50px 50px 0 0;padding:96px 32px}}
+@media(min-width:768px){.services{border-radius:60px 60px 0 0;padding:128px 40px}}
+.services h2{color:#0C0C0C;margin-bottom:64px}
+@media(min-width:768px){.services h2{margin-bottom:112px}}
+.svc-list{max-width:1024px;margin:0 auto}
+.svc{display:flex;align-items:flex-start;gap:20px;padding:32px 0;border-top:1px solid rgba(12,12,12,.15)}
+.svc:last-child{border-bottom:1px solid rgba(12,12,12,.15)}
+@media(min-width:768px){.svc{gap:40px;padding:48px 0}}
+.svc-num{font-weight:900;font-size:clamp(3rem,10vw,140px);line-height:.85;color:#0C0C0C;flex:0 0 auto}
+.svc-name{font-weight:500;text-transform:uppercase;font-size:clamp(1rem,2.2vw,2.1rem);line-height:1.2;margin-bottom:8px}
+.svc-desc{font-weight:300;line-height:1.7;max-width:42rem;font-size:clamp(.85rem,1.6vw,1.25rem);opacity:.6}
+
+/* ═══════════════ PROJECTS ═══════════════ */
+.projects{background:var(--bg);border-radius:40px 40px 0 0;margin-top:-40px;position:relative;z-index:10;padding:80px 20px 40px}
+@media(min-width:640px){.projects{border-radius:50px 50px 0 0;margin-top:-48px}}
+@media(min-width:768px){.projects{border-radius:60px 60px 0 0;margin-top:-56px;padding:96px 40px 40px}}
+.proj-slot{height:auto;position:relative;margin-bottom:24px}
+@media(min-width:1024px){.proj-slot{height:85vh;margin-bottom:0}}
+.proj-card{border-radius:32px;border:2px solid var(--fg);background:var(--bg);padding:16px;transform-origin:top center}
+@media(min-width:640px){.proj-card{border-radius:44px;padding:24px}}
+@media(min-width:768px){.proj-card{border-radius:56px;padding:32px}}
+@media(min-width:1024px){.proj-card{position:sticky}}
+.proj-head{display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;margin-bottom:20px}
+.proj-num{font-weight:900;font-size:clamp(2.6rem,8vw,120px);line-height:.85;color:var(--fg)}
+.proj-meta{flex:1;min-width:180px}
+.proj-cat{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:4px}
+.proj-name{font-weight:600;text-transform:uppercase;font-size:clamp(1.05rem,2.2vw,2rem);line-height:1.15}
+.proj-imgs{display:grid;grid-template-columns:40% 1fr;gap:12px}
+.proj-imgs .col{display:flex;flex-direction:column;gap:12px}
+.proj-imgs img{width:100%;object-fit:cover;border-radius:24px;background:#141414}
+@media(min-width:640px){.proj-imgs img{border-radius:36px}}
+@media(min-width:768px){.proj-imgs img{border-radius:48px}}
+.img-a{height:clamp(90px,16vw,230px)}
+.img-b{height:clamp(110px,22vw,340px)}
+.img-c{height:100%;min-height:100%}
+
+/* ═══════════════ REEL ═══════════════ */
+.reel-frame{max-width:1000px;margin:0 auto;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#000}
+.reel-frame .ratio{position:relative;width:100%;aspect-ratio:16/9}
+.reel-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.reel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:1000px;margin:14px auto 0}
+.reel-grid .ratio{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#000}
+.reel-cap{text-align:center;color:var(--muted);font-size:13px;margin-top:16px;letter-spacing:.04em}
+
+/* ═══════════════ EXPERIENCE ═══════════════ */
+.exp-grid{display:grid;grid-template-columns:1fr;gap:28px;max-width:1100px;margin:0 auto}
+@media(min-width:768px){.exp-grid{grid-template-columns:260px 1fr;gap:48px}}
+.exp-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+@media(min-width:768px){.exp-tabs{flex-direction:column;overflow:visible}}
+.exp-tab{flex:0 0 auto;text-align:left;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:transparent;
+  color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;white-space:nowrap}
+.exp-tab.active{color:var(--bg);background:var(--fg);border-color:var(--fg);font-weight:600}
+.exp-panel{display:none}
+.exp-panel.active{display:block;animation:fadeUp .45s var(--ease)}
+.exp-years{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.exp-role{font-weight:900;text-transform:uppercase;font-size:clamp(1.7rem,4vw,3rem);line-height:1;margin-bottom:8px}
+.exp-company{font-size:15px;color:var(--violet);font-weight:500;margin-bottom:20px}
+.exp-duties{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exp-duties li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.7;color:var(--muted)}
+.exp-duties li::before{content:"—";position:absolute;left:0;color:var(--fg);opacity:.5}
+
+/* ═══════════════ CLIENTS + TESTIMONIAL ═══════════════ */
+.clients-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 40px;max-width:1000px;margin:0 auto}
+.client{font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:clamp(13px,1.6vw,18px);color:var(--muted);
+  transition:color .3s,opacity .3s}
+.client:hover{color:var(--fg)}
+.testi{max-width:800px;margin:64px auto 0;padding:36px 28px;border:1px solid var(--line);border-radius:28px;text-align:center;
+  background:rgba(255,255,255,.03)}
+@media(min-width:768px){.testi{padding:48px 44px}}
+.testi-q{font-size:clamp(1rem,2vw,1.35rem);line-height:1.75;font-weight:300;transition:opacity .35s}
+.testi-author{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:28px}
+.testi-avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--bg);
+  background:linear-gradient(135deg,#BBCCD7,#646973)}
+.testi-name{font-weight:600;font-size:14px}
+.testi-role{font-size:12px;color:var(--muted)}
+.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(215,226,234,.25);cursor:pointer;transition:all .3s;border:none;padding:0}
+.dot.active{background:var(--fg);width:22px;border-radius:99px}
+
+/* ═══════════════ CTA + FOOTER ═══════════════ */
+.cta{text-align:center;padding:110px 20px 90px;position:relative;overflow:hidden}
+.cta-sub{color:var(--muted);font-size:clamp(14px,1.8vw,18px);max-width:520px;margin:20px auto 36px;line-height:1.7}
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.cta-socials{display:flex;gap:28px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.cta-socials a{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.cta-socials a:hover{color:var(--fg)}
+footer{border-top:1px solid rgba(215,226,234,.08);padding:44px 20px;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.footer-links{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}
+.footer-links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.footer-links a:hover{color:var(--fg)}
+.footer-copy{font-size:12px;color:rgba(215,226,234,.3);line-height:1.8}
+
+/* ═══════════════ MODALS ═══════════════ */
+.modal{display:none;position:fixed;inset:0;z-index:1000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.modal-veil{position:fixed;inset:0;background:rgba(5,4,22,.9);backdrop-filter:blur(16px)}
+.modal-box{position:relative;z-index:1;width:100%;max-width:600px;margin:auto;border-radius:24px;overflow:hidden;
+  animation:fadeUp .4s var(--ease)}
+.modal-ws{background:linear-gradient(180deg,#0f0a2e,#07061a);border:1px solid rgba(139,92,246,.3);
+  box-shadow:0 40px 120px rgba(167,139,250,.25)}
+.modal-book{background:rgba(12,12,12,.96);border:1px solid var(--line);box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);color:#c4b5fd;font-size:15px;cursor:pointer;z-index:10;
+  transition:background .2s}
+.modal-close:hover{background:rgba(167,139,250,.35)}
+.modal-pad{padding:40px 26px;position:relative;z-index:1}
+@media(min-width:640px){.modal-pad{padding:44px 40px}}
+label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bottom:8px}
+.inp{width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;
+  color:#f1ecff;font-size:14px;outline:none;transition:border-color .25s,box-shadow .25s}
+.inp:focus{border-color:rgba(168,130,255,.85);box-shadow:0 0 0 4px rgba(167,139,250,.15)}
+.modal-book .inp{background:rgba(255,255,255,.04);border-color:rgba(215,226,234,.12);color:var(--fg)}
+.modal-book label.fld{color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:10px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.ws-role{position:relative;display:block;cursor:pointer}
+.ws-role span{display:block;padding:12px 10px;text-align:center;font-size:12.5px;border-radius:12px;
+  background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);color:#c9c0e8;transition:all .2s}
+.ws-role input:checked + span{border-color:var(--violet);background:rgba(167,139,250,.18);color:#fff}
+.ws-role input:focus-visible + span{outline:2px solid var(--cyan);outline-offset:2px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes twinkle{0%,100%{opacity:.6}50%{opacity:1}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
-.ws-role{position:relative;cursor:none}
-.ws-role span{display:flex;align-items:center;justify-content:center;padding:11px 12px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;text-align:center;transition:all .2s}
-.ws-role:hover span{border-color:rgba(167,139,250,.5);color:#fff}
-.ws-role input:checked + span{background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(240,171,252,.25));border-color:#a78bfa;color:#fff;box-shadow:0 0 30px rgba(167,139,250,.35)}
-
-/* ── FREE COFFEE PROMO ── */
-.coffee-promo{position:relative;display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(120deg,rgba(240,171,252,.12),rgba(167,139,250,.12),rgba(96,231,255,.1));border:1px solid rgba(240,171,252,.4);border-radius:16px;overflow:hidden;backdrop-filter:blur(20px)}
-.coffee-promo-glow{position:absolute;top:-50%;left:-100%;width:60%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:skewX(-20deg);animation:coffeeShine 4s ease-in-out infinite}
-@keyframes coffeeShine{0%{left:-100%}60%,100%{left:200%}}
-.coffee-icon{font-size:30px;flex-shrink:0;animation:coffeeSteam 3s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(240,171,252,.5))}
-@keyframes coffeeSteam{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-3px) rotate(-4deg)}}
-.coffee-title{font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:800;background:linear-gradient(135deg,#fff 0%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px}
-.coffee-sub{font-family:'Noto Sans Lao',sans-serif;font-size:11px;color:rgba(184,174,219,.9);line-height:1.4}
-.coffee-badge{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#f0abfc,#a78bfa);color:#fff;font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;line-height:1;box-shadow:0 0 30px rgba(240,171,252,.5)}
-.coffee-badge span{font-size:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;opacity:.9;margin-top:2px}
-@media(max-width:600px){
-  #workshop{padding:64px 20px!important}
-  .workshop-grid{grid-template-columns:1fr!important;gap:40px!important}
-  .ws-row{grid-template-columns:1fr!important;gap:0!important}
-  .ws-row > div{margin-bottom:18px}
-  #workshop-modal{padding:12px}
-  #workshop-modal > div:last-child{max-width:100%}
-}
-/* ── TOUCH DEVICES: restore native cursor, hide custom one ── */
-@media (hover:none),(pointer:coarse){
-  body,a,button,[onclick],input,select,textarea,
-  .work-item,.service-item,.highlight-item,.filter-btn,
-  .work-cat-header,.exp-tab,.dot,.nav-cta,.ws-role,#ws-acc{cursor:auto}
-  #cursor,#cursor-ring,#cursor-glass{display:none!important}
-}
 </style>
 </head>
 <body>
 
-<!-- Ambient orbs -->
-<div class="orb" id="orb1"></div>
-<div class="orb" id="orb2"></div>
-<div class="orb" id="orb3"></div>
-
-<!-- Scroll progress -->
-<div id="progress-bar"></div>
-
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div id="cursor-glass"></div>
+<div class="progress"><i id="progress-bar"></i></div>
 
 <!-- ═══ NAV ═══ -->
 <nav id="main-nav">
-  <div class="nav-logo">YOD<span>.</span>TM</div>
+  <a href="#top" class="nav-logo">YOD<span>.</span>TM</a>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#experience">About</a></li>
-    <li><a href="#workshop" style="color:#a78bfa">Workshop ✦</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services" class="hide-xs">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#workshop" class="accent">Workshop ✦</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Hire Me</button>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="hero-bg" id="hero-bg"></div>
-  <div class="hero-bg-overlay"></div>
-  <div class="hero-bg-overlay2"></div>
+<main id="top">
 
-  <!-- Glass stats card -->
-  <div class="hero-glass-card glass" id="hero-card">
-    <div class="hero-stat-num" data-count="6">6+</div>
-    <div class="hero-stat-label">Years Active</div>
-    <div class="hero-stat-divider"></div>
-    <div class="hero-stat-num">4</div>
-    <div class="hero-stat-label">Industries</div>
-    <div class="hero-stat-divider"></div>
-    <div class="hero-stat-num">∞</div>
-    <div class="hero-stat-label">Altitude</div>
+<!-- ═══ 1. HERO ═══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-portrait">
+    <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/About%20me.png" alt="Yod Thammavong" fetchpriority="high">
   </div>
 
-  <div class="hero-tag">Visual Creator &amp; Drone Operator — Vientiane, Laos</div>
-  <h1 class="hero-title">
-    YOD<br>
-    THAMM-<br>
-    <span class="hero-title-sub">avong</span>
-  </h1>
-  <p class="hero-desc">Cinematic storytelling through the lens of a drone and a camera. I craft visual experiences that don't just show moments — they make you feel them.</p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Work</button>
-    <button class="btn-ghost" onclick="document.getElementById('showreel').scrollIntoView({behavior:'smooth'})">Watch Showreel</button>
+  <div class="hero-heading-wrap">
+    <h1 class="hero-title display hero-heading fade" style="--fy:40px;transition-delay:.15s">hi, i&apos;m yod</h1>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
+
+  <div class="hero-bottom">
+    <p class="hero-tagline fade" style="--fy:20px;transition-delay:.35s">a visual creator flying drones and building cinematic stories in laos</p>
+    <button class="btn-contact fade" style="--fy:20px;transition-delay:.5s" onclick="openBooking()">Contact Me</button>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ═══ 2. MARQUEE ═══ -->
+<section class="marquee" id="marquee">
+  <div class="marquee-rows">
+    <div class="marquee-row" id="row-1"></div>
+    <div class="marquee-row" id="row-2"></div>
   </div>
 </section>
 
-<!-- ═══ MARQUEE ═══ -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <span class="marquee-item">VIDEO CREATION <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">AERIAL CINEMATOGRAPHY <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">COLOR GRADING <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">DRONE OPERATIONS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">PHOTOGRAPHY <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">MOTION GRAPHICS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">BRAND STORYTELLING <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">VIDEO CREATION <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">AERIAL CINEMATOGRAPHY <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">COLOR GRADING <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">DRONE OPERATIONS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">PHOTOGRAPHY <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">MOTION GRAPHICS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">BRAND STORYTELLING <span class="marquee-dot">✦</span></span>
+<!-- ═══ 3. ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="deco deco-1 fade" style="--fx:-80px;--fy:0px;transition-delay:.1s"></div>
+  <div class="deco deco-2 fade" style="--fx:-80px;--fy:0px;transition-delay:.25s"></div>
+  <div class="deco deco-3 fade" style="--fx:80px;--fy:0px;transition-delay:.15s"></div>
+  <div class="deco deco-4 fade" style="--fx:80px;--fy:0px;transition-delay:.3s"></div>
+
+  <div class="about-inner">
+    <h2 class="sec-title display hero-heading fade" style="--fy:40px">About me</h2>
+    <p class="about-copy" id="about-copy">With more than six years behind a camera and a drone in Vientiane, I work across video creation, aerial cinematography and photography — for banks, insurers, studios and brands. Every frame is built with intention: precise, cinematic, and made to be felt. Let's build something worth watching.</p>
+    <button class="btn-contact fade" style="--fy:20px" onclick="openBooking()">Contact Me</button>
   </div>
-</div>
+</section>
 
-<!-- ═══ AI WORKFLOW LAB WORKSHOP ═══ -->
-<section id="workshop" style="padding:96px 60px 110px;position:relative;z-index:2;background:transparent">
-  <div class="reveal workshop-grid" style="display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center">
+<!-- ═══ 4. WORKSHOP ═══ -->
+<section class="workshop" id="workshop">
+  <div class="workshop-grid">
+    <div class="fade">
+      <div class="ws-badge"><i></i> Workshop · AI Workflow Lab</div>
+      <h2 class="ws-title lao">AI Workshop</h2>
+      <p class="ws-sub lao">ສຳລັບ Content Creator &amp; Editor</p>
+      <p class="ws-desc lao">ແລກປ່ຽນການນຳໃຊ້ເຄື່ອງມື AI ໃນສາຍ Photo &amp; Video — ແລກປ່ຽນເທັກນິກການ Prompt, ແລກປ່ຽນການໃຊ້ Model AI, ແລະ AI ໃນສາຍງານອື່ນໆ.</p>
 
-    <!-- Left: Info -->
-    <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.4);border-radius:100px;font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:24px">
-        <span style="width:6px;height:6px;background:#f0abfc;border-radius:50%;box-shadow:0 0 10px #f0abfc;display:inline-block"></span>
-        Workshop · AI Workflow Lab
-      </div>
-      <h2 style="font-family:'Noto Sans Lao',sans-serif;font-size:clamp(40px,5vw,68px);font-weight:800;line-height:1.1;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#c4b5fd 40%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">AI Workshop</h2>
-      <p style="font-family:'Noto Sans Lao',sans-serif;font-size:25px;font-weight:600;color:#c4b5fd;margin-bottom:25px">ສຳລັບ Content Creator &amp; Editor</p>
-      <p style="font-family:'Noto Sans Lao',sans-serif;font-size:16px;line-height:1.8;color:rgba(240,237,230,.55);font-weight:300;margin-bottom:32px">ແລກປ່ຽນການນຳໃຊ້ເຄື່ອງມື AI ໃນສາຍ Photo & Video - ແລກປ່ຽນເທັກນິກການ Prompt, ແລກປ່ຽນການໃຊ້ Model AI, ແລະ AI ໃນສາຍງານອື່ນໆ.</p>
-
-      <!-- Event details -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px">
-        <div class="glass" style="padding:16px 14px;text-align:center;border-radius:14px">
-          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/date.png" alt="ວັນທີ" loading="lazy" style="width:28px;height:28px;object-fit:contain;display:block;margin:0 auto 6px">
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c-muted);margin-bottom:4px">ວັນທີ</div>
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;font-weight:600;color:var(--c-fg);line-height:1.3">ວັນເສົາ<br>08/08/2026</div>
+      <div class="ws-facts">
+        <div class="ws-fact">
+          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/date.png" alt="" loading="lazy">
+          <div class="ws-fact-k lao">ວັນທີ</div>
+          <div class="ws-fact-v lao">ວັນເສົາ<br>08/08/2026</div>
         </div>
-        <div class="glass" style="padding:16px 14px;text-align:center;border-radius:14px">
-          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/time.png" alt="ເວລາ" loading="lazy" style="width:28px;height:28px;object-fit:contain;display:block;margin:0 auto 6px">
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c-muted);margin-bottom:4px">ເວລາ</div>
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;font-weight:600;color:var(--c-fg);line-height:1.3">13:30 — 17:00 .</div>
+        <div class="ws-fact">
+          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/time.png" alt="" loading="lazy">
+          <div class="ws-fact-k lao">ເວລາ</div>
+          <div class="ws-fact-v lao">13:30 — 17:00 ນ.</div>
         </div>
-        <div class="glass" style="padding:16px 14px;text-align:center;border-radius:14px">
-          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/kaopoon.png" alt="ສະຖານທີ່" loading="lazy" style="width:33px;height:33px;object-fit:contain;display:block;margin:0 auto 6px">
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c-muted);margin-bottom:4px">ສະຖານທີ່</div>
-          <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;font-weight:600;color:var(--c-fg);line-height:1.3;text-decoration:none;display:block">Kaopoon<br>Studio</a>
+        <div class="ws-fact">
+          <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/kaopoon.png" alt="" loading="lazy" style="width:33px;height:33px">
+          <div class="ws-fact-k lao">ສະຖານທີ່</div>
+          <a class="ws-fact-v lao" href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener">Kaopoon<br>Studio</a>
         </div>
       </div>
 
-      <!-- Free Coffee Promo -->
-      <div class="coffee-promo" style="margin-bottom:32px">
-        <div class="coffee-promo-glow"></div>
+      <div class="coffee">
         <div class="coffee-icon">☕</div>
         <div style="flex:1;min-width:0">
-          <div class="coffee-title">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
-          <div class="coffee-sub">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free Coffee for the first 50 guests</div>
+          <div class="coffee-title lao">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
+          <div class="coffee-sub lao">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free coffee for the first 50 guests</div>
         </div>
         <div class="coffee-badge">50<span>cups</span></div>
       </div>
 
-      <button onclick="openWorkshop()" style="font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:700;letter-spacing:.5px;padding:16px 44px;background:linear-gradient(135deg,#6366f1 0%,#a78bfa 50%,#f0abfc 100%);background-size:200% 200%;border:none;border-radius:14px;color:#fff;cursor:none;transition:all .3s;box-shadow:0 10px 30px -5px rgba(99,102,241,.5)" onmouseover="this.style.transform='translateY(-2px)';this.style.backgroundPosition='100% 100%';this.style.boxShadow='0 15px 40px -5px rgba(167,139,250,.6)'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundPosition='0% 0%';this.style.boxShadow='0 10px 30px -5px rgba(99,102,241,.5)'">
-        ລົງທະບຽນເຂົ້າຮ່ວມ →
-      </button>
+      <button class="btn-ws lao" onclick="openWorkshop()">ລົງທະບຽນເຂົ້າຮ່ວມ →</button>
     </div>
 
-    <!-- Right: Preview glass card -->
-    <div class="reveal" style="transition-delay:.15s">
-      <div onclick="openWorkshop()" style="position:relative;padding:40px;border-radius:24px;background:rgba(20,14,56,.5);border:1px solid rgba(139,92,246,.25);backdrop-filter:blur(30px);box-shadow:0 30px 80px -20px rgba(0,0,0,.6),0 0 40px rgba(167,139,250,.2);cursor:none;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#a78bfa,#f0abfc,transparent)"></div>
-        <div style="font-family:'Outfit',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;font-weight:600;margin-bottom:8px">Prompt · Tools · Workflow</div>
-        <div style="font-family:'Noto Sans Lao',sans-serif;font-size:28px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:24px">ສິ່ງທີ່ພວກເຮົາຈະໄດ້ແລກປ່ຽນໄປນຳກັນ</div>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;align-items:flex-start;gap:12px"><span style="color:#60e7ff;font-size:15px;flex-shrink:0">✦</span><span style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:rgba(241,236,255,.75);line-height:1.6">ເທັກການຂຽນ Prompt(ແບບບ້ານໆ) </span></div>
-          <div style="display:flex;align-items:flex-start;gap:12px"><span style="color:#a78bfa;font-size:15px;flex-shrink:0">✦</span><span style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:rgba(241,236,255,.75);line-height:1.6">ແລກປ່ຽນການໃຊ້ເຄື່ອງມື AI ສຳລັບ ຮູບ ແລະ ວິດີໂອ</span></div>
-          <div style="display:flex;align-items:flex-start;gap:12px"><span style="color:#f0abfc;font-size:15px;flex-shrink:0">✦</span><span style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:rgba(241,236,255,.75);line-height:1.6">Workflow ວິທີໃຊ້ Space ໃນ Freepik.com/Cavas ໃນ Higgfields.ai</span></div>
-          <div style="display:flex;align-items:flex-start;gap:12px"><span style="color:#60e7ff;font-size:15px;flex-shrink:0">✦</span><span style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:rgba(241,236,255,.75);line-height:1.6">ແລກປ່ຽນການໃຊ້ AI ທົ່ວໄປໃນໜ້າວຽກແຕ່ລະຄົນ</span></div>
+    <div class="fade" style="transition-delay:.15s">
+      <div class="ws-card" onclick="openWorkshop()">
+        <div class="ws-card-k">Prompt · Tools · Workflow</div>
+        <div class="ws-card-h lao">ສິ່ງທີ່ພວກເຮົາຈະໄດ້ແລກປ່ຽນໄປນຳກັນ</div>
+        <div class="ws-list lao">
+          <div><span style="color:var(--cyan)">✦</span><span>ເທັກນິກການຂຽນ Prompt (ແບບບ້ານໆ)</span></div>
+          <div><span style="color:var(--violet)">✦</span><span>ແລກປ່ຽນການໃຊ້ເຄື່ອງມື AI ສຳລັບ ຮູບ ແລະ ວິດີໂອ</span></div>
+          <div><span style="color:var(--pink)">✦</span><span>Workflow ວິທີໃຊ້ Space ໃນ Freepik.com / Canvas ໃນ Higgsfield.ai</span></div>
+          <div><span style="color:var(--cyan)">✦</span><span>ແລກປ່ຽນການໃຊ້ AI ທົ່ວໄປໃນໜ້າວຽກແຕ່ລະຄົນ</span></div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:24px;margin-top:24px;border-top:1px solid rgba(167,139,250,.15)">
-          <span style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;color:rgba(241,236,255,.4)">FB group: AI Creative Laos Comunity</span>
-          <span style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;color:#60e7ff;font-weight:700">ເລີ່ມຕົ້ນ 1 ກີບ</span>
+        <div class="ws-card-f">
+          <span class="lao">FB group: AI Creative Laos Community</span>
+          <span class="lao" style="color:var(--cyan);font-weight:700">ເລີ່ມຕົ້ນ 1 ກີບ</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══ ABOUT ═══ -->
-<section id="about">
-  <div class="about-visual reveal-left">
-    <div class="about-img-wrap">
-      <div class="about-img"></div>
-      <div class="about-glass-frame"></div>
-      <div class="about-tag">Visual Creator</div>
-    </div>
-  </div>
-  <div class="reveal" style="transition-delay:.15s">
-    <div class="section-label">About Me</div>
-    <h2 class="section-title" style="font-size:clamp(40px,5vw,70px)">GROUND<br>TO SKY</h2>
-    <p class="about-text">I'm a passionate visual storyteller based in Vientiane, Laos. I specialize in capturing the beauty of nature and real-life moments through detailed, cinematic visuals — from intimate ground-level portraits to sweeping aerial panoramas.</p>
-    <p class="about-text">My creative style is built on precision, depth, and intention. Every frame I craft tells a story — one that resonates, endures, and elevates your brand.</p>
-    <div class="about-highlights">
-      <div class="highlight-item glass reveal-scale" style="transition-delay:.1s">
-        <div class="highlight-num">6+</div>
-        <div class="highlight-txt">Years of Experience</div>
-      </div>
-      <div class="highlight-item glass reveal-scale" style="transition-delay:.15s">
-        <div class="highlight-num">4</div>
-        <div class="highlight-txt">Companies Work Experience</div>
-      </div>
-      <div class="highlight-item glass reveal-scale" style="transition-delay:.2s">
-        <div class="highlight-num">AI</div>
-        <div class="highlight-txt">Content Generation Specialist</div>
-      </div>
-      <div class="highlight-item glass reveal-scale" style="transition-delay:.25s">
-        <div class="highlight-num">360°</div>
-        <div class="highlight-txt">Aerial Coverage</div>
-      </div>
-      <div class="highlight-item glass reveal-scale" style="transition-delay:.3s;grid-column:1/-1">
-        <div class="highlight-num">Adobe</div>
-        <div class="highlight-txt">Suite Expert</div>
+<!-- ═══ 5. SERVICES ═══ -->
+<section class="services" id="services">
+  <h2 class="sec-title display fade">Services</h2>
+  <div class="svc-list">
+    <div class="svc fade">
+      <div class="svc-num">01</div>
+      <div>
+        <div class="svc-name">Video Creation</div>
+        <p class="svc-desc">Concept to final delivery — promotional films, documentaries, social campaigns and corporate storytelling, cut and graded to your brand's vision.</p>
       </div>
     </div>
-    <div class="gear-list">
-      <span class="gear-tag">DJI Drone</span>
-      <span class="gear-tag">Sony</span>
-      <span class="gear-tag">Premiere Pro</span>
-      <span class="gear-tag">After Effects</span>
-      <span class="gear-tag">Lightroom</span>
-      <span class="gear-tag">Photoshop</span>
+    <div class="svc fade" style="transition-delay:.1s">
+      <div class="svc-num">02</div>
+      <div>
+        <div class="svc-name">Drone Cinematography</div>
+        <p class="svc-desc">Licensed aerial operations across Laos and Southeast Asia, delivering sweeping cinematic movement no ground camera can reach.</p>
+      </div>
+    </div>
+    <div class="svc fade" style="transition-delay:.2s">
+      <div class="svc-num">03</div>
+      <div>
+        <div class="svc-name">Photography &amp; Retouching</div>
+        <p class="svc-desc">Portrait, event, product and landscape work with a sharp eye for composition and natural light — every image retouched and colour graded.</p>
+      </div>
+    </div>
+    <div class="svc fade" style="transition-delay:.3s">
+      <div class="svc-num">04</div>
+      <div>
+        <div class="svc-name">Motion Graphics</div>
+        <p class="svc-desc">Titles, lower thirds, logo animation and animated ads that give campaigns rhythm and keep a brand recognisable in motion.</p>
+      </div>
+    </div>
+    <div class="svc fade" style="transition-delay:.4s">
+      <div class="svc-num">05</div>
+      <div>
+        <div class="svc-name">AI Content Production</div>
+        <p class="svc-desc">AI-assisted image and video generation folded into a real production pipeline — faster concepts, more looks tested, the same finish quality.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- ═══ 6. PROJECTS ═══ -->
+<section class="projects" id="projects">
+  <h2 class="sec-title display hero-heading fade" style="margin-bottom:56px">Project</h2>
 
-<!-- ═══ WORK ═══ -->
-<section id="work">
-  <div class="reveal work-header">
-    <div>
-      <div class="section-label">Selected Work</div>
-      <h2 class="section-title" style="margin-bottom:0">PORTFOLIO</h2>
-    </div>
-  </div>
-
-  <div class="work-filters reveal">
-    <button class="filter-btn active" onclick="filterCats('all',this)">All</button>
-    <button class="filter-btn" onclick="filterCats('aerial',this)">Aerial</button>
-    <button class="filter-btn" onclick="filterCats('commercial',this)">Commercial</button>
-    <button class="filter-btn" onclick="filterCats('corporate',this)">Corporate</button>
-    <button class="filter-btn" onclick="filterCats('event',this)">Event</button>
-    <button class="filter-btn" onclick="filterCats('automotive',this)">Automotive</button>
-  </div>
-
-  <!-- AERIAL -->
-  <div class="work-category-block" data-cat="aerial">
-    <div class="work-cat-header open" onclick="toggleCat(this)">
-      <span class="work-cat-title">AERIAL</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">1 Project</span>
-        <span class="work-cat-arrow">›</span>
+  <div class="proj-slot">
+    <article class="proj-card" data-card="0" style="top:96px">
+      <div class="proj-head">
+        <div class="proj-num">01</div>
+        <div class="proj-meta">
+          <div class="proj-cat">Aerial Cinematography</div>
+          <div class="proj-name">Wings Over Vientiane</div>
+        </div>
+        <a class="btn-ghost" href="https://www.youtube.com/watch?v=kxUxOThMgAs" target="_blank" rel="noopener">Live Project</a>
       </div>
-    </div>
-    <div class="work-cat-body open">
-      <div class="work-grid" style="padding:2px 0">
-        <div class="work-item featured">
-          <div class="work-thumb">
-            <div style="position:relative;width:100%;height:100%;background:#000">
-              <iframe src="https://www.youtube.com/embed/kxUxOThMgAs?autoplay=0&rel=0&modestbranding=1" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe>
-            </div>
-            <div class="work-overlay" style="pointer-events:none">
-              <div class="work-cat">Aerial Cinematography</div>
-              <div class="work-name">WINGS OVER<br>VIENTIANE</div>
-              <div class="work-role">Drone Operator · Video Editor · AI Content Specialist</div>
-            </div>
-            <div class="work-num">01 — Featured</div>
-          </div>
+      <div class="proj-imgs">
+        <div class="col">
+          <img class="img-a" src="https://img.youtube.com/vi/kxUxOThMgAs/hqdefault.jpg" alt="Wings Over Vientiane still" loading="lazy">
+          <img class="img-b" src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg" alt="Aerial frame over Vientiane" loading="lazy">
+        </div>
+        <div class="col">
+          <img class="img-c" src="https://img.youtube.com/vi/kxUxOThMgAs/maxresdefault.jpg" alt="Wings Over Vientiane key frame" loading="lazy">
         </div>
       </div>
-    </div>
+    </article>
   </div>
 
-  <!-- COMMERCIAL -->
-  <div class="work-category-block" data-cat="commercial">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">COMMERCIAL</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">Coming Soon</span>
-        <span class="work-cat-arrow">›</span>
+  <div class="proj-slot">
+    <article class="proj-card" data-card="1" style="top:124px">
+      <div class="proj-head">
+        <div class="proj-num">02</div>
+        <div class="proj-meta">
+          <div class="proj-cat">Showreel</div>
+          <div class="proj-name">The Reel — 2024</div>
+        </div>
+        <a class="btn-ghost" href="https://www.youtube.com/watch?v=Ad9OG1pL5EY" target="_blank" rel="noopener">Live Project</a>
       </div>
-    </div>
-    <div class="work-cat-body">
-      <div style="padding:48px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);display:flex;align-items:center;gap:16px">
-        <span style="color:var(--c-accent);opacity:.5">✦</span> Coming Soon — Commercial projects will appear here
+      <div class="proj-imgs">
+        <div class="col">
+          <img class="img-a" src="https://img.youtube.com/vi/P-dK9DQImwQ/hqdefault.jpg" alt="Showreel frame" loading="lazy">
+          <img class="img-b" src="https://img.youtube.com/vi/79i-pOTHjaU/maxresdefault.jpg" alt="Showreel frame" loading="lazy">
+        </div>
+        <div class="col">
+          <img class="img-c" src="https://img.youtube.com/vi/Ad9OG1pL5EY/maxresdefault.jpg" alt="2024 showreel key frame" loading="lazy">
+        </div>
       </div>
-    </div>
+    </article>
   </div>
 
-  <!-- CORPORATE -->
-  <div class="work-category-block" data-cat="corporate">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">CORPORATE</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">Coming Soon</span>
-        <span class="work-cat-arrow">›</span>
+  <div class="proj-slot">
+    <article class="proj-card" data-card="2" style="top:152px">
+      <div class="proj-head">
+        <div class="proj-num">03</div>
+        <div class="proj-meta">
+          <div class="proj-cat">Client Campaigns</div>
+          <div class="proj-name">Brand &amp; Corporate Films</div>
+        </div>
+        <a class="btn-ghost" href="https://www.youtube.com/watch?v=Oeabe5qimGw" target="_blank" rel="noopener">Live Project</a>
       </div>
-    </div>
-    <div class="work-cat-body">
-      <div style="padding:48px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);display:flex;align-items:center;gap:16px">
-        <span style="color:var(--c-accent);opacity:.5">✦</span> Coming Soon — Corporate projects will appear here
+      <div class="proj-imgs">
+        <div class="col">
+          <img class="img-a" src="https://img.youtube.com/vi/Oeabe5qimGw/hqdefault.jpg" alt="Campaign frame" loading="lazy">
+          <img class="img-b" src="https://img.youtube.com/vi/P-dK9DQImwQ/maxresdefault.jpg" alt="Campaign frame" loading="lazy">
+        </div>
+        <div class="col">
+          <img class="img-c" src="https://img.youtube.com/vi/79i-pOTHjaU/maxresdefault.jpg" alt="Campaign key frame" loading="lazy">
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- EVENT -->
-  <div class="work-category-block" data-cat="event">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">EVENT</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">0 Projects</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body">
-      <div class="work-grid" style="padding:2px 0">
-        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AUTOMOTIVE -->
-  <div class="work-category-block" data-cat="automotive">
-    <div class="work-cat-header" onclick="toggleCat(this)">
-      <span class="work-cat-title">AUTOMOTIVE</span>
-      <div style="display:flex;align-items:center;gap:24px">
-        <span class="work-cat-count">0 Projects</span>
-        <span class="work-cat-arrow">›</span>
-      </div>
-    </div>
-    <div class="work-cat-body">
-      <div class="work-grid" style="padding:2px 0">
-        <div style="padding:40px 60px;font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--c-muted);grid-column:1/-1">Coming soon</div>
-      </div>
-    </div>
+    </article>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══ SHOWREEL ═══ -->
-<section id="showreel">
-  <div class="reveal">
-    <div class="section-label">Showreel</div>
-    <h2 class="section-title">THE REEL</h2>
+<!-- ═══ 7. REEL ═══ -->
+<section class="sec" id="reel">
+  <div class="reel-frame fade">
+    <div class="ratio"><iframe src="https://www.youtube.com/embed/Ad9OG1pL5EY" title="2024 Showreel" loading="lazy" allowfullscreen></iframe></div>
   </div>
-  <div class="reel-wrap reveal-scale" style="transition-delay:.2s">
-    <div class="reel-screen">
-      <iframe src="https://www.youtube.com/embed/Ad9OG1pL5EY" style="width:100%;height:100%;border:0;position:absolute;inset:0" allowfullscreen></iframe>
-    </div>
-    <p class="reel-caption">2024 Showreel — Video Creation · Aerial Cinematography · Photography</p>
-    <div class="reel-sub-grid">
-      <div class="reel-sub-item">
-        <iframe src="https://www.youtube.com/embed/P-dK9DQImwQ" style="width:100%;height:100%;border:0;position:absolute;inset:0" allowfullscreen></iframe>
-      </div>
-      <div class="reel-sub-item">
-        <iframe src="https://www.youtube.com/embed/79i-pOTHjaU" style="width:100%;height:100%;border:0;position:absolute;inset:0" allowfullscreen></iframe>
-      </div>
-      <div class="reel-sub-item">
-        <iframe src="https://www.youtube.com/embed/Oeabe5qimGw" style="width:100%;height:100%;border:0;position:absolute;inset:0" allowfullscreen></iframe>
-      </div>
-    </div>
+  <p class="reel-cap fade">2024 Showreel — video creation · aerial cinematography · photography</p>
+  <div class="reel-grid fade" style="transition-delay:.1s">
+    <div class="ratio"><iframe src="https://www.youtube.com/embed/P-dK9DQImwQ" title="Project video" loading="lazy" allowfullscreen></iframe></div>
+    <div class="ratio"><iframe src="https://www.youtube.com/embed/79i-pOTHjaU" title="Project video" loading="lazy" allowfullscreen></iframe></div>
+    <div class="ratio"><iframe src="https://www.youtube.com/embed/Oeabe5qimGw" title="Project video" loading="lazy" allowfullscreen></iframe></div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══ SERVICES ═══ -->
-<section id="services">
-  <div class="reveal">
-    <div class="section-label">What I Do</div>
-    <h2 class="section-title">SERVICES</h2>
-  </div>
-  <div class="services-grid">
-    <div class="service-item glass reveal" style="transition-delay:.05s">
-      <div class="service-num">01</div>
-      <div class="service-name">VIDEO<br>CREATION</div>
-      <p class="service-desc">From concept to final delivery — I craft engaging video content tailored to your brand's vision. Promotional films, documentaries, social campaigns, corporate storytelling.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-item glass reveal" style="transition-delay:.12s">
-      <div class="service-num">02</div>
-      <div class="service-name">DRONE<br>CINEMATOGRAPHY</div>
-      <p class="service-desc">Professional aerial operations across Laos and Southeast Asia. Licensed drone pilot delivering sweeping, cinematic aerial footage that no ground camera can replicate.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-item glass reveal" style="transition-delay:.19s">
-      <div class="service-num">03</div>
-      <div class="service-name">PHOTO &amp;<br>EDITING</div>
-      <p class="service-desc">Sharp eye for composition, natural light, and emotion. Portrait, event, product, and landscape — every image precisely retouched and color-graded to perfection.</p>
-      <div class="service-line"></div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══ EXPERIENCE ═══ -->
-<section id="experience">
-  <div class="reveal">
-    <div class="section-label">Career</div>
-    <h2 class="section-title">EXPERIENCE</h2>
-  </div>
+<!-- ═══ 8. EXPERIENCE ═══ -->
+<section class="sec" id="experience">
+  <h2 class="sec-title display hero-heading fade" style="margin-bottom:56px">Experience</h2>
   <div class="exp-grid">
-    <div class="exp-nav reveal-left" style="transition-delay:.1s">
-      <div class="exp-tab active" onclick="switchExp(0,this)">Allianz Insurance</div>
-      <div class="exp-tab" onclick="switchExp(1,this)">LDB Bank</div>
-      <div class="exp-tab" onclick="switchExp(2,this)">KB KOLAO</div>
-      <div class="exp-tab" onclick="switchExp(3,this)">Taiban Studio</div>
+    <div class="exp-tabs fade">
+      <button class="exp-tab active" onclick="switchExp(0,this)">Allianz Insurance</button>
+      <button class="exp-tab" onclick="switchExp(1,this)">LDB Bank</button>
+      <button class="exp-tab" onclick="switchExp(2,this)">KB KOLAO</button>
+      <button class="exp-tab" onclick="switchExp(3,this)">Taiban Studio</button>
     </div>
-    <div class="reveal" style="transition-delay:.2s">
+    <div class="fade" style="transition-delay:.1s">
       <div class="exp-panel active" id="ep0">
         <div class="exp-years">2024 — 2026</div>
-        <div class="exp-role">MARKETING<br>CREATOR</div>
+        <div class="exp-role">Marketing<br>Creator</div>
         <div class="exp-company">Allianz Insurance Laos</div>
         <ul class="exp-duties">
           <li>Video filming and cinematic editing for brand campaigns</li>
@@ -721,7 +585,7 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
       </div>
       <div class="exp-panel" id="ep1">
         <div class="exp-years">2023 — 2024</div>
-        <div class="exp-role">CONTENT<br>CREATOR</div>
+        <div class="exp-role">Content<br>Creator</div>
         <div class="exp-company">LDB Bank</div>
         <ul class="exp-duties">
           <li>Full video production pipeline — filming to final cut</li>
@@ -732,10 +596,10 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
       </div>
       <div class="exp-panel" id="ep2">
         <div class="exp-years">2020 — 2023</div>
-        <div class="exp-role">SENIOR<br>MARKETING</div>
+        <div class="exp-role">Senior<br>Marketing</div>
         <div class="exp-company">KB KOLAO Leasing Co.</div>
         <ul class="exp-duties">
-          <li>Designed all artwork and visual assets for brand</li>
+          <li>Designed all artwork and visual assets for the brand</li>
           <li>Produced video content for Facebook and digital channels</li>
           <li>Campaign photography for marketing materials</li>
           <li>Strategy analysis and competitive benchmarking</li>
@@ -743,151 +607,151 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
       </div>
       <div class="exp-panel" id="ep3">
         <div class="exp-years">2018 — 2022</div>
-        <div class="exp-role">VIDEO<br>CREATOR</div>
+        <div class="exp-role">Video<br>Creator</div>
         <div class="exp-company">Taiban Studio Co., Ltd</div>
         <ul class="exp-duties">
           <li>Feature film cinematography and production</li>
           <li>Video content creation for social platforms</li>
           <li>Photography and visual storytelling</li>
-          <li>Post-production and color grading</li>
+          <li>Post-production and colour grading</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══ TESTIMONIALS ═══ -->
-<section id="testimonials">
-  <div class="reveal">
-    <div class="section-label">Client Voices</div>
-    <h2 class="section-title">TESTIMONIALS</h2>
+<!-- ═══ 9. CLIENTS + TESTIMONIALS ═══ -->
+<section class="sec" id="clients">
+  <div class="eyebrow fade" style="text-align:center;margin-bottom:14px">Trusted by</div>
+  <div class="clients-strip fade" style="transition-delay:.1s">
+    <span class="client">Allianz</span>
+    <span class="client">LDB Bank</span>
+    <span class="client">KB KOLAO</span>
+    <span class="client">Taiban</span>
+    <span class="client">Windwalk</span>
+    <span class="client">Post64</span>
+    <span class="client">The Moment Wedding</span>
   </div>
-  <div class="testi-wrap reveal" style="transition-delay:.2s">
-    <div class="testi-glass glass">
-      <div class="testi-quote" id="tq">"The video content Yod delivered was exceptional — cinematic quality that made our brand campaign stand out. His eye for storytelling through visuals is unmatched in the region."</div>
-      <div class="testi-author">
-        <div class="testi-avatar" id="ta-init">A</div>
-        <div>
-          <div class="testi-name" id="ta-name">Allianz Marketing Team</div>
-          <div class="testi-role" id="ta-role">Allianz Insurance Laos</div>
-        </div>
+
+  <div class="testi fade" style="transition-delay:.15s">
+    <p class="testi-q" id="tq">"The video content Yod delivered was exceptional — cinematic quality that made our brand campaign stand out. His eye for storytelling through visuals is unmatched in the region."</p>
+    <div class="testi-author">
+      <div class="testi-avatar" id="ta-init">A</div>
+      <div style="text-align:left">
+        <div class="testi-name" id="ta-name">Allianz Marketing Team</div>
+        <div class="testi-role" id="ta-role">Allianz Insurance Laos</div>
       </div>
-      <div class="testi-dots" id="tdots">
-        <div class="dot active" onclick="switchTesti(0)"></div>
-        <div class="dot" onclick="switchTesti(1)"></div>
-        <div class="dot" onclick="switchTesti(2)"></div>
-      </div>
+    </div>
+    <div class="testi-dots">
+      <button class="dot active" aria-label="Testimonial 1" onclick="switchTesti(0)"></button>
+      <button class="dot" aria-label="Testimonial 2" onclick="switchTesti(1)"></button>
+      <button class="dot" aria-label="Testimonial 3" onclick="switchTesti(2)"></button>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══ CLIENTS ═══ -->
-<section id="clients">
-  <div class="reveal">
-    <div class="section-label">Trusted By</div>
-    <h2 class="section-title" style="font-size:clamp(36px,5vw,64px)">BRANDS &amp; CLIENTS</h2>
+<!-- ═══ 10. CTA ═══ -->
+<section class="cta" id="contact">
+  <div class="eyebrow fade" style="margin-bottom:18px">Ready to create?</div>
+  <h2 class="sec-title display hero-heading fade">Let&apos;s create</h2>
+  <p class="cta-sub fade" style="transition-delay:.1s">Available for projects, campaigns and collaborations across Southeast Asia.</p>
+  <div class="cta-actions fade" style="transition-delay:.15s">
+    <a class="btn-contact" href="tel:+8562055040203" style="display:inline-block">+856 20 5504 0203</a>
+    <button class="btn-ghost" onclick="openBooking()">Book Me</button>
   </div>
-  <div class="clients-strip reveal" style="transition-delay:.2s">
-    <div class="client-logo">ALLIANZ</div>
-    <div class="client-logo">LDB BANK</div>
-    <div class="client-logo">KB KOLAO</div>
-    <div class="client-logo">TAIBAN</div>
-    <div class="client-logo">Windwalk</div>
-    <div class="client-logo">Post64</div>
-    <div class="client-logo">The Moment Wedding</div>
+  <div class="cta-socials fade" style="transition-delay:.2s">
+    <a href="https://facebook.com/Jarnyodfpvlaos" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://tiktok.com/@yod_taiban" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/Jarnyod_taiban" target="_blank" rel="noopener">Instagram</a>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<footer>
+  <div class="nav-logo">YOD<span>.</span>TM</div>
+  <div class="footer-links">
+    <a href="#projects">Projects</a>
+    <a href="#services">Services</a>
+    <a href="#experience">Experience</a>
+    <a href="#workshop">Workshop</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">Vientiane, Laos — Visual Creator &amp; Drone Operator<br>&copy; 2026 Yod Thammavong</div>
+</footer>
 
-<!-- ═══ WORKSHOP REGISTRATION MODAL ═══ -->
-<div id="workshop-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto">
-  <div onclick="closeWorkshop()" style="position:fixed;inset:0;background:rgba(5,4,22,.9);backdrop-filter:blur(16px)"></div>
-  <div style="position:relative;z-index:1;width:100%;max-width:600px;margin:auto;background:linear-gradient(180deg,#0f0a2e,#07061a);border:1px solid rgba(139,92,246,.3);border-radius:24px;box-shadow:0 40px 120px rgba(167,139,250,.25);animation:fadeUp .4s ease;overflow:hidden;font-family:'Noto Sans Lao',sans-serif">
-    <!-- Cosmic background layers -->
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(99,102,241,.3),transparent 50%),radial-gradient(ellipse at 85% 20%,rgba(240,171,252,.18),transparent 50%),radial-gradient(ellipse at 70% 90%,rgba(96,231,255,.14),transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(167,139,250,.2),transparent 50%);pointer-events:none;z-index:0"></div>
-    <div style="position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.7),transparent),radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,.5),transparent),radial-gradient(2px 2px at 80% 20%,rgba(167,139,250,.6),transparent),radial-gradient(1px 1px at 40% 90%,rgba(255,255,255,.4),transparent),radial-gradient(1px 1px at 90% 50%,rgba(96,231,255,.5),transparent),radial-gradient(2px 2px at 15% 60%,rgba(240,171,252,.4),transparent);pointer-events:none;z-index:0;animation:twinkle 6s ease-in-out infinite"></div>
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#a78bfa,#f0abfc,transparent);z-index:2"></div>
+</main>
 
-    <button onclick="closeWorkshop()" style="position:absolute;top:16px;right:16px;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);color:#c4b5fd;font-size:16px;width:32px;height:32px;border-radius:50%;cursor:none;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:10" onmouseover="this.style.background='rgba(167,139,250,.35)'" onmouseout="this.style.background='rgba(167,139,250,.15)'">✕</button>
-
-    <div style="padding:44px 40px;position:relative;z-index:1">
+<!-- ═══ WORKSHOP MODAL ═══ -->
+<div id="workshop-modal" class="modal" role="dialog" aria-modal="true" aria-label="Workshop registration">
+  <div class="modal-veil" onclick="closeWorkshop()"></div>
+  <div class="modal-box modal-ws">
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),var(--pink),transparent);z-index:2"></div>
+    <button class="modal-close" onclick="closeWorkshop()" aria-label="Close">✕</button>
+    <div class="modal-pad">
       <div id="ws-form-wrap">
-        <!-- Cosmic hero header -->
-        <div style="text-align:center;margin-bottom:30px">
-          <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.4);border-radius:100px;font-family:'Noto Sans Lao',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:18px">
-            <span style="width:6px;height:6px;background:#f0abfc;border-radius:50%;box-shadow:0 0 10px #f0abfc;display:inline-block;animation:pulse 2s ease-in-out infinite"></span>
-            AI Workshop · Workflow Lab
-          </div>
-          <div style="font-family:'Outfit',sans-serif;font-size:clamp(28px,5vw,40px);font-weight:800;line-height:1.15;background:linear-gradient(135deg,#fff 0%,#c4b5fd 40%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(167,139,250,.5)">AI <span style="font-family:'Caveat',cursive;font-style:italic;font-weight:700;background:linear-gradient(135deg,#60e7ff 0%,#a78bfa 50%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;transform:rotate(-2deg)">Workflow Lab</span></div>
-          <div style="font-family:'Noto Sans Lao',sans-serif;font-size:clamp(15px,3vw,19px);font-weight:700;margin-top:8px;background:linear-gradient(135deg,#fff 0%,#c4b5fd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">ສຳລັບ Content Creator &amp; Editor</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:12px;letter-spacing:3px;color:#a78bfa;font-weight:600;text-transform:uppercase;margin-top:12px">Prompt · Tools · Workflow · Model</div>
+        <div style="text-align:center;margin-bottom:28px">
+          <div class="ws-badge"><i style="animation:twinkle 2s ease-in-out infinite"></i> AI Workshop · Workflow Lab</div>
+          <div class="ws-title" style="font-size:clamp(28px,5vw,40px)">AI Workflow Lab</div>
+          <div class="lao" style="font-size:clamp(15px,3vw,19px);font-weight:700;margin-top:8px;color:#e6ddff">ສຳລັບ Content Creator &amp; Editor</div>
+          <div style="font-size:12px;letter-spacing:.24em;color:var(--violet);font-weight:600;text-transform:uppercase;margin-top:12px">Prompt · Tools · Workflow · Model</div>
         </div>
 
-        <!-- Event detail strip -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px">
-          <div style="padding:14px 10px;background:rgba(20,14,56,.55);border:1px solid rgba(139,92,246,.25);border-radius:12px;text-align:center">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/date.png" alt="ວັນທີ" loading="lazy" style="width:24px;height:24px;object-fit:contain;display:block;margin:0 auto 4px">
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8479b0;margin-bottom:3px">ວັນທີ</div>
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;color:#f1ecff;line-height:1.3">ວັນເສົາ<br>08/08/2026</div>
+        <div class="ws-facts" style="max-width:none">
+          <div class="ws-fact">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/date.png" alt="" loading="lazy">
+            <div class="ws-fact-k lao">ວັນທີ</div>
+            <div class="ws-fact-v lao">ວັນເສົາ<br>08/08/2026</div>
           </div>
-          <div style="padding:14px 10px;background:rgba(20,14,56,.55);border:1px solid rgba(139,92,246,.25);border-radius:12px;text-align:center">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/time.png" alt="ເວລາ" loading="lazy" style="width:24px;height:24px;object-fit:contain;display:block;margin:0 auto 4px">
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8479b0;margin-bottom:3px">ເວລາ</div>
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;color:#f1ecff;line-height:1.3">13:30—17:00 ນ.</div>
+          <div class="ws-fact">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/time.png" alt="" loading="lazy">
+            <div class="ws-fact-k lao">ເວລາ</div>
+            <div class="ws-fact-v lao">13:30—17:00 ນ.</div>
           </div>
-          <div style="padding:14px 10px;background:rgba(20,14,56,.55);border:1px solid rgba(139,92,246,.25);border-radius:12px;text-align:center">
-            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/kaopoon.png" alt="ສະຖານທີ່" loading="lazy" style="width:29px;height:29px;object-fit:contain;display:block;margin:0 auto 4px">
-            <div style="font-family:'Noto Sans Lao',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8479b0;margin-bottom:3px">ສະຖານທີ່</div>
-            <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;font-weight:600;color:#f1ecff;line-height:1.3;text-decoration:none;display:block">Kaopoon<br>Studio</a>
+          <div class="ws-fact">
+            <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/kaopoon.png" alt="" loading="lazy" style="width:29px;height:29px">
+            <div class="ws-fact-k lao">ສະຖານທີ່</div>
+            <a class="ws-fact-v lao" href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener">Kaopoon<br>Studio</a>
           </div>
         </div>
 
-        <!-- Free Coffee Promo -->
-        <div class="coffee-promo" style="margin-bottom:28px">
-          <div class="coffee-promo-glow"></div>
+        <div class="coffee" style="max-width:none;margin-top:22px">
           <div class="coffee-icon">☕</div>
           <div style="flex:1;min-width:0">
-            <div class="coffee-title">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
-            <div class="coffee-sub">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free Coffee for the first 50 guests</div>
+            <div class="coffee-title lao">ຟຣີ! ກາເຟ 50 ຈອກທຳອິດ</div>
+            <div class="coffee-sub lao">ໃຜມາກ່ອນ ໄດ້ກ່ອນ — Free coffee for the first 50 guests</div>
           </div>
           <div class="coffee-badge">50<span>cups</span></div>
         </div>
 
-        <h2 style="font-family:'Noto Sans Lao',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">ລົງທະບຽນເຂົ້າຮ່ວມ</h2>
-        <p style="font-family:'Noto Sans Lao',sans-serif;font-size:14px;color:#b8aedb;margin-bottom:28px">ກອກຂໍ້ມູນດ້ານລຸ່ມເພື່ອຈອງບ່ອນນັ່ງ</p>
+        <h2 class="lao" style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">ລົງທະບຽນເຂົ້າຮ່ວມ</h2>
+        <p class="lao" style="font-size:14px;color:#b8aedb;margin-bottom:24px">ກອກຂໍ້ມູນດ້ານລຸ່ມເພື່ອຈອງບ່ອນນັ່ງ</p>
 
-        <div id="ws-error" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#fca5a5;padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:20px">⚠️ ມີບັນຫາໃນການສົ່ງຟອມ. ກະລຸນາລອງໃໝ່.</div>
+        <div id="ws-error" class="lao" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#fca5a5;padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:20px">ສົ່ງຟອມບໍ່ສຳເລັດ — ກະລຸນາລອງໃໝ່ ຫຼື ຕິດຕໍ່ຜ່ານ WhatsApp.</div>
 
-        <form id="ws-form" action="https://formspree.io/f/mqejqzbo" method="POST">
-          <div class="ws-row" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+        <form id="ws-form" action="https://formspree.io/f/mqejqzbo" method="POST" class="lao">
+          <div class="row2" style="margin-bottom:18px">
             <div>
-              <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ຊື່ <span style="color:#f0abfc">*</span></label>
-              <input type="text" name="firstName" placeholder="ຊື່" required style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;transition:all .25s" onfocus="this.style.borderColor='rgba(168,130,255,.85)';this.style.boxShadow='0 0 0 4px rgba(167,139,250,.15)'" onblur="this.style.borderColor='rgba(139,92,246,.25)';this.style.boxShadow='none'">
+              <label class="fld">ຊື່ <span style="color:var(--pink)">*</span></label>
+              <input class="inp" type="text" name="firstName" placeholder="ຊື່" required>
             </div>
             <div>
-              <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ນາມສະກຸນ <span style="color:#f0abfc">*</span></label>
-              <input type="text" name="lastName" placeholder="ນາມສະກຸນ" required style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;transition:all .25s" onfocus="this.style.borderColor='rgba(168,130,255,.85)';this.style.boxShadow='0 0 0 4px rgba(167,139,250,.15)'" onblur="this.style.borderColor='rgba(139,92,246,.25)';this.style.boxShadow='none'">
+              <label class="fld">ນາມສະກຸນ <span style="color:var(--pink)">*</span></label>
+              <input class="inp" type="text" name="lastName" placeholder="ນາມສະກຸນ" required>
             </div>
           </div>
 
           <div style="margin-bottom:18px">
-            <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ອີເມລ <span style="color:#f0abfc">*</span></label>
-            <input type="email" name="email" placeholder="you@example.com" required style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;transition:all .25s" onfocus="this.style.borderColor='rgba(168,130,255,.85)';this.style.boxShadow='0 0 0 4px rgba(167,139,250,.15)'" onblur="this.style.borderColor='rgba(139,92,246,.25)';this.style.boxShadow='none'">
+            <label class="fld">ອີເມລ <span style="color:var(--pink)">*</span></label>
+            <input class="inp" type="email" name="email" placeholder="you@example.com" required>
           </div>
 
-          <div class="ws-row" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+          <div class="row2" style="margin-bottom:18px">
             <div>
-              <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ເບີໂທ / WhatsApp <span style="color:#f0abfc">*</span></label>
-              <input type="tel" name="phone" placeholder="+856 20 ..." required style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;transition:all .25s" onfocus="this.style.borderColor='rgba(168,130,255,.85)';this.style.boxShadow='0 0 0 4px rgba(167,139,250,.15)'" onblur="this.style.borderColor='rgba(139,92,246,.25)';this.style.boxShadow='none'">
+              <label class="fld">ເບີໂທ / WhatsApp <span style="color:var(--pink)">*</span></label>
+              <input class="inp" type="tel" name="phone" placeholder="+856 20 ..." required>
             </div>
             <div>
-              <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ອາຍຸ</label>
-              <select name="age" style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;cursor:none">
+              <label class="fld">ອາຍຸ</label>
+              <select class="inp" name="age">
                 <option value="" style="background:#0f0a2e">— ເລືອກຊ່ວງອາຍຸ —</option>
                 <option style="background:#0f0a2e">ຕ່ຳກວ່າ 18</option>
                 <option style="background:#0f0a2e">18 – 24</option>
@@ -899,22 +763,22 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
           </div>
 
           <div style="margin-bottom:18px">
-            <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:10px">ສາຍງານ / ຕຳແໜ່ງ <span style="color:#f0abfc">*</span></label>
+            <label class="fld">ສາຍງານ / ຕຳແໜ່ງ <span style="color:var(--pink)">*</span></label>
             <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
-              <label class="ws-role"><input type="radio" name="role" value="Content Creator" required style="position:absolute;opacity:0;pointer-events:none"><span>🎬 Content Creator</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Video Editor" style="position:absolute;opacity:0;pointer-events:none"><span>✂️ Video Editor</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Graphic Designer" style="position:absolute;opacity:0;pointer-events:none"><span>🎨 Graphic Designer</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Photographer" style="position:absolute;opacity:0;pointer-events:none"><span>📷 Photographer</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Employee" style="position:absolute;opacity:0;pointer-events:none"><span>👔 Employee</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Student" style="position:absolute;opacity:0;pointer-events:none"><span>🎓 Student</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Marketer" style="position:absolute;opacity:0;pointer-events:none"><span>📈 Marketer</span></label>
-              <label class="ws-role"><input type="radio" name="role" value="Other" style="position:absolute;opacity:0;pointer-events:none"><span>✨ Other</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Content Creator" required style="position:absolute;opacity:0"><span>🎬 Content Creator</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Video Editor" style="position:absolute;opacity:0"><span>✂️ Video Editor</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Graphic Designer" style="position:absolute;opacity:0"><span>🎨 Graphic Designer</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Photographer" style="position:absolute;opacity:0"><span>📷 Photographer</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Employee" style="position:absolute;opacity:0"><span>👔 Employee</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Student" style="position:absolute;opacity:0"><span>🎓 Student</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Marketer" style="position:absolute;opacity:0"><span>📈 Marketer</span></label>
+              <label class="ws-role"><input type="radio" name="role" value="Other" style="position:absolute;opacity:0"><span>✨ Other</span></label>
             </div>
           </div>
 
           <div style="margin-bottom:18px">
-            <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ປະສົບການກ່ຽວກັບເຄື່ອງມື AI </label>
-            <select name="experience" style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;cursor:none">
+            <label class="fld">ປະສົບການກ່ຽວກັບເຄື່ອງມື AI</label>
+            <select class="inp" name="experience">
               <option value="" style="background:#0f0a2e">— ເລືອກລະດັບ —</option>
               <option style="background:#0f0a2e">ມືໃໝ່ — ຍັງບໍ່ເຄີຍໃຊ້</option>
               <option style="background:#0f0a2e">ເລີ່ມຕົ້ນ — ໃຊ້ແຊັດຖາມທົ່ວໄປ</option>
@@ -924,212 +788,231 @@ footer{padding:48px 60px 36px;border-top:1px solid var(--c-border);display:grid;
           </div>
 
           <div style="margin-bottom:24px">
-            <label style="display:block;font-family:'Noto Sans Lao',sans-serif;font-size:13px;font-weight:600;color:#b8aedb;margin-bottom:8px">ສິ່ງທີ່ຄາດຫວັງຈາກ Workshop</label>
-            <textarea name="expectation" placeholder="ທ່ານຢາກໄດ້ຮັບຫຍັງຈາກ Workshop ຄັ້ງນີ້..." style="width:100%;padding:13px 15px;background:rgba(12,8,36,.65);border:1px solid rgba(139,92,246,.25);border-radius:12px;color:#f1ecff;font-family:'Noto Sans Lao',sans-serif;font-size:14px;outline:none;resize:vertical;min-height:80px;transition:all .25s" onfocus="this.style.borderColor='rgba(168,130,255,.85)';this.style.boxShadow='0 0 0 4px rgba(167,139,250,.15)'" onblur="this.style.borderColor='rgba(139,92,246,.25)';this.style.boxShadow='none'"></textarea>
+            <label class="fld">ສິ່ງທີ່ຄາດຫວັງຈາກ Workshop</label>
+            <textarea class="inp" name="expectation" rows="3" placeholder="ທ່ານຢາກໄດ້ຮັບຫຍັງຈາກ Workshop ຄັ້ງນີ້..."></textarea>
           </div>
 
-          <!-- QR Payment / Donation -->
-          <div style="margin:28px 0 24px;padding:24px;background:rgba(12,8,36,.5);border:1px solid rgba(167,139,250,.3);border-radius:18px;text-align:center;position:relative;overflow:hidden">
-            <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#60e7ff,#a78bfa,transparent)"></div>
-            <p style="font-family:'Noto Sans Lao',sans-serif;font-size:15px;font-weight:700;color:#f1ecff;margin-bottom:4px">☕ ບໍລິຈາກ ຄ່າກາເຟ</p>
-            <p style="font-family:'Noto Sans Lao',sans-serif;font-size:13px;color:#8479b0;margin-bottom:18px">ສະແກນ QR — ເລີ່ມຕົ້ນ <span style="color:#60e7ff;font-weight:700">1 ກີບ</span></p>
-            <!-- QR code (QR Bank.jpeg uploaded on GitHub) -->
+          <div style="margin:26px 0 24px;padding:24px;background:rgba(12,8,36,.5);border:1px solid rgba(167,139,250,.3);border-radius:18px;text-align:center;position:relative;overflow:hidden">
+            <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent)"></div>
+            <p class="lao" style="font-size:15px;font-weight:700;color:#f1ecff;margin-bottom:4px">☕ ບໍລິຈາກ ຄ່າກາເຟ</p>
+            <p class="lao" style="font-size:13px;color:#8479b0;margin-bottom:18px">ສະແກນ QR — ເລີ່ມຕົ້ນ <span style="color:var(--cyan);font-weight:700">1 ກີບ</span></p>
             <div style="display:inline-block;padding:12px;background:#fff;border-radius:16px;box-shadow:0 0 40px rgba(96,231,255,.25);margin-bottom:16px">
-              <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/QR Bank.jpg"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-                   style="display:block;width:180px;height:180px;border-radius:8px;object-fit:cover" alt="BCEL QR">
-              <div style="display:none;width:180px;height:180px;border-radius:8px;background:#f0f0f0;flex-direction:column;align-items:center;justify-content:center;gap:8px">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 20h3"/></svg>
-                <span style="color:#a78bfa;font-weight:600;font-family:'Noto Sans Lao',sans-serif;font-size:11px;text-align:center">QR Bank</span>
-              </div>
+              <img src="https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/QR Bank.jpg" alt="BCEL QR" style="width:180px;height:180px;border-radius:8px;object-fit:cover">
             </div>
-            <p style="font-family:'Noto Sans Lao',sans-serif;font-size:12px;color:#b8aedb;margin-bottom:8px">🏦 BCEL — ທະນາຄານການຄ້າຕ່າງປະເທດລາວ</p>
+            <p class="lao" style="font-size:12px;color:#b8aedb;margin-bottom:8px">🏦 BCEL — ທະນາຄານການຄ້າຕ່າງປະເທດລາວ</p>
             <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:12px">
-              <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#f1ecff">YOD THAMMAVONG Mr</span>
-              <span id="ws-acc" title="ກົດເພື່ອກ໋ອບປີ້ເລກບັນຊີ" style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#60e7ff;cursor:none;letter-spacing:1px">160120001279164001</span>
+              <span style="font-size:13px;font-weight:600;color:#f1ecff">YOD THAMMAVONG Mr</span>
+              <button type="button" id="ws-acc" title="ກົດເພື່ອກ໋ອບປີ້ເລກບັນຊີ" style="background:none;border:none;font-size:15px;font-weight:700;color:var(--cyan);cursor:pointer;letter-spacing:.06em">160120001279164001</button>
             </div>
-            <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(96,231,255,.1);border:1px solid rgba(96,231,255,.3);border-radius:100px;font-family:'Noto Sans Lao',sans-serif;font-size:12px;font-weight:600;color:#60e7ff;margin-bottom:12px">
-              <span>⚡</span> ເລີ່ມຕົ້ນ 1 ກີບ
-            </div>
-            <p style="font-family:'Noto Sans Lao',sans-serif;font-size:11px;color:#8479b0;line-height:1.6">ຈຳນວນບໍລິຈາກແມ່ນຕາມໃຈ ເພື່ອຊ່ວຍຄ່າກາເຟ ແລະ ສະຖານທີ່<br>ແລ້ວທາງທີມຈະຕິດຕໍ່ກັບ</p>
+            <p class="lao" style="font-size:11px;color:#8479b0;line-height:1.6">ຈຳນວນບໍລິຈາກແມ່ນຕາມໃຈ ເພື່ອຊ່ວຍຄ່າກາເຟ ແລະ ສະຖານທີ່<br>ແລ້ວທາງທີມຈະຕິດຕໍ່ກັບ</p>
           </div>
 
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" name="_subject" value="🎬 ລົງທະບຽນໃໝ່ — AI Workflow Lab">
 
-          <button type="submit" id="ws-submit" style="width:100%;padding:17px;background:linear-gradient(135deg,#6366f1 0%,#a78bfa 50%,#f0abfc 100%);background-size:200% 200%;color:#fff;border:none;border-radius:14px;font-family:'Noto Sans Lao',sans-serif;font-size:16px;font-weight:700;letter-spacing:.5px;cursor:none;transition:all .3s;box-shadow:0 10px 30px -5px rgba(99,102,241,.5);display:flex;align-items:center;justify-content:center;gap:10px" onmouseover="this.style.transform='translateY(-2px)';this.style.backgroundPosition='100% 100%'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundPosition='0% 0%'">
+          <button type="submit" id="ws-submit" class="btn-ws lao" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px">
             <span>ຢືນຢັນການລົງທະບຽນ</span><span>→</span>
           </button>
-
-          <p style="margin-top:20px;text-align:center;font-family:'Noto Sans Lao',sans-serif;font-size:12px;color:#8479b0">ຈັດໂດຍ <span style="color:#f0abfc"> JARNYOD TAIBAN </span> · Kaopoon Studio</p>
+          <p class="lao" style="margin-top:20px;text-align:center;font-size:12px;color:#8479b0">ຈັດໂດຍ <span style="color:var(--pink)">JARNYOD TAIBAN</span> · Kaopoon Studio</p>
         </form>
       </div>
 
-      <!-- Success -->
-      <div id="ws-success" style="display:none;text-align:center;padding:40px 20px">
-        <div style="width:72px;height:72px;margin:0 auto 24px;background:linear-gradient(135deg,#6366f1,#f0abfc);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(167,139,250,.6);font-size:32px;color:#fff">✓</div>
-        <h2 style="font-family:'Noto Sans Lao',sans-serif;font-size:26px;font-weight:700;margin-bottom:12px;background:linear-gradient(135deg,#fff,#f0abfc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">ລົງທະບຽນສຳເລັດ! 🎉</h2>
-        <p style="font-family:'Noto Sans Lao',sans-serif;color:#b8aedb;font-size:15px;line-height:1.7;max-width:400px;margin:0 auto 20px">ຂອບໃຈທີ່ລົງທະບຽນເຂົ້າຮ່ວມ Workshop. ພວກເຮົາໄດ້ຮັບຂໍ້ມູນຂອງທ່ານແລ້ວ ແລະ ຈະຕິດຕໍ່ກັບຫາທ່ານໄວໆນີ້.</p>
-        <p style="font-family:'Noto Sans Lao',sans-serif;font-size:13px;color:#8479b0">ແລ້ວພົບກັນວັນເສົາ 08/08/2026 ທີ່ <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="color:#a78bfa">Kaopoon Studio</a></p>
-        <button onclick="closeWorkshop()" style="margin-top:32px;font-family:'Noto Sans Lao',sans-serif;font-size:13px;padding:12px 32px;border:1px solid rgba(167,139,250,.3);color:#c4b5fd;background:transparent;border-radius:10px;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='#a78bfa';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(167,139,250,.3)';this.style.color='#c4b5fd'">ປິດ · Close</button>
+      <div id="ws-success" style="display:none;text-align:center;padding:40px 10px">
+        <div style="width:72px;height:72px;margin:0 auto 24px;background:linear-gradient(135deg,var(--indigo),var(--pink));border-radius:50%;display:grid;place-items:center;box-shadow:0 0 60px rgba(167,139,250,.6);font-size:32px;color:#fff">✓</div>
+        <h2 class="lao" style="font-size:26px;font-weight:700;margin-bottom:12px;color:#fff">ລົງທະບຽນສຳເລັດ! 🎉</h2>
+        <p class="lao" style="color:#b8aedb;font-size:15px;line-height:1.7;max-width:400px;margin:0 auto 20px">ຂອບໃຈທີ່ລົງທະບຽນເຂົ້າຮ່ວມ Workshop. ພວກເຮົາໄດ້ຮັບຂໍ້ມູນຂອງທ່ານແລ້ວ ແລະ ຈະຕິດຕໍ່ກັບຫາທ່ານໄວໆນີ້.</p>
+        <p class="lao" style="font-size:13px;color:#8479b0">ແລ້ວພົບກັນທີ່ <a href="https://maps.app.goo.gl/xLWbHD6DGxntXeXM8" target="_blank" rel="noopener" style="color:var(--violet)">Kaopoon Studio</a></p>
+        <button class="btn-ghost lao" style="margin-top:28px" onclick="closeWorkshop()">ປິດ · Close</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ CTA ═══ -->
-<section id="cta">
-  <div class="cta-orb"></div>
-  <div class="reveal">
-    <div class="section-label" style="justify-content:center">Ready to Create?</div>
-    <h2 class="cta-title">LET'S<br>CREATE</h2>
-    <p class="cta-sub">Available for projects, campaigns, and collaborations across Southeast Asia</p>
-    <div class="cta-actions">
-      <a href="tel:+8562055040203" class="btn-primary" style="text-decoration:none;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:16px 36px;background:var(--c-accent);color:var(--c-bg);display:inline-block">+856 20 5504 0203</a>
-      <button class="btn-ghost" onclick="openBooking()">Book Me</button>
-    </div>
-    <div class="cta-socials">
-      <a href="https://facebook.com/Jarnyodfpvlaos" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://tiktok.com/@yod_taiban" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://instagram.com/Jarnyod_taiban" target="_blank" rel="noopener">Instagram</a>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ BOOKING MODAL ═══ -->
-<div id="booking-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px">
-  <div onclick="closeBooking()" style="position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(16px)"></div>
-  <div class="glass-dark" style="position:relative;z-index:1;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:56px 44px;animation:fadeUp .4s ease">
-    <button onclick="closeBooking()" style="position:absolute;top:20px;right:20px;background:transparent;border:none;color:rgba(240,237,230,.35);font-size:22px;cursor:none;transition:color .2s;line-height:1" onmouseover="this.style.color='#e8c87a'" onmouseout="this.style.color='rgba(240,237,230,.35)'">✕</button>
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#e8c87a;margin-bottom:14px">New Project</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:50px;letter-spacing:2px;line-height:.93;margin-bottom:8px">BOOK ME</h2>
-    <p style="font-size:15px;color:rgba(240,237,230,.45);font-family:'Cormorant Garamond',serif;margin-bottom:44px;font-weight:300">Fill in the details below and I'll get back to you within 24 hours.</p>
-    <div id="booking-form">
-      <div style="margin-bottom:20px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Your Name *</label><input id="f-name" type="text" placeholder="e.g. Somchai Phongsavath" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></div>
-      <div style="margin-bottom:20px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Email Address *</label><input id="f-email" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></div>
-      <div style="margin-bottom:20px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Phone Number</label><input id="f-phone" type="tel" placeholder="+856 20 XXXX XXXX" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></div>
-      <div style="margin-bottom:20px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Service Needed *</label><select id="f-service" style="width:100%;background:rgba(4,6,10,.8);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"><option value="" disabled selected>Select a service...</option><option value="Video Creation">Video Creation</option><option value="Drone Cinematography">Drone Cinematography</option><option value="Photography & Editing">Photography &amp; Editing</option><option value="Commercial Campaign">Commercial Campaign</option><option value="Corporate Content">Corporate Content</option><option value="Event Coverage">Event Coverage</option><option value="Other">Other / Not Sure Yet</option></select></div>
-      <div style="margin-bottom:20px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Estimated Budget</label><select id="f-budget" style="width:100%;background:rgba(4,6,10,.8);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;cursor:none;appearance:none" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"><option value="" disabled selected>Select budget range...</option><option value="Under $500">Under $500</option><option value="$500 – $1,500">$500 – $1,500</option><option value="$1,500 – $5,000">$1,500 – $5,000</option><option value="$5,000+">$5,000+</option><option value="Let's discuss">Let's discuss</option></select></div>
-      <div style="margin-bottom:36px"><label style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.45);display:block;margin-bottom:10px">Project Details *</label><textarea id="f-message" rows="5" placeholder="Tell me about your project — what do you need, when, and where?" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:13px 16px;color:#f0ede6;font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border .2s;resize:vertical" onfocus="this.style.borderColor='#e8c87a'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></textarea></div>
-      <div id="f-error" style="display:none;font-family:'DM Mono',monospace;font-size:11px;color:#e87a7a;letter-spacing:1px;margin-bottom:16px"></div>
-      <button id="f-submit" onclick="submitBooking()" style="width:100%;background:#e8c87a;border:none;padding:17px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#04060a;cursor:none;transition:all .3s;font-weight:500;position:relative;overflow:hidden" onmouseover="this.style.background='#f0ede6'" onmouseout="this.style.background='#e8c87a'">Send Booking Request</button>
-      <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(240,237,230,.2);text-align:center;margin-top:16px">I'll reply to your email within 24 hours</p>
-    </div>
-    <div id="booking-success" style="display:none;text-align:center;padding:40px 0">
-      <div style="font-size:48px;margin-bottom:20px;color:#e8c87a">✓</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:#e8c87a;margin-bottom:14px">REQUEST SENT!</h3>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(240,237,230,.55);line-height:1.7">Thank you! I'll review your project and<br>get back to you within 24 hours.</p>
-      <button onclick="closeBooking()" style="margin-top:36px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:13px 36px;border:1px solid rgba(240,237,230,.15);color:rgba(240,237,230,.4);background:transparent;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='#e8c87a';this.style.color='#e8c87a'" onmouseout="this.style.borderColor='rgba(240,237,230,.15)';this.style.color='rgba(240,237,230,.4)'">Close</button>
+<div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-label="Book a project">
+  <div class="modal-veil" onclick="closeBooking()"></div>
+  <div class="modal-box modal-book">
+    <button class="modal-close" onclick="closeBooking()" aria-label="Close" style="background:rgba(215,226,234,.1);border-color:rgba(215,226,234,.2);color:var(--fg)">✕</button>
+    <div class="modal-pad">
+      <div id="booking-form">
+        <div class="eyebrow" style="margin-bottom:12px">New project</div>
+        <h2 class="display" style="font-size:44px;margin-bottom:8px">Book me</h2>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:32px">Tell me what you need and I'll reply within 24 hours.</p>
+
+        <div style="margin-bottom:18px">
+          <label class="fld">Your name *</label>
+          <input class="inp" id="f-name" type="text" placeholder="e.g. Somchai Phongsavath">
+        </div>
+        <div style="margin-bottom:18px">
+          <label class="fld">Email address *</label>
+          <input class="inp" id="f-email" type="email" placeholder="your@email.com">
+        </div>
+        <div style="margin-bottom:18px">
+          <label class="fld">Phone number</label>
+          <input class="inp" id="f-phone" type="tel" placeholder="+856 20 XXXX XXXX">
+        </div>
+        <div style="margin-bottom:18px">
+          <label class="fld">Service needed *</label>
+          <select class="inp" id="f-service">
+            <option value="" disabled selected style="background:#0C0C0C">Select a service…</option>
+            <option style="background:#0C0C0C">Video Creation</option>
+            <option style="background:#0C0C0C">Drone Cinematography</option>
+            <option style="background:#0C0C0C">Photography &amp; Retouching</option>
+            <option style="background:#0C0C0C">Motion Graphics</option>
+            <option style="background:#0C0C0C">AI Content Production</option>
+            <option style="background:#0C0C0C">Event Coverage</option>
+            <option style="background:#0C0C0C">Other / Not sure yet</option>
+          </select>
+        </div>
+        <div style="margin-bottom:18px">
+          <label class="fld">Estimated budget</label>
+          <select class="inp" id="f-budget">
+            <option value="" disabled selected style="background:#0C0C0C">Select budget range…</option>
+            <option style="background:#0C0C0C">Under $500</option>
+            <option style="background:#0C0C0C">$500 – $1,500</option>
+            <option style="background:#0C0C0C">$1,500 – $5,000</option>
+            <option style="background:#0C0C0C">$5,000+</option>
+            <option style="background:#0C0C0C">Let's discuss</option>
+          </select>
+        </div>
+        <div style="margin-bottom:28px">
+          <label class="fld">Project details *</label>
+          <textarea class="inp" id="f-message" rows="5" placeholder="What do you need, when, and where?"></textarea>
+        </div>
+        <div id="f-error" style="display:none;font-size:12px;color:#e87a7a;margin-bottom:16px"></div>
+        <button class="btn-contact" id="f-submit" style="width:100%" onclick="submitBooking()">Send booking request</button>
+        <p style="font-size:11px;color:rgba(215,226,234,.3);text-align:center;margin-top:16px">I reply to every request within 24 hours</p>
+      </div>
+      <div id="booking-success" style="display:none;text-align:center;padding:40px 0">
+        <div style="font-size:44px;margin-bottom:16px;color:var(--fg)">✓</div>
+        <h3 class="display" style="font-size:38px;margin-bottom:12px">Request sent</h3>
+        <p style="font-size:15px;color:var(--muted);line-height:1.7">Thanks — I'll review your project and get back to you within 24 hours.</p>
+        <button class="btn-ghost" style="margin-top:28px" onclick="closeBooking()">Close</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="footer-brand">YOD<span>.</span>TM</div>
-  <div class="footer-links">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#experience">Experience</a>
-    <a href="#workshop">Workshop</a>
-    <a href="#cta">Contact</a>
-  </div>
-  <div class="footer-copy">Vientiane, Laos — Visual Creator &amp; Drone Operator<br>&copy; 2025 Yod Thammavong</div>
-</footer>
-
 <script>
-/* ── CURSOR ── */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-const curGlass = document.getElementById('cursor-glass');
-let mx=0,my=0,rx=0,ry=0,gx=0,gy=0;
-let rafCur=null;
+/* ═══ FADE-IN ═══ */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0,rootMargin:'50px'});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+// hero elements animate on load
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.hero .fade').forEach(el=>el.classList.add('in'));
+  const port=document.querySelector('.hero-portrait');
+  if(port) port.classList.add('in');
+});
 
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  if(!rafCur){rafCur=requestAnimationFrame(()=>{
-    cur.style.transform=`translate3d(${mx-6}px,${my-6}px,0)`;
-    rafCur=null;
-  });}
-},{passive:true});
+/* ═══ MARQUEE TILES ═══ */
+const shots=[
+  'https://img.youtube.com/vi/kxUxOThMgAs/maxresdefault.jpg',
+  'https://raw.githubusercontent.com/JarnGit/jarnyod-portfolio/main/DJI_20260209201222_0055_D_YOD.jpg',
+  'https://img.youtube.com/vi/Ad9OG1pL5EY/maxresdefault.jpg',
+  'https://img.youtube.com/vi/P-dK9DQImwQ/maxresdefault.jpg',
+  'https://img.youtube.com/vi/79i-pOTHjaU/maxresdefault.jpg',
+  'https://img.youtube.com/vi/Oeabe5qimGw/maxresdefault.jpg'
+];
+function fillRow(el,list){
+  el.innerHTML=[...list,...list,...list].map(src=>
+    `<div class="tile"><img src="${src}" alt="" loading="lazy" decoding="async"></div>`).join('');
+}
+const rowA=document.getElementById('row-1'), rowB=document.getElementById('row-2');
+fillRow(rowA,shots.slice(0,3));
+fillRow(rowB,shots.slice(3));
 
-(function animRing(){
-  rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
-  gx+=(mx-gx)*.07;gy+=(my-gy)*.07;
-  ring.style.transform=`translate3d(${Math.round(rx)-20}px,${Math.round(ry)-20}px,0)`;
-  curGlass.style.transform=`translate3d(${Math.round(gx)-40}px,${Math.round(gy)-40}px,0)`;
-  requestAnimationFrame(animRing);
+/* ═══ SCROLL ENGINE (single rAF) ═══ */
+const bar=document.getElementById('progress-bar');
+const nav=document.getElementById('main-nav');
+const marquee=document.getElementById('marquee');
+const aboutCopy=document.getElementById('about-copy');
+const cards=[...document.querySelectorAll('.proj-card')];
+const totalCards=cards.length;
+
+/* split the about paragraph into characters for the scroll reveal */
+const chars=[];
+(function splitCopy(){
+  const text=aboutCopy.textContent.trim();
+  aboutCopy.textContent='';
+  for(const ch of text){
+    const s=document.createElement('span');
+    s.textContent=ch;
+    s.style.opacity='0.2';
+    aboutCopy.appendChild(s);
+    chars.push(s);
+  }
 })();
 
-document.body.addEventListener('mouseover',e=>{
-  if(e.target.closest('a,button,[onclick],.work-item,.service-item,.highlight-item,.client-logo')){
-    cur.style.width='18px';cur.style.height='18px';
-    ring.style.width='52px';ring.style.height='52px';ring.style.opacity='0.8';ring.style.borderColor='rgba(232,200,122,.8)';
-    curGlass.style.opacity='1';
-  }
-},{passive:true});
-document.body.addEventListener('mouseout',e=>{
-  if(e.target.closest('a,button,[onclick],.work-item,.service-item,.highlight-item,.client-logo')){
-    cur.style.width='12px';cur.style.height='12px';
-    ring.style.width='40px';ring.style.height='40px';ring.style.opacity='0.5';ring.style.borderColor='rgba(232,200,122,.5)';
-    curGlass.style.opacity='0';
-  }
-},{passive:true});
+let ticking=false;
+function frame(){
+  ticking=false;
+  const y=window.scrollY, vh=window.innerHeight;
 
-/* ── ALL SCROLL LOGIC — single RAF-throttled handler ── */
-const heroBg=document.getElementById('hero-bg');
-const heroCard=document.getElementById('hero-card');
-const nav=document.getElementById('main-nav');
-const progressBar=document.getElementById('progress-bar');
-const docEl=document.documentElement;
-let scrollRAF=null;
-let lastScrollY=0;
+  /* progress bar */
+  bar.style.width=(y/(document.documentElement.scrollHeight-vh)*100)+'%';
 
-function onScroll(){
-  const y=window.scrollY;
-  lastScrollY=y;
-  scrollRAF=null;
-
-  // Progress bar
-  const h=docEl.scrollHeight-window.innerHeight;
-  progressBar.style.width=(y/h*100)+'%';
-
-  // Hero parallax — only when hero is visible
-  if(y<window.innerHeight){
-    heroBg.style.transform=`translate3d(0,${y*0.28}px,0) scale(1.05)`;
-    if(heroCard) heroCard.style.transform=`translate3d(0,calc(-50% + ${y*0.12}px),0)`;
-  }
-
-  // Nav glass
+  /* nav */
   nav.classList.toggle('scrolled',y>60);
-}
 
-window.addEventListener('scroll',()=>{
-  if(!scrollRAF) scrollRAF=requestAnimationFrame(onScroll);
-},{passive:true});
+  /* marquee — scroll-linked horizontal drift */
+  const mTop=marquee.offsetTop;
+  if(y>mTop-vh*1.4 && y<mTop+marquee.offsetHeight+vh){
+    const off=(y-mTop+vh)*0.3-200;
+    rowA.style.transform=`translateX(${off}px)`;
+    rowB.style.transform=`translateX(${-off}px)`;
+  }
 
-/* ── SCROLL REVEAL ── */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el=>obs.observe(el));
-
-/* ── PORTFOLIO ACCORDION ── */
-function toggleCat(header){
-  const body=header.nextElementSibling;
-  const isOpen=body.classList.contains('open');
-  body.classList.toggle('open',!isOpen);
-  header.classList.toggle('open',!isOpen);
-}
-function filterCats(cat,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.work-category-block').forEach(block=>{
-    block.style.display=(cat==='all'||block.getAttribute('data-cat')===cat)?'block':'none';
+  /* about copy — character reveal (start 0.8 → end 0.2) */
+  const r=aboutCopy.getBoundingClientRect();
+  const start=vh*0.8, end=vh*0.2;
+  const p=Math.min(1,Math.max(0,(start-r.top)/((start-end)+r.height)));
+  const n=chars.length;
+  chars.forEach((s,i)=>{
+    const cp=Math.min(1,Math.max(0,(p*n-i)));
+    s.style.opacity=(0.2+cp*0.8).toFixed(3);
   });
-}
 
-/* ── EXPERIENCE TABS ── */
+  /* project cards — stack + scale down */
+  if(window.innerWidth>=1024){
+    cards.forEach((card,i)=>{
+      const slot=card.parentElement.getBoundingClientRect();
+      const target=1-(totalCards-1-i)*0.03;
+      const prog=Math.min(1,Math.max(0,1-slot.top/vh));
+      card.style.transform=`scale(${(1-(1-target)*prog).toFixed(4)})`;
+    });
+  }else{
+    cards.forEach(c=>c.style.transform='');
+  }
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame);}},{passive:true});
+addEventListener('resize',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame);}},{passive:true});
+frame();
+
+/* ═══ MAGNET (hero portrait follows the cursor) ═══ */
+(function magnet(){
+  const el=document.querySelector('.hero-portrait');
+  if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('(hover: none)').matches)return;
+  const PAD=150, STRENGTH=3;
+  let active=false;
+  el.style.willChange='transform';
+  addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const inside=Math.abs(e.clientX-cx)<r.width/2+PAD && Math.abs(e.clientY-cy)<r.height/2+PAD;
+    if(inside){
+      if(!active){el.style.transition='transform .3s ease-out';active=true;}
+      el.style.transform=`translateX(-50%) translate3d(${(e.clientX-cx)/STRENGTH}px,${(e.clientY-cy)/STRENGTH}px,0)`;
+    }else if(active){
+      el.style.transition='transform .6s ease-in-out';
+      el.style.transform='translateX(-50%)';
+      active=false;
+    }
+  },{passive:true});
+})();
+
+/* ═══ EXPERIENCE TABS ═══ */
 function switchExp(i,tab){
   document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.exp-tab').forEach(t=>t.classList.remove('active'));
@@ -1137,7 +1020,7 @@ function switchExp(i,tab){
   tab.classList.add('active');
 }
 
-/* ── TESTIMONIALS ── */
+/* ═══ TESTIMONIALS ═══ */
 const testis=[
   {q:'"The video content Yod delivered was exceptional — cinematic quality that made our brand campaign stand out. His eye for storytelling through visuals is unmatched in the region."',name:'Allianz Marketing Team',role:'Allianz Insurance Laos',init:'A'},
   {q:'"Yod produced outstanding content for our bank — professional, creative, and always on-brief. The quality of his drone footage elevated our campaign to a whole new level."',name:'LDB Bank Creative',role:'LDB Bank Laos',init:'L'},
@@ -1157,14 +1040,10 @@ function switchTesti(i){
     document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
   },300);
 }
-document.getElementById('tq').style.transition='opacity .35s';
-setInterval(()=>switchTesti((ct+1)%3),5500);
+setInterval(()=>switchTesti((ct+1)%testis.length),6000);
 
-/* ── BOOKING MODAL ── */
-function openBooking(){
-  document.getElementById('booking-modal').style.display='flex';
-  document.body.style.overflow='hidden';
-}
+/* ═══ MODALS ═══ */
+function openBooking(){document.getElementById('booking-modal').style.display='flex';document.body.style.overflow='hidden';}
 function closeBooking(){
   document.getElementById('booking-modal').style.display='none';
   document.body.style.overflow='';
@@ -1175,74 +1054,57 @@ function closeBooking(){
     document.getElementById('f-service').selectedIndex=0;
     document.getElementById('f-budget').selectedIndex=0;
     document.getElementById('f-error').style.display='none';
-    document.getElementById('f-submit').textContent='Send Booking Request';
-    document.getElementById('f-submit').disabled=false;
+    const b=document.getElementById('f-submit');b.textContent='Send booking request';b.disabled=false;
   },300);
 }
-async function submitBooking(){
-  const name=document.getElementById('f-name').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  const phone=document.getElementById('f-phone').value.trim();
-  const service=document.getElementById('f-service').value;
-  const budget=document.getElementById('f-budget').value;
-  const message=document.getElementById('f-message').value.trim();
-  const errEl=document.getElementById('f-error');
-  const btn=document.getElementById('f-submit');
-  if(!name||!email||!service||!message){errEl.textContent='⚠ Please fill in all required fields marked with *';errEl.style.display='block';return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='⚠ Please enter a valid email address';errEl.style.display='block';return;}
-  errEl.style.display='none';btn.textContent='Sending...';btn.disabled=true;
-  try{
-    const res=await fetch('https://formspree.io/f/mzdyqawy',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name,email,phone:phone||'Not provided',service,budget:budget||'Not specified',message})});
-    if(res.ok){document.getElementById('booking-form').style.display='none';document.getElementById('booking-success').style.display='block';}
-    else throw new Error();
-  }catch(e){errEl.textContent='⚠ Something went wrong. Please try again or contact me directly.';errEl.style.display='block';btn.textContent='Send Booking Request';btn.disabled=false;}
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeBooking();closeWorkshop();}});
+function openWorkshop(){document.getElementById('workshop-modal').style.display='flex';document.body.style.overflow='hidden';}
+function closeWorkshop(){document.getElementById('workshop-modal').style.display='none';document.body.style.overflow='';}
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeBooking();closeWorkshop();}});
 
-/* ── WORKSHOP MODAL ── */
-function openWorkshop(){
-  document.getElementById('workshop-modal').style.display='flex';
-  document.body.style.overflow='hidden';
-}
-function closeWorkshop(){
-  document.getElementById('workshop-modal').style.display='none';
-  document.body.style.overflow='';
-}
-(function(){
-  const wsForm=document.getElementById('ws-form');
-  if(!wsForm) return;
-  // Click-to-copy account number
-  const acc=document.getElementById('ws-acc');
-  if(acc){
-    acc.addEventListener('click',()=>{
-      navigator.clipboard.writeText(acc.textContent.trim()).then(()=>{
-        const orig=acc.textContent;
-        acc.textContent='✓ ສຳເນົາແລ້ວ!';
-        setTimeout(()=>acc.textContent=orig,1500);
-      }).catch(()=>{});
-    });
+async function submitBooking(){
+  const g=id=>document.getElementById(id).value.trim();
+  const name=g('f-name'),email=g('f-email'),phone=g('f-phone'),message=g('f-message');
+  const service=document.getElementById('f-service').value,budget=document.getElementById('f-budget').value;
+  const errEl=document.getElementById('f-error'),btn=document.getElementById('f-submit');
+  if(!name||!email||!service||!message){errEl.textContent='Fill in the fields marked with * to send the request.';errEl.style.display='block';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='Enter a valid email address so I can reply.';errEl.style.display='block';return;}
+  errEl.style.display='none';btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch('https://formspree.io/f/mzdyqawy',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,phone:phone||'Not provided',service,budget:budget||'Not specified',message})});
+    if(!res.ok)throw new Error();
+    document.getElementById('booking-form').style.display='none';
+    document.getElementById('booking-success').style.display='block';
+  }catch(e){
+    errEl.textContent='The request did not send. Try again, or message me on WhatsApp at +856 20 5504 0203.';
+    errEl.style.display='block';btn.textContent='Send booking request';btn.disabled=false;
   }
-  wsForm.addEventListener('submit',async(e)=>{
+}
+
+/* ═══ WORKSHOP FORM ═══ */
+(function(){
+  const f=document.getElementById('ws-form');
+  if(!f)return;
+  const acc=document.getElementById('ws-acc');
+  if(acc)acc.addEventListener('click',()=>{
+    navigator.clipboard.writeText(acc.textContent.trim()).then(()=>{
+      const o=acc.textContent;acc.textContent='✓ ສຳເນົາແລ້ວ!';setTimeout(()=>acc.textContent=o,1500);
+    }).catch(()=>{});
+  });
+  f.addEventListener('submit',async e=>{
     e.preventDefault();
-    const err=document.getElementById('ws-error');
-    const btn=document.getElementById('ws-submit');
-    err.style.display='none';
-    btn.disabled=true;
-    btn.querySelector('span').textContent='ກຳລັງສົ່ງ...';
+    const err=document.getElementById('ws-error'),btn=document.getElementById('ws-submit');
+    err.style.display='none';btn.disabled=true;btn.querySelector('span').textContent='ກຳລັງສົ່ງ...';
     try{
-      const res=await fetch(wsForm.action,{method:'POST',body:new FormData(wsForm),headers:{'Accept':'application/json'}});
-      if(res.ok){
-        document.getElementById('ws-form-wrap').style.display='none';
-        document.getElementById('ws-success').style.display='block';
-      }else throw new Error();
-    }catch(err2){
-      err.style.display='block';
-      btn.disabled=false;
-      btn.querySelector('span').textContent='ຢືນຢັນການລົງທະບຽນ';
+      const res=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
+      if(!res.ok)throw new Error();
+      document.getElementById('ws-form-wrap').style.display='none';
+      document.getElementById('ws-success').style.display='block';
+    }catch(e2){
+      err.style.display='block';btn.disabled=false;btn.querySelector('span').textContent='ຢືນຢັນການລົງທະບຽນ';
     }
   });
 })();
-
 </script>
 </body>
 </html>
