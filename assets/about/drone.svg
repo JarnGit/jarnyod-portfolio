@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="300" viewBox="0 0 420 300" fill="none">
+  <defs>
+    <linearGradient id="shell" x1="174" y1="86" x2="244" y2="220" gradientUnits="userSpaceOnUse"><stop stop-color="#e1e9ef"/><stop offset=".28" stop-color="#a8b7c9"/><stop offset=".65" stop-color="#636e88"/><stop offset="1" stop-color="#2e3449"/></linearGradient>
+    <linearGradient id="arm" x1="92" y1="104" x2="318" y2="229" gradientUnits="userSpaceOnUse"><stop stop-color="#b4c5d4"/><stop offset=".38" stop-color="#5d7086"/><stop offset=".7" stop-color="#8c8ba6"/><stop offset="1" stop-color="#383c53"/></linearGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#92a3b7"/><stop offset=".4" stop-color="#343c52"/><stop offset="1" stop-color="#171e2d"/></linearGradient>
+    <linearGradient id="front" x1="179" y1="176" x2="244" y2="207" gradientUnits="userSpaceOnUse"><stop stop-color="#8596af"/><stop offset="1" stop-color="#252d43"/></linearGradient>
+    <radialGradient id="glass" cx=".3" cy=".25"><stop stop-color="#a0ecf4"/><stop offset=".38" stop-color="#4b648a"/><stop offset="1" stop-color="#101a2e"/></radialGradient>
+    <g id="rotor">
+      <path d="M-11 0V13C-11 23 11 23 11 13V0Z" fill="#343e53" stroke="#9facc3" stroke-opacity=".6"/>
+      <ellipse rx="11" ry="7" fill="#a9bbca"/>
+      <path d="M-5-2C-17-12-41-13-68-6-70-3-65 0-59 2L-7 4ZM5 2C17 12 41 13 68 6 70 3 65 0 59-2L7-4Z" fill="url(#blade)" stroke="#a7b9ce" stroke-opacity=".4"/>
+      <path d="m-60-7-2 7M60 7l2-7" stroke="#b5c6d8" stroke-opacity=".7" stroke-width="2"/>
+      <ellipse rx="5" ry="4" fill="#d1dce4"/>
+    </g>
+  </defs>
+  <g transform="rotate(10 210 150)">
+    <path d="m181 123-70-37-12 14 74 55ZM241 123l68-39 12 15-72 56ZM179 168l-73 46 8 15 80-38ZM240 171l72 44-8 16-78-40Z" fill="url(#arm)" stroke="#c0d1df" stroke-opacity=".5"/>
+    <path d="m115 103 54 35m84 1 53-35m-190 110 59-33m73 2 53 32" stroke="#d6eaf3" stroke-opacity=".45" stroke-width="2"/>
+    <path d="m106 223-1 21h15m188-19 1 21h-15" stroke="#64718b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M179 91Q210 78 241 91L251 171Q253 184 238 199L216 212 185 201Q169 189 168 177Z" fill="url(#shell)" stroke="#c2d2df" stroke-opacity=".75"/>
+    <path d="M179 91q32-9 62 0l-5 27q-25-7-52 0Z" fill="#ced9e5" fill-opacity=".25" stroke="#e6f4fa" stroke-opacity=".3"/>
+    <path d="M187 105v37q23-6 44 0v-37" stroke="#27314a" stroke-opacity=".5"/>
+    <path d="m191 152 38 1m-38 5 38 1m-37 5 36 1" stroke="#394860" stroke-width="2" stroke-linecap="round"/>
+    <path d="M169 178Q210 191 251 173L240 197Q212 220 184 200Z" fill="url(#front)" stroke="#a8bfd0" stroke-opacity=".6"/>
+    <ellipse cx="184" cy="187" rx="7" ry="5" fill="#101a2b" stroke="#829cb4"/>
+    <ellipse cx="236" cy="187" rx="7" ry="5" fill="#101a2b" stroke="#829cb4"/>
+    <path d="M194 201v18q15 14 30 0v-18" stroke="#2a354b" stroke-width="8"/>
+    <rect x="195" y="211" width="29" height="25" rx="7" fill="#6e7e97" stroke="#c0cfda" stroke-opacity=".7"/>
+    <circle cx="209.5" cy="223.5" r="9.5" fill="#10192b" stroke="#c0cadf"/><circle cx="209.5" cy="223.5" r="6.5" fill="url(#glass)"/>
+    <circle cx="207" cy="221" r="2" fill="#bfeef8" fill-opacity=".7"/>
+    <path d="M203 97h14" stroke="#b5a1e8" stroke-width="3" stroke-linecap="round"/>
+    <use href="#rotor" transform="translate(105 89) rotate(-16)"/>
+    <use href="#rotor" transform="translate(316 89) rotate(24)"/>
+    <use href="#rotor" transform="translate(108 212) rotate(18)"/>
+    <use href="#rotor" transform="translate(311 216) rotate(-22)"/>
+    <path d="m99 112 9 4m203-1 8-4" stroke="#a7e4ec" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
