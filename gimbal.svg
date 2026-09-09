@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="350" viewBox="0 0 250 350" fill="none">
+  <defs>
+    <linearGradient id="metal" x1="62" y1="62" x2="192" y2="274" gradientUnits="userSpaceOnUse"><stop stop-color="#d9e4ee"/><stop offset=".25" stop-color="#8b9ab0"/><stop offset=".5" stop-color="#3e4b65"/><stop offset=".8" stop-color="#8f83ad"/><stop offset="1" stop-color="#2b3348"/></linearGradient>
+    <linearGradient id="grip" x1="106" y1="260" x2="148" y2="260" gradientUnits="userSpaceOnUse"><stop stop-color="#202837"/><stop offset=".32" stop-color="#566079"/><stop offset=".62" stop-color="#323b52"/><stop offset="1" stop-color="#111a2a"/></linearGradient>
+    <radialGradient id="glass" cx=".3" cy=".25" r=".8"><stop stop-color="#ade5ef"/><stop offset=".25" stop-color="#54839a"/><stop offset=".6" stop-color="#202c46"/><stop offset="1" stop-color="#504271"/></radialGradient>
+    <linearGradient id="camera" x1="74" y1="69" x2="148" y2="129" gradientUnits="userSpaceOnUse"><stop stop-color="#b5c7d5"/><stop offset=".3" stop-color="#63748e"/><stop offset="1" stop-color="#232d43"/></linearGradient>
+  </defs>
+  <g transform="rotate(14 125 175)">
+    <path d="M117 285 83 327m44-42 8 46m1-46 43 32" stroke="#1c2638" stroke-width="9" stroke-linecap="round"/>
+    <path d="m117 285-34 40m44-40 8 43m1-43 43 30" stroke="#8090a5" stroke-opacity=".65" stroke-width="3" stroke-linecap="round"/>
+    <rect x="106" y="218" width="42" height="84" rx="13" fill="url(#grip)" stroke="#9aa8bc" stroke-opacity=".6"/>
+    <path d="M115 251v32m6-32v37m6-37v38m6-38v36m6-36v31" stroke="#aab6ce" stroke-opacity=".18" stroke-width="2"/>
+    <path d="M113 225v-34l43-28V98H135" stroke="#131d2e" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M113 221v-30l43-28V98H135" stroke="url(#metal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M127 214v-32L69 150V110" stroke="#192236" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M127 214v-32L69 150V110" stroke="url(#metal)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130 180 75 148V123" stroke="#c4d8e4" stroke-opacity=".6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="69" cy="113" r="20" fill="url(#grip)" stroke="#bbcadb" stroke-opacity=".7"/>
+    <circle cx="69" cy="113" r="13" fill="#303d56" stroke="#aaa0cf" stroke-width="2"/>
+    <circle cx="69" cy="113" r="5" fill="#7a8ea8"/>
+    <rect x="78" y="82" width="77" height="51" rx="7" fill="url(#camera)" stroke="#bacfdd" stroke-opacity=".8"/>
+    <path d="m92 82 9-12h25l10 12" fill="url(#metal)" stroke="#c6d7e1" stroke-opacity=".6"/>
+    <rect x="86" y="77" width="9" height="5" rx="1.5" fill="#b7c9d7"/>
+    <rect x="139" y="90" width="12" height="37" rx="3" fill="#253148"/>
+    <circle cx="114" cy="111" r="26" fill="#162034" stroke="#b3c9d9" stroke-width="2"/>
+    <circle cx="114" cy="111" r="21" fill="url(#metal)"/><circle cx="114" cy="111" r="17" fill="url(#glass)" stroke="#172237" stroke-width="2"/>
+    <circle cx="114" cy="111" r="9" fill="#121d31"/><path d="M102 107a13 13 0 0 1 18-7" stroke="#b7edf6" stroke-opacity=".65" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="156" cy="158" r="16" fill="url(#grip)" stroke="#9daec4"/><circle cx="156" cy="158" r="10" stroke="#a296c3" stroke-opacity=".7" stroke-width="2"/>
+    <rect x="104" y="197" width="47" height="49" rx="12" fill="url(#grip)" stroke="#9cacbf" stroke-opacity=".7"/>
+    <rect x="113" y="204" width="24" height="14" rx="3" fill="#101c2e" stroke="#7b92ab" stroke-opacity=".6"/>
+    <path d="M118 210h7m-7 3h13" stroke="#80d9e6" stroke-opacity=".7" stroke-linecap="round"/>
+    <circle cx="122" cy="230" r="6" fill="#19243b" stroke="#b1b9d4"/><circle cx="138" cy="228" r="2.5" fill="#b29cd9"/>
+    <path d="M111 296h31" stroke="#b0c7d7" stroke-opacity=".5" stroke-linecap="round"/>
+  </g>
+</svg>
