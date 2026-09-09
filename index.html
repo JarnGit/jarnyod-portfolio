@@ -133,22 +133,40 @@ h1.hero-title{font-size:13.5vw;white-space:nowrap;width:100%;text-align:center;l
 @media(min-width:768px){.about-inner{gap:64px}}
 .about-copy{color:var(--fg);font-weight:500;line-height:1.7;max-width:560px;font-size:clamp(1rem,2vw,1.35rem)}
 .about-copy span{transition:opacity .1s linear}
-.deco{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
-.deco-1{width:120px;aspect-ratio:1;top:6%;left:2%;
-  background:radial-gradient(circle at 32% 28%,#e8eef3,#8f9aa5 42%,#2c3138 78%,#14171b);
-  box-shadow:0 30px 70px rgba(0,0,0,.6),inset -12px -14px 30px rgba(0,0,0,.55)}
-.deco-2{width:100px;aspect-ratio:1;bottom:10%;left:5%;border-radius:26px;
-  background:linear-gradient(145deg,rgba(96,231,255,.22),rgba(118,33,176,.35));
-  border:1px solid rgba(215,226,234,.18);backdrop-filter:blur(6px);transform:rotate(-12deg)}
-.deco-3{width:120px;aspect-ratio:1;top:6%;right:2%;border-radius:50%;
-  background:conic-gradient(from 220deg,rgba(182,0,168,.35),rgba(118,33,176,.25),rgba(96,231,255,.28),rgba(182,0,168,.35));
-  filter:blur(.5px);box-shadow:0 20px 60px rgba(118,33,176,.35)}
-.deco-4{width:130px;aspect-ratio:1;bottom:10%;right:5%;border-radius:50%;border:1px solid rgba(215,226,234,.28);
-  background:radial-gradient(circle at 70% 30%,rgba(215,226,234,.14),transparent 62%)}
-@media(min-width:640px){.deco-1,.deco-3{width:160px}.deco-2{width:140px}.deco-4{width:170px}}
-@media(min-width:768px){.deco-1,.deco-3{width:210px}.deco-2{width:180px}.deco-4{width:220px}
-  .deco-1{left:4%}.deco-3{right:4%}.deco-2{left:10%}.deco-4{right:10%}}
-@media(max-width:520px){.deco{opacity:.5}}
+/* Decorative equipment stays outside the central reading area. */
+.about-equipment{position:absolute;z-index:1;pointer-events:none;user-select:none}
+.about-equipment img{width:100%;height:auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.55))}
+.about-equipment::before{content:"";position:absolute;inset:18%;z-index:-1;
+  background:radial-gradient(ellipse,rgba(131,104,188,.12),transparent 70%);filter:blur(18px)}
+.equipment-camera{width:clamp(190px,19vw,300px);top:3%;left:2%;--float-delay:-2s}
+.equipment-lens{width:clamp(150px,15vw,230px);bottom:5%;left:5%;--float-delay:-5s}
+.equipment-drone{width:clamp(200px,19vw,320px);top:3%;right:1%;--float-delay:-4s}
+.equipment-gimbal{width:clamp(135px,13vw,195px);bottom:4%;right:6%;--float-delay:-1s}
+@media(min-width:1100px){.about{min-height:max(100svh,800px)}}
+/* On smaller screens, reserve a band above and below the copy for the kit. */
+@media(max-width:1099px){
+  .about{padding:216px 24px 200px}
+  .equipment-camera{width:180px;top:54px;left:6%}
+  .equipment-drone{width:210px;top:56px;right:4%}
+  .equipment-lens{width:145px;bottom:16px;left:9%}
+  .equipment-gimbal{width:122px;bottom:8px;right:10%}
+}
+@media(max-width:520px){
+  .about{padding:192px 24px 176px}
+  .about-inner{gap:32px}
+  .equipment-camera{width:144px;top:54px;left:1%}
+  .equipment-drone{width:166px;top:56px;right:0}
+  .equipment-lens{width:116px;bottom:16px;left:6%}
+  .equipment-gimbal{width:100px;bottom:6px;right:8%}
+}
+@keyframes equipment-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:no-preference){
+  .about-equipment.in img{animation:equipment-float 9s ease-in-out var(--float-delay,0s) infinite}
+}
+@media(prefers-reduced-motion:reduce){
+  .about-equipment,.about-equipment img{animation:none;transform:none}
+  .about-copy span{opacity:1!important}
+}
 
 /* ═══════════════ WORKSHOP ═══════════════ */
 .workshop{padding:0 20px 96px;position:relative}
@@ -494,10 +512,18 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
 
 <!-- ═══ 3. ABOUT ═══ -->
 <section class="about" id="about">
-  <div class="deco deco-1 fade" style="--fx:-80px;--fy:0px;transition-delay:.1s"></div>
-  <div class="deco deco-2 fade" style="--fx:-80px;--fy:0px;transition-delay:.25s"></div>
-  <div class="deco deco-3 fade" style="--fx:80px;--fy:0px;transition-delay:.15s"></div>
-  <div class="deco deco-4 fade" style="--fx:80px;--fy:0px;transition-delay:.3s"></div>
+  <div class="about-equipment equipment-camera fade" aria-hidden="true" style="--fx:-18px;--fy:0px;transition-delay:.1s">
+    <img src="assets/about/camera.svg" alt="" width="360" height="290" decoding="async" draggable="false">
+  </div>
+  <div class="about-equipment equipment-lens fade" aria-hidden="true" style="--fx:-18px;--fy:0px;transition-delay:.25s">
+    <img src="assets/about/lens.svg" alt="" width="280" height="300" decoding="async" draggable="false">
+  </div>
+  <div class="about-equipment equipment-drone fade" aria-hidden="true" style="--fx:18px;--fy:0px;transition-delay:.15s">
+    <img src="assets/about/drone.svg" alt="" width="420" height="300" decoding="async" draggable="false">
+  </div>
+  <div class="about-equipment equipment-gimbal fade" aria-hidden="true" style="--fx:18px;--fy:0px;transition-delay:.3s">
+    <img src="assets/about/gimbal.svg" alt="" width="250" height="350" decoding="async" draggable="false">
+  </div>
 
   <div class="about-inner">
     <h2 class="sec-title display hero-heading fade" style="--fy:40px">About me</h2>
