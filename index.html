@@ -370,6 +370,16 @@ h1.hero-title{font-size:13.5vw;white-space:nowrap;width:100%;text-align:center;l
 .proj-imgs .col:last-child{position:relative}
 .img-c{position:absolute;inset:0;width:100%;height:100%;object-position:center 42%}
 
+/* UXO Laos: landscape cover and two supporting photographs. */
+.uxo-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.uxo-images img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:20px;background:#141414}
+.uxo-images .uxo-cover{grid-column:1/-1}
+@media(min-width:640px){
+  .uxo-images{grid-template-columns:2fr 1fr}
+  .uxo-images img{border-radius:30px}
+  .uxo-images .uxo-cover{grid-column:1;grid-row:1/3;height:100%;object-position:65% 50%}
+}
+
 /* ═══════════════ REEL ═══════════════ */
 .reel-frame{max-width:1000px;margin:0 auto;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#000}
 .reel-frame .ratio{position:relative;width:100%;aspect-ratio:16/9}
@@ -654,10 +664,31 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
 <section class="projects" id="projects">
   <h2 class="sec-title display hero-heading fade" style="margin-bottom:56px">Project</h2>
 
+  <div class="proj-slot" id="uxo-laos">
+    <article class="proj-card has-note" data-card="uxo" style="top:96px" aria-labelledby="uxo-title">
+      <div class="proj-head">
+        <div class="proj-num">01</div>
+        <div class="proj-meta">
+          <div class="proj-cat">Documentary · Field Visit · Photography</div>
+          <div class="proj-name" id="uxo-title">UXO Laos</div>
+        </div>
+        <div class="proj-actions">
+          <button class="btn-gal" onclick="openGallery('uxo')" aria-label="See 15 images from UXO Laos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg> See Images <b>15</b></button>
+        </div>
+      </div>
+      <p class="proj-note">A photographic story of a UXO Lao field visit — the people, briefings and equipment at the field site, followed by exhibits and conversations at the visitor centre.</p>
+      <div class="uxo-images">
+        <img class="uxo-cover" src="assets/uxo-laos/uxo-01-thumb.webp" srcset="assets/uxo-laos/uxo-01-thumb.webp 720w, assets/uxo-laos/uxo-01.webp 2000w" sizes="(min-width:640px) 62vw, 90vw" width="2000" height="1333" alt="Metal detector operator at a marked field site" loading="lazy" decoding="async">
+        <img class="uxo-support" src="assets/uxo-laos/uxo-09-thumb.webp" srcset="assets/uxo-laos/uxo-09-thumb.webp 720w, assets/uxo-laos/uxo-09.webp 2000w" sizes="(min-width:640px) 30vw, 44vw" width="2000" height="1333" alt="UXO Lao medical team behind red equipment bags" loading="lazy" decoding="async">
+        <img class="uxo-support" src="assets/uxo-laos/uxo-13-thumb.webp" srcset="assets/uxo-laos/uxo-13-thumb.webp 720w, assets/uxo-laos/uxo-13.webp 2000w" sizes="(min-width:640px) 30vw, 44vw" width="2000" height="1333" alt="Three ordnance exhibits casting shadows on a museum wall" loading="lazy" decoding="async">
+      </div>
+    </article>
+  </div>
+
   <div class="proj-slot">
     <article class="proj-card has-note" data-card="0" style="top:96px">
       <div class="proj-head">
-        <div class="proj-num">01</div>
+        <div class="proj-num">02</div>
         <div class="proj-meta">
           <div class="proj-cat">Documentary · Aerial · Event — 2026</div>
           <div class="proj-name-row"><div class="proj-name">CARBS Sayaboury</div><span class="logo-chip"><img src="data:image/webp;base64,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" alt="WWF-Laos" loading="lazy"></span></div>
@@ -686,7 +717,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <div class="proj-slot">
     <article class="proj-card has-note" data-card="1" style="top:110px">
       <div class="proj-head">
-        <div class="proj-num">02</div>
+        <div class="proj-num">03</div>
         <div class="proj-meta">
           <div class="proj-cat">Documentary · Aerial · Portraits — 2026</div>
           <div class="proj-name-row"><div class="proj-name">Phou Xieng Thong NPA</div><span class="logo-chip"><img src="data:image/webp;base64,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" alt="WWF-Laos" loading="lazy"></span></div>
@@ -715,7 +746,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <div class="proj-slot">
     <article class="proj-card" data-card="2" style="top:124px">
       <div class="proj-head">
-        <div class="proj-num">03</div>
+        <div class="proj-num">04</div>
         <div class="proj-meta">
           <div class="proj-cat">Documentary · Field Production — 2025</div>
           <div class="proj-name-row"><div class="proj-name">Education Documentary</div><span class="logo-chip"><img src="data:image/webp;base64,UklGRloLAABXRUJQVlA4IE4LAADQKwCdASpSAEgAPjkWiEMiISEbvL2AIAOEtgBlr+Fjl+A/Ir2QKw/R/v7/Q/ar4aRR+vX9l90fzz/qHqX8wP9OP9h/c/xg7g/7XeoD9fv2b93T/T+oX+0eoB/Rf9R1jnoAeWt+6XwZ/1r/Z/tB8BP6/f9284Pwfg74qvPPt16uePu0f6Nfo/7R59d6/xn1AvxT+df5HebQAfl39V/1nGl4gH8v/m//M4yLy/2AP59/aP+p7L/9D/3/ug9o/0f/3f858A38v/rv/P7Gfo1/r2wP1oEukRkUvAMiLr2rA9z1XgjUL7AEH2QTd8ou1P2iXxKzmSC607VqkoRkGk3uF8bGngrrb/DE2zHRV2TmfIleI/v29ShpLwH79Kgp2vcYMG+g/74mV3tF7f2/IQe7iiY13mWmg58W7daPLHc7RRA1r/wnlM4TWZ4SNTEmhJkbueo25SGabnSvgvoImjvXooP+bw/++VyWAAD+//5iAnxbZcuAQhNdgxg05T0Bci75kkhfkoQUTad90h8fpkoWwavm+Rq9Rcw88kS0sVvCcemU7nK0ONOxyyyWsvfwXQxnGufhG1k+tzixPbcm+Kxj7JCtYq4u+NRXovJniFt7m/PsbiESyQTNxHEx1zSPH7NTBnlByWlFEnq5KEBTIu8rc3e0popBtpyRHwrozZUxZHEJAmSaAxSQfIMZdXK44jPcBeecSELZqs2jLtC5L+dM98MqTojVoH6AoZTapnhbpR2MYrDdrH3LrcINMmzeNbLYlPA8BP/08fJT8s9LmsKxGo4Oid2xAfq2bL2eIgWErfj5TM75o3dXVk7N/8BxVj0n55tD8/Oi3FTnDDGzTH0lD474L9ebGuXGAZkZiEYPWqdT3tAflzQCfCOI6GMnYib9IkHurymg/qwwk7+pZjfzm75UBTaZC2qGP92rEvYv2WPwC5rPL+QIIVedwTL2bxif5mj/ZBX9Kiq2yEdF8PXoBizAWRkaW9l6tmnT5gv5kcTGtsq5kRtr1TCWCS8GFD8cdXq2W+ofyin5CeRQsGoARIH6/Ej6O11r2OD3bsJPHmrWdqO0wxKgmrJTNQq9jRVWwqoNM9KI/c8oP3Q6S8pOVN8dBdJ9reR3XLA31AjRum1Gcra/D4i5jtS/6F8EM+KO7x8vuia7ga1n9iItmPrGvV9Tazqv1QHxurD7pEAi8p840P4+FddWBJpRXGi6Wlc3ZTtOK7wrxJFvWaDCDvVO7f3a+jwDtIgzFIZu7sdhuFfVXBV/P4skeqdg1cf/bkLc4bVdeAaw+Lkccq9xJsg+9+NQDDRkQUN6JTqv1eMO1ykpikP85eHbtzyqAjSFrzvtP0iw8Lf+RrnRElwzTgl2AH+o2wpYM5UkLsxpH5wMRoAhH4knYqo+EusuDBWAjOAe5sp+WRG+Kj/Dha3k8HN/57ndjFSfkySsTR5u7/CsIucyPGSUh976psy3jxVDdOfurBvDTa25yMkAqbtSW2WhRxgZCpvdY/cvWAvyhJ5nXpPRhapE2T0Sw7DsUgYe0zVG+Ll312fcETnKqqGnvbsfopITlRh+wtDRSmJexZyhid8VvGpTs/sdr11f03m6g3ttCIQsGwRRjluv1pldAtuvwlItGMJafxAlZpGNsz+YsnJ0nRRUR1NoQTwhdhAy1sE0JwvHsw92ODwbrKDTrXXMq/fslKeT9lLGzDzB3rIDAjgSACtHTnr0C7pB4D1FAiZtGDRrDW+/oEA/552NgrWdrxp/C4SW6OdIRaUoUYJAGEpST973/MpYoFEAa+tlWBf+5DJwbYglScAADZuw/lVBeWBgpBzTHGgR3DyR+vZICyMzcEPL1yCmphGPgIVk2y6Y237zP8Jhj+ZIh76Z3sK49eUjiTPLPv/4U2ptMqxoGvtUNqPX/L+0OqXRjj4AOMEXw2Lhw0zoR3WlgwapWmeu2UTFv1YY4z3xLfV/mNksNn63rTk32lslfVEHFNg7o8v+8vPHOz/JiOAoXis3em3FeYWAA0wN6c8TgmqGGfWNri3poCZbAUT8490fXGBgWv0F6tc5kTTBlNvibZlRjAtUq8Xc3Wxao76hA6FTY1eqT//tETxzCg+bv+mZZ1tI0//B2hH5HV/3b9wLKAF8cmOU38pNQxPLcLw8kzlg4WdL+2t3PuorzcVA11twvMG4I1k0pPZ5MZAkWOpZnP7B96IuHORbdzET9BLrm5I3cIdyd4P4T1vorLCNHhhtxr8Rq0zKFFrQUeo1O5Hf7mZA39NhNvz3M4rg7hUDdJZNtBeLukghI5n1D00xqMvmSWzwf49yMgaXbUXI5Myr9/yzFJTK3MkaGAxAxlaJSO2umjCeUZusezMAv1datAfBQz8+9Dc+88rzpf2BPobXHphF2X1lAZMEh21HbmVVD+83K08+NE0I55QrvRZ548iStOo3i3PC+wza2R+svaXzsxSu060Lq+n1ZgqgwMTcM7lvEThf1Kj0egvjIdLrbEpge20iz3s9HxNCmuMM/HybUS3KDmM60L+pEirx+UuBYh7mt2ZJfRig8ZNmt4ESypovOfpMgbXi9QtrDMtjm2Lx9XlX8SJLXm2igDb8MhUxacmANi4dFjLyT/i3+vW6S9B2LFmh9sY+FXdjSIK0XvZHZz/JqonAYS3nphsrdRdv3OTQDkk/ASBWv0qzNuXKTI716QQml+lW9IK4ZtCUAD2vHCKTqIxiV+OvYDNZ0tUvuLYDFraYzFsEYKL6W3jFBFfPZK/mazoNjyw+7yJ4+EqUw1jfaOdypjHa9TBrGj/xsirqLMIoh8XBAJ0INLiogX8c1W+Oqltt4am8eE7XaFPIx75kCW8LIpeygeLCAQaBK88SL4CM9gY3tCwS0guOn9CHvPpH8xxfeV2HQ3lKOMzG6XxpBK550DCLJ5Uz+t4VpHKDoQy+MxL72PB9JGqHXmIPY+VVUVcwffiFqy2Md+rbABcvkjWeezX8Iqxn5K3pltHm88ec/raXyE2nTbt/J/oR34xR+3mxo/UPyuzf/F73MgGl5n0gn/gc6UvskhKxuYeH6mHtJ/fWEG/S5Cdk9G/RDtvXAiwWV87sqqd4f/yI0miX9KUaY1suW2ii6ajKE/maUAqpW1sbocZWJYMrqZO2hbTrEj2BAZEvLN/RfYmM3kd8TD0EfeIAHL4IQ4bDyoMgENDjx8iEFwqwr6ndE4Wn23jK+I0VNUTFll8DlIADY1j8lPfXx2rGz/HG0Imx2fFSMsoS3uNV2GL/4LE9GQ8nUBKeh2VU1pNbL2amo5Mke35PPt7CBWS7x/XItxR6VXP50O3O01MckTVGs+HGtJzIGVx9EqMK2FuFu+im2H3AzWJnHmWRHdc4L4fF4NPnIb6bU02PVZRN8Q7ac9z4KEcnZuRhobn6+26QcjimNl/KiGaq8W70cRSug5NGda22paAOI7esC+5TRTQxa3NthEt12S2vq9Xn4goPQZ+7+ZNpEaBi/TP5dVpMOAdVJ3L4gTdQ+Hk+C+lfCrDdCDD3Bat2CMShe2gszo3n1evg0qBblpZ3JyliPW7O0TVUkGDR1PnSLivQRMYNkqx+lXitb1AJf5lM0I6sgks+4IOZxMQeKX33ots5t6ilEJYdujQGqxfxYbZ7JLJkLJvjP6VXco4D786ryo+Z0elaHpU9S/rpLwfpQWnB028/Y+YtK+oW8XujD7tuF0eQHWkOIlrcM9+f6txj5xz9Tw09aMI81RakP7eKQgdfqioiHfMHgd7FZL/6Er/a7A6OhIcH+AbttEOOJ6Qt+P9Ld3lblOmU5Ijd+ISrbYI0C4tz3w2owUk/vNox/t9h7q3T9aqGIB8PJWjwfFXys+/jvwXxG3pkPfAAKy8AAAAAAA==" alt="Ministry of Education and Sports" loading="lazy"><i></i><img src="data:image/webp;base64,UklGRuQEAABXRUJQVlA4INgEAABQGwCdASpIAEgAPj0ai0OiIaEVyc3AIAPEoA0xgabVfZUsX+J4Po/fWdON5YD1AeY79ivSG/YD3AegB/T/8d1qvoV+WD+4HweeV1qzqavQdd8vXT9udAn9YvtP426YT/MP6r+RH7d/7vj++J/y3/JaNH5IHgp+D+dH/d+kF/h/cd7X/yr+1f8/3B/5B/RP9N/bf2v/uX/////kZ9Hr9o0MzUWbcZAGo94SuX47wdGGu3Mn6/VQZhyBURXyn57lIsfjLOjfuEU8/gJIuGQr29eGrYcW9Q6lXfQnPsCuho8sC2NZgAD+/XnA//ran+bU/zangQ//5Qbn/z/jvdaNT+2G9fX7SYhVnyhZocQZMFh9q86k/R4+0LMOL7+NHY2O/6HLFXxno5AxOTJlJRo3vE+FQnM3ku7OyYyM0QSZ8mSNEBkzpRP0rU5yrCBvFQQ/9buuAm4alW60o4jUXEN6mac1/F7C705gqAVl3h2nKowyzdMLRufJxUdBL1yY9BfSQwTmF3E675c4HCQsoZv7z/sfNb9/lLuJCIsqawW1tb4klp2rbIZ//nurxr+HroeQ/P/Ic2+oBa/hjTvqPw5vm/4mJQdRfBElZjEXxK2XGY1xvOI/9qIo4iCh8Ert/uUTvEOM8qPK49pdWA3XGdyMX3hs3vbd7wx4rK0U02ZpdmTDEyKduvibJuQmmUyo8QhacNSfWpDI1W95t1jQW64WGuTq2JwCJdxYJj5wo6/4yGj2WHh+fWL/4yGI5nb/g90VHO7vL1pHPxcRzv/+aL9SOxt6uTUrotPsk24p2TssP3HV8Ywytec1etTRCHDEY498fFFwzJPQoFVwfrDvfp79Zms1uyF1lF76cTyotmt3DuNqr7aUmDu7MnYVHT8pYi+fQo07e8BuldrEDmq43/8GiIzcYqBv85cZw3tAG7Hn/YGy+hL2merGczZl8kgV9jL2+n/oaQ3JsXHaaT6gWgJidn9kbplgwC85QBSTmCSN4t5w0q7kvcBEztCg+++Xziykx9I5b577PB9MMnLiMLOdQ1UvnUpbf1mNEmrt37z/lP8ZPofXBf1txmS3gR3lqPUzWFgScG2GoXRZh6qbwaBZFVujKVg0xdZj/OzaF0pnWzkkwl3iK5TGjnvEhP1DK2F79bBn/4rdBUcInuKuv8Fzl44mPqulKkoIjy83IJ5KFAYyyf7TmMof/RR2172uXaAJ9CWkrXlib4p75/WoG5/KeuR++QWy0GBD76TObOv/LNut1/Ax8JPswQKNC3PZ+5e+G122g0s7/RRybHXFAaD+AHeaBXsg232DscJneUiG3fuBW4xYi4r5+SXcS7EHG+U1x021YeuBIPMFTVsko/X3No++aYo7GslzvCOx4L58HOtdG4CDGds2avqSMrC6NypVo8FePvhgAWJ+GncQQY/M2gv86cAWJPhPjwdCVLFlwnSdz1C5/HPNp2jT0FuxTTvEi0MBWzFEP2sx9FoVfqH+KVtnTQg1TfQbc1Lkb1BNsYlbyLT0layrni/qGtj8dnEiN3vlZw9VUgelb9rEkSRJ0cEmrSlFgkLzyGH+nXfa8Etiwu/cNRkpQHsILdv87QiIV+SqI9QPNromv9M7s2r4ogMqaJAuakCCa9Cvq3LqyesxvaIm9gAAAAAA" alt="Asian Development Bank" loading="lazy"></span></div>
@@ -739,7 +770,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <div class="proj-slot">
     <article class="proj-card" data-card="3" style="top:138px">
       <div class="proj-head">
-        <div class="proj-num">04</div>
+        <div class="proj-num">05</div>
         <div class="proj-meta">
           <div class="proj-cat">Corporate · Interviews · Field Production — 2026</div>
           <div class="proj-name-row"><div class="proj-name">Corporate Video Production</div><span class="logo-chip"><img src="data:image/webp;base64,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" alt="SAMC" loading="lazy"></span></div>
@@ -763,7 +794,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <div class="proj-slot">
     <article class="proj-card" data-card="4" style="top:152px">
       <div class="proj-head">
-        <div class="proj-num">05</div>
+        <div class="proj-num">06</div>
         <div class="proj-meta">
           <div class="proj-cat">Documentary · Agricultural Research</div>
           <div class="proj-name-row"><div class="proj-name">Lao Bananas Documentary</div><span class="logo-chip"><img src="data:image/webp;base64,UklGRsgNAABXRUJQVlA4ILwNAADwPQCdASqkAEgAPj0YikMiIaEX2hZIIAPEswBqnGGfN9S/Ij8qvlyrD9G/D/ru8V+QPKu4t/x33Ve9r/FexP8pf6r3AP1D/2fUW8wf7RftF7rP+A/Tv3G/rN7BH80/snpAewZ6AH7qemF+2fweftp+3ftOZqZ/bO0j/Bf039kPOnw8+qfYXlUdMeY/8n+2f4j8u/Zvv1+IGoR+O/x//Nf179xfy39rH+v/IDyvwC/kv9C/0v5tecX/Jfkd7o/Xb/Afar8qf6B/j/zM/uXtQeGH45/gPcC/mf86/zP93/bj/AfS9/Tf93/O/3j07/mf+M/4f+V+Aj+V/03/b/3f2sPaB+3nsZ/sR//yUj6H/abPKcbWRhQ8Qg9lnf3gZQChS1rYDq3Yr7ySjZaxCWwkDBloMnyObijZH0zwN05aJJtLkAQk9er/yhAQdXuN8jAZ6ACdxkzoslGm+BEz2N/ye8ZqDrZwz694QqgHhnKies8OsktC5Hp1982Fh76lx43+w3vLqxpvKJmNK0FZ7b1PD/vWQpfHJgKLunOPscNeIcoCkUTB6A9LoyJxQuUWeV2tF0GyZ9GfII295N4ez5LTuNvHFObXMuAClAbiuUwdUlAOvGD7l1d9Leqk5ACZ/LFi8uOnlmq1BnkOnydNb73mD290irfYZ1Yp5AAA/vhgTzAiIrIg6xATGQgs47EWHtmOIyxyR+8ovhYJX+BraWMr4AneeGN4OP16ru1wH6BCP69+FDd4H1KpvqsQrGqtjawWp0VJD8e6yJ+HhlgILlmg5jPj0VnKkUh3qUFfjuil9ni6wCfw5a6Jkx1bAeZS9rTG3+cnnSw11q3j5Zs9Juu/62EOOQ1Y/6cS18R+GiCSjJDgl2+VmFVzw5CZHI7Qa/vEbqJoX8Y/4WqLexJzCV5wK4pBdIWJCCbKduvtLj4Nu/aWPccBGlltcjE7yujPMJE5QC3jeW8LiE/hfuNsl6nT3ENXMoJMsP2R6yz4M8dONKB2r8o/882cimFw+zHIyvM7sx4u1bB0tL4v1VpKpiVhL6QQy//wZsTS25tYCeBoil9PRrP9SPg7SdjNtiXvkcHYAaTkvRxfLGP0cZffYKXeBptVtGNrUFzqLTmxvtgO0vXPEMskSKR2yW0tAKu/9foHfodivyHegS88ZQiC8Ni8jhSqOkX7zVPcWC2zzzsn2PFvBEOuXmJcbUm7K8Q3cmY+YPmuNKnMLUw7PiWuUV1KRQkbAhqX627QnyHzn6HnKk0OYqyHiCSkT8x0Pu6e44QV8XG66n8KF5cxVC0hvWMRe7rljIrD4U1b/R2kJmT9D7HqqUBB5/jH/wzoCz329ddbA2vQejG4lcxdpZ4I1c/bunmwdZUbvu80YGxrpqYD+SI1te4z2mm1kLtExig8lNtX6oMbRP5oxrBQnN/8TD1Pj/iFdphU9IqmU6x96FJbGw97UK3gJN7q5lKMHC8oxvApOi4UnQcTcZkaaCyJ4q42Pez0oSJoAf1FOdhUsRFgSnrpuYtqtkBoztHCSQUAEtSiSwsOa1VN3FULaDUnoxA4U338an+p++iZGK3nnVqKdP0QnrUq+Ul3MFGYzJmUIilhhAGb83bAKgBjbAAKwiZWVZ3cLmBhbfeBKRVn1ZtzVwvD8zFYaCQVHEkSD3pk2I0Qiao59ETkUZmfV4tw/6yEPtcSdVC5fjn6YeEIewelaNh2+slRte7UJLl/42BuUK9+mz78DdG/fbaHf+IULxQrXL/nnilfW3S2PQH5oBUahASiUYPLfkJTxImPm2HX/lIjbf0OuYdo02V9tWdlIEmVrFakJT/BViRxQnTigBUx3HV4NEgTno1gVeZmO/tC5j/zxSN0PBEGQeAwr35tgA93huEcp3Vsn2YFAPO7wYh8NmPNXsWfRmd7D6F79d6m+qbNSLjw+ZEIkR4XsguBlfAnBp0abfLZMOhLgw/2ajQHRNn//+gDbTVw5SQx9+YcSLJQgwd5ks8GTmXHs0gqvLSOWfOqhytG+J5/Dc21Xhge+genQSAQ67Z5F5agfifUjvYDTuGE9APNhbhnJbnkt6EQZDgtX3vsUCKcUAaU69hiro6XaocZH5K+7PBDzP7gjHPs4zZcNyVBozkDZON/+AnvJg1sCpLYTf/dEWmyHCMqXWS/2ECvJp5m3mZ1ijXGLwDYYCb4juJdBhsj4urBJch1h8f8AlagfSWSdaZedKAiapSJB13dzwKm44nU7fObtGuvrgvAPJItxCRZVkOajXUy8qH+9FrW3pj5Lw6tJGqv5PuHx/Dqv2p2zmB8hir5qxHhxz0X2H8mVLSEmJQPH7DkTjBRx2K2VOuByX/xZsnAVENOO72ZviraVszefDqJPpp3xZ4NI2Jj9BICW78pYqu5xEG1GiuEw134f8dS4YDXwsRqJRuiktfMx8J9lMpq51L6M1a8TKhYAbAQ6YeCDgZKcFpGTBcsgiN/i4IDfIsSuaL7Wx3LlRA+vhXV52lgCBc73kdR3vkYXm60NvgzY/3MWYnrRMJ2ac2GSRWWotXRKuX9Wlfy53It+7UmkROgV24FaBkhnsM3mwD4lr9fsGPvltp95HXePeb4sNk8LRjW0x0k1aIb0s0r7dKp3+dAkRI3wMcRZeWT3Z6oUaQOEYyVyx1c7g8i2Mj8f3Zi+vAdv787EA7x9aCOSj1XKEHHvFJdp10xuo9SHIKv3Qf1JTSG2TI14nlUmVY/ltQBld8veA8OovE7eptuOtfmmYYyoSmqolObi49fh+S3d+J6NN2RbQioT5RjigEzX1pQUJbR1BW+rXvED/JFxyo5tlfC8+AtTFFDGPAMREmcUJs3seUmrWPCsyoNYY6HHTQs4DYV71gOvlmy7x8n/hzwHpW2S2qq8Eb0VtH3e5XC0gw+J1g1XlKb65l1AV4S7BS36KUL4ha8xWiN+rJPsdlK5gn+VGv9DQAwj7Dkuexdo7GWDi8VGSVxgK0/hXQ96VzJtZtdRGt0FAQgN3/qVwnL5sZbe6wLe8bMfWQ6v2x0wuJqh8vhvs7PQdeAno+7X/waTK+ap6r3VaSDW652meOujM/608NbjzlYmeVQ+Kt29pwOImPP0rhQp+WqTxCGbc0FFwjk/zAHeyDT8l5rTc3mc0/OZ/CZN8qlffC2FKCFPg7+N8O81KpJ/PLSeLbBpffdoQC0sjXiVCwf/ZXWjmZzWK4V5x9w2H1hvwY0uDMSJM6N1hcgjnv5i5ywZaVf76tn9bg2BEF6j+N4ZP3ntthXfRc1jWM21jDl5k08Hlx0ndvnHa9W+rOeNKYB+wfMkNBi5QAGvcfyrI4qVbIGH7qP01/YfGjmG5vHipB+RW1taOQ3MkEmYR3TmkXaYSUuvW6lVapft0redymtSUF6G3Vmj1U1chtLONXnEq16VF5Y5CBnLeaFtpZ3q/ROCRJuoNrnBcVndDjSwYvTSOLnEGJ1HKhXQGhXbOn+O9TxCovjAd+2/AfaWvfnNlUeXZaCyLL0qrLK70CGb/QXl/JsEyQO9vrg/oqNoM19YzmF3Bi4ZivnPjWETipDBn1546Im+gOTtnIzYTA2XMWyD3GvR1RAUyvnyGTXoH9y0kJD2eD8clc7hZjqj9t6BZ08A6fXp3pXwfZGKZ/ybkXDJv9ROUgxMk30hw05i/TUXsL17+qsqncaLzxBs3vUSfGfE4yAb1PSPpCs2EvKhJm6A679U1bB+qemF313L2oTePMNRsc1+IRmTNZXAej/mWQld0u7rAu9zt34Sj3hS1yLyzjOTBDofc9fJaP0kcHNiBXtXIBYN4Hb+Qkq4niKu0IGzGCfWZXcmu3ZlWhH20U0HbZIujgA/8S+U+8Z85y3YP1URWfJ/FceKxtElSjEoN+cJKR/BrPZb+QtQfOuVmDLUQZ7IUg7/WtW/ZYg9sCdC/zLg0G6GtHxHZtVADbCscQxcZAem0/QvdSGQrz8ryPYc4F7RI0jvPpwVV2mik8FU0nwjD+kXP2GRUWnC01LDp/rNEaIeIOPafBxj55paDrqnVsXa28BbZqSrcAOcAwwCiBMzgN66eGXCQ8vP/AdN5NJwa8q7OfwYn78eJOIPaUSI4WNDGeSPESuah2HzsoUsgQ6wklacnLCtKSYWoDz1k3yDc54arsu7Af1ZqSLdwhhdfOViQiplw0iADG2tbsQZWu1G5C+utywO8+AZGLwYSAAKsXap/EkkiuLSgEEZjQuYgSa904/n6roTBEqJwEynUsUtFg0Ej7xm/giZ7kDDYkceHUiictHngYi1hQYXzFpi/CsZ4XygrccRHnGxhLsADWWpzP5cOZTjsKSb4kiQ5xQzY3wvHQACOtuu5Mkmon9/Qc7ZM8ZoK/NOtsW6SHrB6IRveKM5uhYC7e/DGAemXuNLtkjc6Xuk7YsYLhjck7+lvBk3Y877GXs5OA5TpCzKL7buOmW0Sv2pilZ7K5TjEEK8U7mcPMMb1sXsXtB2fpPDHGGbFqCoQ1kZW/wJQHS6zNieTOWqusQBhS3JDoBoU72cXk3oOlymTipQklgWMrvCT1ba30FEFinpgfOmjr/vnRdES/NtKNfk/jDQDTjUPw3mJReE+vlB2d2V1ygfhQ/LTu8lG+99ug9nRrbWbdP5pFSPIYzyza2BVuxwX+mt5/ZNdIVbAh4U4nDuwNZu9OMBeM+ncuzs1Be9Y67Wsr9dmYunPGPmgAAAAA=" alt="CIRAD" loading="lazy"></span></div>
@@ -788,7 +819,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
   <div class="proj-slot">
     <article class="proj-card" data-card="5" style="top:166px">
       <div class="proj-head">
-        <div class="proj-num">06</div>
+        <div class="proj-num">07</div>
         <div class="proj-meta">
           <div class="proj-cat">Showreel · Client Campaigns</div>
           <div class="proj-name">Films &amp; Campaigns</div>
@@ -973,7 +1004,7 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#b8aedb;margin-bott
 </div>
 
 <!-- ═══ LIGHTBOX ═══ -->
-<div id="lightbox" class="lb" role="dialog" aria-modal="true" aria-label="Workshop photo" onclick="if(event.target.id==='lightbox')closeLb()">
+<div id="lightbox" class="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" onclick="if(event.target.id==='lightbox')closeLb()">
   <button class="modal-close" onclick="closeLb()" aria-label="Close" style="background:rgba(215,226,234,.12);border-color:rgba(215,226,234,.22);color:var(--fg);top:22px;right:22px">✕</button>
   <button class="lb-nav lb-prev" onclick="stepLb(-1)" aria-label="Previous">‹</button>
   <img id="lb-img" src="" alt="">
@@ -1306,7 +1337,86 @@ const pick=(arr,idx)=>idx.map(i=>arr[i]);
 const yt=(id,caps)=>['maxresdefault','hq1','hq2','hq3']
   .map((n,i)=>({src:`https://img.youtube.com/vi/${id}/${n}.jpg`,cap:caps[i]||caps[0]}));
 
+const UXO_SHOTS=[
+  {
+    "src": "assets/uxo-laos/uxo-01.webp",
+    "thumb": "assets/uxo-laos/uxo-01-thumb.webp",
+    "cap": "Metal detector operator at a marked field site"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-02.webp",
+    "thumb": "assets/uxo-laos/uxo-02-thumb.webp",
+    "cap": "Visitors walking from a convoy along a rural road"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-03.webp",
+    "thumb": "assets/uxo-laos/uxo-03-thumb.webp",
+    "cap": "Outdoor briefing beside maps and seated visitors"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-04.webp",
+    "thumb": "assets/uxo-laos/uxo-04-thumb.webp",
+    "cap": "UXO Lao team member speaking into a microphone"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-05.webp",
+    "thumb": "assets/uxo-laos/uxo-05-thumb.webp",
+    "cap": "Visitors listening to the outdoor briefing"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-06.webp",
+    "thumb": "assets/uxo-laos/uxo-06-thumb.webp",
+    "cap": "Red UXO danger sign against a green background"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-07.webp",
+    "thumb": "assets/uxo-laos/uxo-07-thumb.webp",
+    "cap": "Metal detector coil and its shadow over dry ground"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-08.webp",
+    "thumb": "assets/uxo-laos/uxo-08-thumb.webp",
+    "cap": "Team member kneeling beside a marked line at the field site"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-09.webp",
+    "thumb": "assets/uxo-laos/uxo-09-thumb.webp",
+    "cap": "UXO Lao medical team behind red equipment bags"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-10.webp",
+    "thumb": "assets/uxo-laos/uxo-10-thumb.webp",
+    "cap": "UXO Lao team member in a red vest at the medical post"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-11.webp",
+    "thumb": "assets/uxo-laos/uxo-11-thumb.webp",
+    "cap": "UXO Lao Visitor Information Center sign and outdoor exhibits"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-12.webp",
+    "thumb": "assets/uxo-laos/uxo-12-thumb.webp",
+    "cap": "Team member beside visitor centre exhibits and suspended models"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-13.webp",
+    "thumb": "assets/uxo-laos/uxo-13-thumb.webp",
+    "cap": "Three ordnance exhibits casting shadows on a museum wall"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-14.webp",
+    "thumb": "assets/uxo-laos/uxo-14-thumb.webp",
+    "cap": "Visitor and UXO Lao team member discussing a display case"
+  },
+  {
+    "src": "assets/uxo-laos/uxo-15.webp",
+    "thumb": "assets/uxo-laos/uxo-15-thumb.webp",
+    "cap": "Field vehicle travelling along a mountain road"
+  }
+];
+
 const GALLERIES={
+  uxo:{title:'UXO Laos',sub:'Documentary · Field Visit · Photography',shots:()=>UXO_SHOTS},
   carbs:{title:'CARBS Sayaboury',sub:'Documentary · Aerial · Event — 2026',
     shots:()=>[...cardImgs(0),...pick(shots,[0,3,5]).map(src=>({src,cap:'Aerial over the Sayaboury river basin'})),...GAL_NEW.carbs]},
   pxt:{title:'Phou Xieng Thong NPA',sub:'Documentary · Aerial · Portraits — 2026',
@@ -1331,7 +1441,7 @@ function openGallery(key){
   document.getElementById('gal-ttl').textContent=g.title;
   document.getElementById('gal-sub').textContent=g.sub+' · '+galCur.length+' images';
   document.getElementById('gal-grid').innerHTML=galCur.map((s,i)=>
-    `<figure class="gal-item" onclick="openLb(${i},'gal')"><img src="${s.src}" alt="${s.cap}" loading="lazy" decoding="async"><b>${s.cap}</b></figure>`
+    `<figure class="gal-item" onclick="openLb(${i},'gal')"><img src="${s.thumb||s.src}" alt="${s.cap}" loading="lazy" decoding="async"><b>${s.cap}</b></figure>`
   ).join('');
   const el=document.getElementById('gallery');
   el.scrollTop=0; el.classList.add('open');
@@ -1345,6 +1455,7 @@ function openLb(i,set){
   lbSet=(set==='bts')?btsShots:(set==='gal')?galCur:wsShots;
   lbi=(i+lbSet.length)%lbSet.length;
   document.getElementById('lb-img').src=lbSet[lbi].src;
+  document.getElementById('lb-img').alt=lbSet[lbi].cap;
   document.getElementById('lb-cap').textContent=lbSet[lbi].cap;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow='hidden';
