@@ -71,13 +71,31 @@ nav.scrolled{background:rgba(0,0,0,.72);backdrop-filter:blur(18px);padding:14px 
 .foot-logo img{height:64px;width:auto;display:block}
 @media(max-width:520px){.nav-logo img{height:26px}}
 @media(min-width:768px){.nav-logo img{height:36px}}
-.nav-links{display:flex;align-items:center;gap:clamp(14px,3vw,44px);list-style:none}
-.nav-links a{font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--fg);transition:opacity .2s}
-.nav-links a:hover{opacity:.7}
-.nav-links a.accent{color:var(--violet)}
-@media(min-width:768px){nav{padding:28px 40px}.nav-links a{font-size:15px}.nav-logo{font-size:17px}}
-@media(min-width:1024px){.nav-links a{font-size:1.05rem}}
-@media(max-width:520px){.nav-links{gap:12px}.nav-links a{font-size:11px;letter-spacing:.05em}.nav-links .hide-xs{display:none}}
+/* menu — logo left · links centred · solid CTA right */
+.nav-links{display:flex;align-items:center;gap:clamp(28px,4.4vw,76px);list-style:none;margin:0 auto}
+.nav-links a{font-weight:400;font-size:17px;letter-spacing:0;color:rgba(204,204,204,.72);transition:color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:#FFFFFF}
+.nav-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;border-radius:12px;
+  background:#FFFFFF;color:#000000;font-weight:500;font-size:17px;line-height:1;transition:background .25s,color .25s}
+.nav-cta:hover{background:#CC6633;color:#000000}
+.nav-burger{display:none;width:44px;height:44px;border:0;background:none;position:relative;cursor:pointer;color:#FFFFFF}
+.nav-burger span,.nav-burger span::before,.nav-burger span::after{content:"";position:absolute;left:11px;width:22px;height:1.5px;background:currentColor;transition:transform .3s,opacity .2s}
+.nav-burger span{top:21px}.nav-burger span::before{left:0;top:-7px}.nav-burger span::after{left:0;top:7px}
+.nav-burger[aria-expanded="true"] span{background:transparent}
+.nav-burger[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+@media(min-width:768px){nav{padding:28px 40px}.nav-logo{font-size:17px}}
+@media(max-width:1100px){.nav-links{gap:clamp(20px,3vw,40px)}.nav-links a,.nav-cta{font-size:16px}}
+@media(max-width:900px){
+  .nav-burger{display:block}
+  .nav-cta{margin-left:auto;padding:11px 18px;font-size:15px;border-radius:10px}
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;z-index:-1;margin:0;padding:96px 24px 32px;flex-direction:column;align-items:flex-start;gap:0;
+    background:rgba(0,0,0,.96);backdrop-filter:blur(18px);border-bottom:1px solid rgba(204,204,204,.12)}
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:16px 0;font-size:24px;color:#FFFFFF;border-bottom:1px solid rgba(204,204,204,.12)}
+}
+@media(max-width:380px){.nav-cta{padding:10px 14px;font-size:14px}}
 
 /* ═══════════════ HERO ═══════════════ */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow-x:clip;padding:0 20px}
@@ -494,14 +512,24 @@ label.fld{display:block;font-size:13px;font-weight:500;color:#CCCCCC;margin-bott
 <!-- ═══ NAV ═══ -->
 <nav id="main-nav">
   <a href="#top" class="nav-logo" aria-label="FOTO Studio — home"><img src="assets/img/brand/foto-studio-wordmark-white.svg" alt="FOTO Studio" width="92" height="36"></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-menu">
     <li><a href="#about">About</a></li>
-    <li><a href="#services" class="hide-xs">Services</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#workshop" class="accent">Workshop ✦</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#workshop">Workshop</a></li>
+    <li><a href="#experience">Experience</a></li>
   </ul>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+  <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu"><span></span></button>
 </nav>
+<script>
+(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('nav-menu');
+function set(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');}
+b.addEventListener('click',function(){set(!m.classList.contains('open'));});
+m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+window.addEventListener('resize',function(){if(window.innerWidth>900)set(false);});})();
+</script>
 
 <main id="top">
 
