@@ -43,7 +43,7 @@ To receive inquiries directly instead, create a free form endpoint (e.g. Formspr
 ## Still to fill in
 
 - **Social links** — in the Contact section, replace `href="#"` with your Facebook / Instagram / TikTok / YouTube URLs. Icons with `#` stay hidden.
-- **Domain** — when the site is live, uncomment the `canonical` / `og:url` lines in `<head>` and make the `og:image` and JSON-LD `logo`/`image` URLs absolute (`https://your-domain/…`).
+- **Domain** — set to https://jarnyod.com (canonical, social image, JSON-LD, robots.txt, sitemap.xml). Change these if the domain changes.
 - **FOTO Studio email** — the site uses info@jarnyod.com; search-and-replace it if you set up a FOTO Studio address.
 - **Stats** (8+ years, 500+ shoots, 120+ clients, 40 TB) — carried over from the previous site; update if needed.
 - **Testimonials / client logos** — removed until real ones are available.
